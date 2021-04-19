@@ -1,0 +1,80 @@
+.plusImage {
+  height: 50rpx;
+  width: 50rpx;
+}
+
+.deleteImage {
+  height: 50rpx;
+  width: 50rpx;
+}
+
+.line {
+  height: 2px;
+  background: cyan;
+}
+
+.table {
+  border: 2px solid darkgray;
+  width: 100%;
+  margin-top: 1rpx;
+}
+
+.tr {
+  display: flex;
+  justify-content: center;
+  height: 2rem;
+  align-items: center;
+}
+
+.td-1 {
+  width: 20%;
+  justify-content: center;
+  display: flex;
+  height: 2rem;
+  align-items: center;
+  border-right: 2px solid #ddd;
+}
+
+
+.td-2 {
+  width: 60%;
+  justify-content: center;
+  display: flex;
+  height: 2rem;
+  align-items: center;
+  border-right: 2px solid #ddd;
+}
+
+.td-3 {
+  width: 20%;
+  justify-content: center;
+  display: flex;
+  height: 2rem;
+  align-items: center;
+  border-right: 2px solid #ddd;
+}
+
+.bg-w {
+  background: cyan;
+}
+
+.bg-g {
+  background: #E6F3F9;
+}
+
+.bg-g2 {
+  background: #fff;
+}
+
+.clean {
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 100rpx;
+}
+
+.item1 {
+  display: flex;
+  flex-direction: row;
+  background-color: AliceBlue;
+  height: 50rpx;
+}

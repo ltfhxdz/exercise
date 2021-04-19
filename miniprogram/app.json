@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/setup/setup",
+    "pages/clockin/clockin",
+    "pages/index/index",
+    "pages/userConsole/userConsole",
+    "pages/storageConsole/storageConsole",
+    "pages/databaseGuide/databaseGuide",
+    "pages/addFunction/addFunction",
+    "pages/deployFunctions/deployFunctions",
+    "pages/chooseLib/chooseLib",
+    "pages/openapi/openapi",
+    "pages/openapi/serverapi/serverapi",
+    "pages/openapi/callback/callback",
+    "pages/openapi/cloudid/cloudid",
+    "pages/im/im",
+    "pages/im/room/room"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#000000",
+    "navigationBarTitleText": "恒星打卡",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#FFFFFF",
+    "selectedColor": "#FFA500",
+    "backgroundColor": "#000000",
+    "list": [
+
+      {
+        "pagePath": "pages/clockin/clockin",
+        "iconPath": "pages/images/meihua.jpg",
+        "selectedIconPath": "pages/images/meihua.jpg",
+        "text": "打卡"
+      }, {
+        "pagePath": "pages/setup/setup",
+        "iconPath": "pages/images/lanhua.jpg",
+        "selectedIconPath": "pages/images/lanhua.jpg",
+        "text": "设置"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}
