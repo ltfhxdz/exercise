@@ -5,49 +5,88 @@ Page({
    * 页面的初始数据
    */
   data: {
-    addHidden: true,
+    bigAddHidden: true,
   },
 
-  add: function () {
+  bigDelete: function (e) {
+    const db = wx.cloud.database();
+    db.collection('big').doc(e.currentTarget.dataset.id).remove({
+      success: res => {
+        this.query();
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '数据库删除失败'
+        })
+        console.error('数据库删除失败：', err)
+      }
+    })
+
+  },
+
+  bigAddDB: function (name) {
+    const db = wx.cloud.database()
+    db.collection('big').add({
+      data: {
+        name: name
+      },
+      success: res => {
+        this.query();
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '数据库新增失败'
+        })
+        console.error('数据库新增失败：', err)
+      }
+    })
+
+  },
+
+  bigAdd: function () {
+    this.bigAddClean();
     this.setData({
-      addHidden: false
+      bigAddHidden: false
     })
   },
 
-  addCancel: function () {
+  bigAddCancel: function () {
     this.setData({
-      addValue: '',
-      addHidden: true,
-      addFlag: false
+      bigAddValue: '',
+      bigAddHidden: true,
+      bigAddFlag: false
     });
   },
 
 
-  addConfirm: function () {
-    let addWord = this.data.addWord;
-   
+  bigAddConfirm: function () {
+    this.bigAddDB(this.data.bigName);
+
+
     this.setData({
-      addHidden: true
+      bigAddHidden: true
     });
 
   },
 
 
-  addInput: function (e) {
+  bigAddInput: function (e) {
     if (e.detail.value.length == 0) {
-      this.addClean();
+      this.bigAddClean();
     } else {
       this.setData({
-        addWord: e.detail.value,
-        addFlag: true
+        bigName: e.detail.value,
+        bigAddFlag: true
       })
     }
   },
 
-  addClean: function () {
+  bigAddClean: function () {
     this.setData({
-      addValue: '',
-      addFlag: false
+      bigAddValue: '',
+      bigAddFlag: false
     })
   },
 
