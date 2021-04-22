@@ -1,2 +1,13 @@
-<!--miniprogram/pages/clockin/clockin.wxml-->
-<text>miniprogram/pages/clockin/clockin.wxml</text>
+<view class="table" wx:for="{{twoList}}" wx:key="id">
+  <view class="tr bg-w">
+    <view class="td">{{item.name}}</view>
+  </view>
+
+  <block wx:for="{{item.twodata}}" wx:for-item="twodata" wx:key="id">
+    <view class="tr bg-g">
+      <view class="td-1">{{index+1}}</view>
+      <view class="td-2">{{twodata.name}}</view>
+    </view>
+    <view class="line"></view>
+  </block>
+</view>

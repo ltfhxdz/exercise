@@ -14,9 +14,9 @@
 }
 
 .table {
-  border: 2px solid darkgray;
+  border: 1px solid darkgray;
   width: 100%;
-  margin-top: 1rpx;
+  margin-top: 50rpx;
 }
 
 .tr {

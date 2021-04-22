@@ -3,23 +3,23 @@
     <view class="td-1">序号</view>
     <view class="td-2">肌肉群</view>
     <view class="td-3">
-      <image src='../images/plus.png' class="plusImage" bindtap='bigAdd'></image>
+      <image src='../images/plus.png' class="plusImage" catchtap='bigAdd'></image>
     </view>
   </view>
 
   <block wx:for="{{bigList}}" wx:key="id">
     <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
       <view class="td-1">{{index+1}}</view>
-      <view class="td-2">{{item.name}}</view>
+      <view class="td-2" catchtap="addActivity" data-name="{{item.name}}" data-id="{{item._id}}">{{item.name}}</view>
       <view class="td-3">
-        <image src='../images/delete.jpg' class="deleteImage" bindtap='bigDelete' data-id="{{item._id}}"></image>
+        <image src='../images/delete.jpg' class="deleteImage" catchtap='bigDelete' data-id="{{item._id}}"></image>
       </view>
     </view>
     <view class="tr bg-g2" wx:else>
       <view class="td-1">{{index+1}}</view>
-      <view class="td-2">{{item.name}}</view>
+      <view class="td-2" catchtap="addActivity" data-name="{{item.name}}" data-id="{{item._id}}">{{item.name}}</view>
       <view class="td-3">
-        <image src='../images/delete.jpg' class="deleteImage" bindtap='bigDelete' data-id="{{item._id}}"></image>
+        <image src='../images/delete.jpg' class="deleteImage" catchtap='bigDelete' data-id="{{item._id}}"></image>
       </view>
     </view>
   </block>
@@ -29,7 +29,44 @@
   <view class="item1">
     <input type='text' cursor-spacing='100' value="{{bigAddValue}}" maxlength="20" placeholder="请输入肌肉群"
       bindinput="bigAddInput" />
-    <view bindtap='bigAddClean' wx:if="{{bigAddFlag}}">
+    <view catchtap='bigAddClean' wx:if="{{bigAddFlag}}">
+      <image src='../images/x.png' class="clean"></image>
+    </view>
+  </view>
+</modal>
+
+<view class="table" wx:if="{{activityFlag}}">
+  <view class="tr bg-w">
+    <view class="td-1">序号</view>
+    <view class="td-2">{{activity}}动作</view>
+    <view class="td-3">
+      <image src='../images/plus.png' class="plusImage" catchtap='smallAdd'></image>
+    </view>
+  </view>
+
+  <block wx:for="{{smallList}}" wx:key="id">
+    <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+      <view class="td-1">{{index+1}}</view>
+      <view class="td-2">{{item.name}}</view>
+      <view class="td-3">
+        <image src='../images/delete.jpg' class="deleteImage" catchtap='smallDelete' data-id="{{item._id}}"></image>
+      </view>
+    </view>
+    <view class="tr bg-g2" wx:else>
+      <view class="td-1">{{index+1}}</view>
+      <view class="td-2">{{item.name}}</view>
+      <view class="td-3">
+        <image src='../images/delete.jpg' class="deleteImage" catchtap='smallDelete' data-id="{{item._id}}"></image>
+      </view>
+    </view>
+  </block>
+</view>
+
+<modal hidden="{{smallAddHidden}}" title="添加" bindcancel="smallAddCancel" bindconfirm="smallAddConfirm">
+  <view class="item1">
+    <input type='text' cursor-spacing='100' value="{{smallAddValue}}" maxlength="20" placeholder="请输入动作"
+      bindinput="smallAddInput" />
+    <view catchtap='smallAddClean' wx:if="{{smallAddFlag}}">
       <image src='../images/x.png' class="clean"></image>
     </view>
   </view>
