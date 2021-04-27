@@ -12,7 +12,9 @@
     <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
       <view class="td-1">{{index+1}}</view>
       <view class="td-2" catchtap="addActivity" data-name="{{item.name}}" data-id="{{item._id}}">{{item.name}}</view>
-      <view class="td-3"><switch bindchange="bigActivation" data-id="{{item._id}}"></switch></view>
+      <view class="td-3">
+        <switch bindchange="bigActivation" data-id="{{item._id}}" checked="{{item.activation}}"></switch>
+      </view>
       <view class="td-4">
         <image src='../images/delete.jpg' class="deleteImage" catchtap='bigDelete' data-id="{{item._id}}"></image>
       </view>
@@ -20,7 +22,9 @@
     <view class="tr bg-g2" wx:else>
       <view class="td-1">{{index+1}}</view>
       <view class="td-2" catchtap="addActivity" data-name="{{item.name}}" data-id="{{item._id}}">{{item.name}}</view>
-      <view class="td-3"><switch bindchange="bigActivation" data-id="{{item._id}}"></switch></view>
+      <view class="td-3">
+        <switch bindchange="bigActivation" data-id="{{item._id}}" checked="{{item.activation}}"></switch>
+      </view>
       <view class="td-4">
         <image src='../images/delete.jpg' class="deleteImage" catchtap='bigDelete' data-id="{{item._id}}"></image>
       </view>
@@ -52,7 +56,9 @@
     <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
       <view class="td-1">{{index+1}}</view>
       <view class="td-2">{{item.name}}</view>
-      <view class="td-3"><switch bindchange="smallActivation"></switch></view>
+      <view class="td-3">
+        <switch bindchange="smallActivation"></switch>
+      </view>
       <view class="td-4">
         <image src='../images/delete.jpg' class="deleteImage" catchtap='smallDelete' data-id="{{item._id}}"></image>
       </view>
@@ -60,7 +66,9 @@
     <view class="tr bg-g2" wx:else>
       <view class="td-1">{{index+1}}</view>
       <view class="td-2">{{item.name}}</view>
-      <view class="td-3"><switch bindchange="smallActivation"></switch></view>
+      <view class="td-3">
+        <switch bindchange="smallActivation"></switch>
+      </view>
       <view class="td-4">
         <image src='../images/delete.jpg' class="deleteImage" catchtap='smallDelete' data-id="{{item._id}}"></image>
       </view>

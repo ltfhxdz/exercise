@@ -13,59 +13,48 @@ Page({
 
 
   bigActivation: function (e) {
+
+    let activationString = wx.getStorageSync('activation');
+    let activationList = [];
+    if (activationString != '') {
+      activationList = JSON.parse(activationString);
+    }
+
+
     if (e.detail.value) {
       //新增
-      this.activationAddDB(e);
+      let flag = false;
+      for (let x in activationList) {
+        if (activationList[x]["id"] == e.currentTarget.dataset.id) {
+          activationList[x]["activation"] = 1;
+          flag = true;
+          break;
+        }
+      }
+      if (!flag) {
+        let activationMap = {};
+        activationMap["id"] = e.currentTarget.dataset.id;
+        activationMap["activation"] = 1;
+        activationList.push(activationMap);
+
+      }
+      wx.setStorageSync('activation', JSON.stringify(activationList));
+
     } else {
-      //先查询，得到id，再删除
-      this.activationQueryByActivation_id(e);
+      //删除
+      let newActivationList = [];
+      for (let x in activationList) {
+        if (activationList[x]["id"] != e.currentTarget.dataset.id) {
+          newActivationList.push(activationList[x]);
+        }
+      }
+
+      wx.setStorageSync('activation', JSON.stringify(newActivationList));
     }
+
   },
 
 
-  activationQueryByActivation_id: function (e) {
-    const db = wx.cloud.database();
-    db.collection('activation').where({
-      activation_id: e.currentTarget.dataset.id
-    }).get({
-      success: res => {
-        //再删除
-        this.activationDelete(res.data[0]["_id"]);
-      }
-    })
-  },
-
-
-  activationAddDB: function (e) {
-    const db = wx.cloud.database()
-    db.collection('activation').add({
-      data: {
-        activation_id: e.currentTarget.dataset.id,
-      },
-      success: res => {
-        console.log(res);
-      },
-      fail: err => {
-        console.error('数据库新增失败：', err)
-      }
-    })
-  },
-
-  activationDelete: function (id) {
-    const db = wx.cloud.database();
-    db.collection('activation').doc(id).remove({
-      success: res => {
-        console.log(id + ":删除成功");
-      },
-      fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '数据库删除失败'
-        })
-        console.error('数据库删除失败：', err)
-      }
-    })
-  },
 
   addActivity: function (e) {
     this.smallQuery(e.currentTarget.dataset.id);
@@ -260,8 +249,32 @@ Page({
     const db = wx.cloud.database();
     db.collection('big').get({
       success: res => {
+        let activationString = wx.getStorageSync('activation');
+        let activationList = [];
+        if (activationString != '') {
+          activationList = JSON.parse(activationString);
+        }
+
+        let bigList = [];
+        for (let x in res.data) {
+          let flag = false;
+          let bigMap = {};
+          bigMap["_id"] = res.data[x]["_id"];
+          bigMap["name"] = res.data[x]["name"];
+          for (let y in activationList) {
+            if (res.data[x]["_id"] == activationList[y]["id"]) {
+              bigMap["activation"] = true;
+              flag = true;
+              break;
+            }
+          }
+          if (!flag) {
+            bigMap["activation"] = false;
+          }
+          bigList.push(bigMap);
+        }
         this.setData({
-          bigList: res.data
+          bigList: bigList
         })
       }
     })
@@ -272,7 +285,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
   },
 
   /**
