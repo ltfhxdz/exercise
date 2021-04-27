@@ -5,6 +5,39 @@ Page({
    * 页面的初始数据
    */
   data: {
+    detailShow: true,
+    weightArray: [
+      [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150],
+      [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    ],
+    numberArray: [
+      [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+      [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    ],
+  },
+
+  clockin:function(e){
+    console.log(e.detail.value);
+  },
+
+  numberMethod: function (e) {
+    let numberArray = e.detail.value;
+    let number = numberArray[0] * 10 + numberArray[1];
+    console.log(number);
+
+    this.setData({
+      number: number + '个',
+    })
+  },
+
+  weightMethod: function (e) {
+    let weightArray = e.detail.value;
+    let weight = weightArray[0] * 10 + weightArray[1];
+    console.log(weight);
+
+    this.setData({
+      weight: weight + '公斤',
+    })
   },
 
   activityQuery: function () {
@@ -54,6 +87,10 @@ Page({
    */
   onLoad: function (options) {
     this.activityQuery();
+    this.setData({
+      weight: 25 + '公斤',
+      number: 20 + '个',
+    })
   },
 
   /**

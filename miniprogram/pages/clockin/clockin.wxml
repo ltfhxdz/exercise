@@ -1,4 +1,4 @@
-<view class="table" wx:for="{{twoList}}" wx:key="id">
+<view class="table" wx:if="{{!detailShow}}" wx:for="{{twoList}}" wx:key="id">
   <view class="tr bg-w">
     <view class="td">{{item.name}}</view>
   </view>
@@ -10,4 +10,40 @@
     </view>
     <view class="line"></view>
   </block>
+</view>
+
+<view class="mask" style="{{detailShow?'z-index: 1;opacity:0.8':''}}">
+</view>
+
+<view class='modalBg' wx:if="{{detailShow}}">
+  <view class="item3">
+    <view class="tr bg-w">
+      <view class="td">平板杠铃卧推</view>
+    </view>
+
+    <view class="tr bg-g">
+      <view class="td-1">第一组</view>
+      <view class="td-2 bg-g3">
+        <picker mode="multiSelector" bindchange="weightMethod" value="{{weightIndex}}" range="{{weightArray}}">
+          <text>{{weight}}</text>
+        </picker>
+      </view>
+
+      <view class="td-3 bg-g3">
+        <picker mode="multiSelector" bindchange="numberMethod" value="{{numberIndex}}" range="{{numberArray}}">
+          <text>{{number}}</text>
+        </picker>
+      </view>
+
+      <view class="td-4">
+        <switch bindchange="clockin"></switch>
+      </view>
+    </view>
+
+    <view class="line"></view>
+
+    <view class="tr bg-g">
+      <view class="td-5"><button>取消</button></view>
+    </view>
+  </view>
 </view>

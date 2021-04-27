@@ -9,6 +9,64 @@ Page({
     smallAddHidden: true
   },
 
+
+
+
+  bigActivation: function (e) {
+    if (e.detail.value) {
+      //新增
+      this.activationAddDB(e);
+    } else {
+      //先查询，得到id，再删除
+      this.activationQueryByActivation_id(e);
+    }
+  },
+
+
+  activationQueryByActivation_id: function (e) {
+    const db = wx.cloud.database();
+    db.collection('activation').where({
+      activation_id: e.currentTarget.dataset.id
+    }).get({
+      success: res => {
+        //再删除
+        this.activationDelete(res.data[0]["_id"]);
+      }
+    })
+  },
+
+
+  activationAddDB: function (e) {
+    const db = wx.cloud.database()
+    db.collection('activation').add({
+      data: {
+        activation_id: e.currentTarget.dataset.id,
+      },
+      success: res => {
+        console.log(res);
+      },
+      fail: err => {
+        console.error('数据库新增失败：', err)
+      }
+    })
+  },
+
+  activationDelete: function (id) {
+    const db = wx.cloud.database();
+    db.collection('activation').doc(id).remove({
+      success: res => {
+        console.log(id + ":删除成功");
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '数据库删除失败'
+        })
+        console.error('数据库删除失败：', err)
+      }
+    })
+  },
+
   addActivity: function (e) {
     this.smallQuery(e.currentTarget.dataset.id);
 
@@ -33,7 +91,6 @@ Page({
         console.error('数据库删除失败：', err)
       }
     })
-
   },
 
   smallAddDB: function (big_id, name) {
@@ -54,7 +111,6 @@ Page({
         console.error('数据库新增失败：', err)
       }
     })
-
   },
 
   smallAdd: function () {
@@ -216,7 +272,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
   },
 
   /**

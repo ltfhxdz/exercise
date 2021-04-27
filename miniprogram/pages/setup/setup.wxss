@@ -22,25 +22,25 @@
 .tr {
   display: flex;
   justify-content: center;
-  height: 2rem;
+  height: 90rpx;
   align-items: center;
 }
 
 .td-1 {
-  width: 20%;
+  width: 15%;
   justify-content: center;
   display: flex;
-  height: 2rem;
+  height: 90rpx;
   align-items: center;
   border-right: 2px solid #ddd;
 }
 
 
 .td-2 {
-  width: 60%;
+  width: 50%;
   justify-content: center;
   display: flex;
-  height: 2rem;
+  height: 90rpx;
   align-items: center;
   border-right: 2px solid #ddd;
 }
@@ -49,11 +49,19 @@
   width: 20%;
   justify-content: center;
   display: flex;
-  height: 2rem;
+  height: 90rpx;
   align-items: center;
   border-right: 2px solid #ddd;
 }
 
+.td-4 {
+  width: 15%;
+  justify-content: center;
+  display: flex;
+  height: 90rpx;
+  align-items: center;
+  border-right: 2px solid #ddd;
+}
 .bg-w {
   background: cyan;
 }
