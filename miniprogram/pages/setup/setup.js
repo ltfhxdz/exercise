@@ -155,7 +155,7 @@ Page({
     }).get({
       success: res => {
         this.setData({
-          smallList: res.data
+          smallList: this.getActivationList(res.data)
         })
       }
     })
@@ -244,37 +244,40 @@ Page({
     })
   },
 
+  getActivationList:function(queryList){
+    let activationString = wx.getStorageSync('activation');
+    let activationList = [];
+    if (activationString != '') {
+      activationList = JSON.parse(activationString);
+    }
+
+    let activateList = [];
+    for (let x in queryList) {
+      let flag = false;
+      let bigMap = {};
+      bigMap["_id"] = queryList[x]["_id"];
+      bigMap["name"] = queryList[x]["name"];
+      for (let y in activationList) {
+        if (queryList[x]["_id"] == activationList[y]["id"]) {
+          bigMap["activation"] = true;
+          flag = true;
+          break;
+        }
+      }
+      if (!flag) {
+        bigMap["activation"] = false;
+      }
+      activateList.push(bigMap);
+    }
+    return activateList;
+  },
 
   bigQuery: function () {
     const db = wx.cloud.database();
     db.collection('big').get({
       success: res => {
-        let activationString = wx.getStorageSync('activation');
-        let activationList = [];
-        if (activationString != '') {
-          activationList = JSON.parse(activationString);
-        }
-
-        let bigList = [];
-        for (let x in res.data) {
-          let flag = false;
-          let bigMap = {};
-          bigMap["_id"] = res.data[x]["_id"];
-          bigMap["name"] = res.data[x]["name"];
-          for (let y in activationList) {
-            if (res.data[x]["_id"] == activationList[y]["id"]) {
-              bigMap["activation"] = true;
-              flag = true;
-              break;
-            }
-          }
-          if (!flag) {
-            bigMap["activation"] = false;
-          }
-          bigList.push(bigMap);
-        }
         this.setData({
-          bigList: bigList
+          bigList: this.getActivationList(res.data)
         })
       }
     })
