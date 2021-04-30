@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/setup/setup",
     "pages/clockin/clockin",
+    "pages/setup/setup",
     "pages/index/index",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
@@ -19,7 +19,7 @@
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#000000",
-    "navigationBarTitleText": "恒星打卡",
+    "navigationBarTitleText": "燃脂打卡",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
@@ -27,7 +27,6 @@
     "selectedColor": "#FFA500",
     "backgroundColor": "#000000",
     "list": [
-
       {
         "pagePath": "pages/clockin/clockin",
         "iconPath": "pages/images/meihua.jpg",

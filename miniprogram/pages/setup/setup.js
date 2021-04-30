@@ -6,9 +6,114 @@ Page({
    */
   data: {
     bigAddHidden: true,
-    smallAddHidden: true
+    smallAddHidden: true,
+    detailShow: false,
+    groupArray: [
+      [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    ],
+
+    unitArray: ['公斤', '磅'],
+
+    weightArray: [
+      [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150],
+      [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    ],
+    numberArray: [
+      [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+      [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    ],
   },
 
+  detailAdd: function () {
+    this.detailAddDB(this.data.smallId, this.data.action, this.data.group, this.data.weight, this.data.unit, this.data.number);
+    this.setData({
+      detailShow: false
+    })
+  },
+
+  detailAddDB: function (smallId, name, group, weight,unit, number) {
+    const db = wx.cloud.database()
+    db.collection('detail').add({
+      data: {
+        small_id: smallId,
+        name: name,
+        group: group,
+        weight: weight,
+        unit: unit,
+        number: number,
+        exercise_date: db.serverDate()
+      },
+      success: res => {
+        console.log(res);
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '数据库新增失败'
+        })
+        console.error('数据库新增失败：', err)
+      }
+    })
+  },
+
+
+  groupMethod: function (e) {
+    let groupArray = e.detail.value;
+    let group = groupArray[0] + 1;
+
+    this.setData({
+      group: group,
+    })
+  },
+
+  numberMethod: function (e) {
+    let numberArray = e.detail.value;
+    let number = numberArray[0] * 10 + numberArray[1];
+
+    this.setData({
+      number: number,
+    })
+  },
+
+  unitMethod: function (e) {
+    let unitArray = e.detail.value;
+    let unit = unitArray[0];
+
+    this.setData({
+      unit: this.data.unitArray[unit],
+    })
+  },
+
+  weightMethod: function (e) {
+    let weightArray = e.detail.value;
+    let weight = weightArray[0] * 10 + weightArray[1];
+
+    this.setData({
+      weight: weight,
+    })
+  },
+
+
+  showGroup: function (e) {
+    console.log(e.currentTarget.dataset.id);
+    let action = e.currentTarget.dataset.name;
+    this.setData({
+      smallId: e.currentTarget.dataset.id,
+      detailShow: true,
+      action: action,
+      group: 4,
+      weight: 20,
+      unit: '公斤',
+      number: 20
+    })
+
+  },
+
+  closeGroup: function () {
+    this.setData({
+      detailShow: false
+    })
+  },
 
 
 
@@ -244,7 +349,7 @@ Page({
     })
   },
 
-  getActivationList:function(queryList){
+  getActivationList: function (queryList) {
     let activationString = wx.getStorageSync('activation');
     let activationList = [];
     if (activationString != '') {
