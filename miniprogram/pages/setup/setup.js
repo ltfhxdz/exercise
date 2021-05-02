@@ -55,7 +55,7 @@ Page({
       }
     })
   },
-
+  
 
   groupMethod: function (e) {
     let groupArray = e.detail.value;

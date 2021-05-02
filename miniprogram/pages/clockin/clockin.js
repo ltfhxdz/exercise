@@ -28,6 +28,7 @@ Page({
         let groupMap = {};
         groupMap["group"] = this.data.groupList[x]["group"];
         groupMap["weight"] = this.data.groupList[x]["weight"];
+        groupMap["unit"] = this.data.groupList[x]["unit"];
         groupMap["number"] = number;
         groupList.push(groupMap);
       } else {
@@ -49,6 +50,7 @@ Page({
         let groupMap = {};
         groupMap["group"] = this.data.groupList[x]["group"];
         groupMap["number"] = this.data.groupList[x]["number"];
+        groupMap["unit"] = this.data.groupList[x]["unit"];
         groupMap["weight"] = weight;
         groupList.push(groupMap);
       } else {
@@ -91,6 +93,7 @@ Page({
 
         this.setData({
           detailShow: true,
+          small_id: small_id,
           small_name: small_name,
           groupList: groupList
         })
@@ -109,8 +112,48 @@ Page({
     })
   },
 
+  batchClockin: function (e) {
+    let groupList = this.data.groupList;
+    for (let x in groupList) {
+      this.checkinAddDB(e.currentTarget.dataset.small_id, e.currentTarget.dataset.small_name, groupList[x]["group"], groupList[x]["weight"], groupList[x]["unit"], groupList[x]["number"])
+    }
+
+    this.setData({
+      detailShow: false
+    })
+  },
+
   clockin: function (e) {
-    console.log(e.detail.value);
+    if (e.detail.value) {
+      this.checkinAddDB(e.currentTarget.dataset.small_id, e.currentTarget.dataset.small_name, e.currentTarget.dataset.group, e.currentTarget.dataset.weight, e.currentTarget.dataset.unit, e.currentTarget.dataset.number)
+    }
+
+  },
+
+
+  checkinAddDB: function (small_id, small_name, group, weight, unit, number) {
+    const db = wx.cloud.database()
+    db.collection('checkin').add({
+      data: {
+        small_id: small_id,
+        small_name: small_name,
+        group: group,
+        weight: weight,
+        unit: unit,
+        number: number,
+        checkin_date: db.serverDate()
+      },
+      success: res => {
+        console.log(res);
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '数据库新增失败'
+        })
+        console.error('数据库新增失败：', err)
+      }
+    })
   },
 
   activityQuery: function () {

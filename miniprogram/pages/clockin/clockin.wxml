@@ -47,7 +47,9 @@
           </picker>
         </view>
         <view class="detail-td-4">
-          <switch bindchange="clockin"></switch>
+          <switch bindchange="clockin" data-group="{{item.group}}" data-weight="{{item.weight}}"
+            data-unit="{{item.unit}}" data-number="{{item.number}}" data-small_name="{{small_name}}"
+            data-small_id="{{small_id}}"></switch>
         </view>
       </view>
 
@@ -55,7 +57,8 @@
     </view>
 
     <view class="tr bg-g">
-      <view class="button1" catchtap='closeGroup'><button>一键打卡</button></view>
+      <view class="button1" catchtap='batchClockin' data-small_name="{{small_name}}" data-small_id="{{small_id}}">
+        <button>一键打卡</button></view>
     </view>
   </view>
 </view>
