@@ -55,7 +55,6 @@ Page({
         groupList.push(this.data.groupList[x]);
       }
     }
-    console.log(groupList);
     this.setData({
       groupList: groupList
     })
@@ -90,7 +89,6 @@ Page({
           groupList.push(groupMap);
         }
 
-        console.log(groupList);
         this.setData({
           detailShow: true,
           small_name: small_name,
@@ -102,9 +100,7 @@ Page({
 
 
   showGroup: function (e) {
-
     this.detailQuery(e.currentTarget.dataset.small_id, e.currentTarget.dataset.small_name);
-
   },
 
   closeGroup: function () {
