@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/history/history",
     "pages/clockin/clockin",
     "pages/setup/setup",
     "pages/index/index",
@@ -32,7 +33,14 @@
         "iconPath": "pages/images/meihua.jpg",
         "selectedIconPath": "pages/images/meihua.jpg",
         "text": "打卡"
-      }, {
+      },
+      {
+        "pagePath": "pages/history/history",
+        "iconPath": "pages/images/meihua.jpg",
+        "selectedIconPath": "pages/images/meihua.jpg",
+        "text": "历史"
+      },
+      {
         "pagePath": "pages/setup/setup",
         "iconPath": "pages/images/lanhua.jpg",
         "selectedIconPath": "pages/images/lanhua.jpg",

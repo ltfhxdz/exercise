@@ -115,7 +115,7 @@ Page({
   batchClockin: function (e) {
     let groupList = this.data.groupList;
     for (let x in groupList) {
-      this.checkinAddDB(e.currentTarget.dataset.small_id, e.currentTarget.dataset.small_name, groupList[x]["group"], groupList[x]["weight"], groupList[x]["unit"], groupList[x]["number"])
+      this.clockinAddDB(e.currentTarget.dataset.small_id, e.currentTarget.dataset.small_name, groupList[x]["group"], groupList[x]["weight"], groupList[x]["unit"], groupList[x]["number"])
     }
 
     this.setData({
@@ -125,15 +125,15 @@ Page({
 
   clockin: function (e) {
     if (e.detail.value) {
-      this.checkinAddDB(e.currentTarget.dataset.small_id, e.currentTarget.dataset.small_name, e.currentTarget.dataset.group, e.currentTarget.dataset.weight, e.currentTarget.dataset.unit, e.currentTarget.dataset.number)
+      this.clockinAddDB(e.currentTarget.dataset.small_id, e.currentTarget.dataset.small_name, e.currentTarget.dataset.group, e.currentTarget.dataset.weight, e.currentTarget.dataset.unit, e.currentTarget.dataset.number)
     }
 
   },
 
 
-  checkinAddDB: function (small_id, small_name, group, weight, unit, number) {
+  clockinAddDB: function (small_id, small_name, group, weight, unit, number) {
     const db = wx.cloud.database()
-    db.collection('checkin').add({
+    db.collection('clockin').add({
       data: {
         small_id: small_id,
         small_name: small_name,
@@ -141,7 +141,7 @@ Page({
         weight: weight,
         unit: unit,
         number: number,
-        checkin_date: db.serverDate()
+        clockin_date: db.serverDate()
       },
       success: res => {
         console.log(res);
