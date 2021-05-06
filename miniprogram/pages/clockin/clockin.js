@@ -124,27 +124,191 @@ Page({
   },
 
   clockin: function (e) {
+
     if (e.detail.value) {
-      this.clockinAddDB(e.currentTarget.dataset.small_id, e.currentTarget.dataset.small_name, e.currentTarget.dataset.group, e.currentTarget.dataset.weight, e.currentTarget.dataset.unit, e.currentTarget.dataset.number)
+      this.clockinQueryByDate(e);
+    } else {
+      this.clockinDeleteByDate(e);
+    }
+
+
+  },
+
+  dateToString: function () {
+    let date = new Date();
+    var year = date.getFullYear();
+    var month = (date.getMonth() + 1).toString();
+    var day = (date.getDate()).toString();
+    if (month.length == 1) {
+      month = "0" + month;
+    }
+    if (day.length == 1) {
+      day = "0" + day;
+    }
+    var dateTime = year + "-" + month + "-" + day;
+
+    return dateTime;
+  },
+
+
+  getStartDate: function () {
+    return new Date(this.dateToString() + " 00:00:00");
+  },
+
+  getEndDate: function () {
+    return new Date(this.dateToString() + " 23:59:59");
+  },
+
+
+  clockinQueryByDate: function (e) {
+    const db = wx.cloud.database();
+    db.collection('clockin').where({
+      clockin_date: db.command.gte(this.getStartDate()).and(db.command.lte(this.getEndDate()))
+    }).get({
+      success: res => {
+        let clockinList = res.data;
+        if (clockinList.length == 0) {
+          //clockinList 0条记录，添加
+          this.clockinAdd(e);
+        } else {
+          //clockinList 1条记录，更新
+          let groupList = clockinList[0]['groupList'];
+          let groupListNew = [];
+          let flag = false;
+          for (let x in groupList) {
+            if (groupList[x]['small_id'] == e.currentTarget.dataset.small_id) {
+              //在同一个small_id下
+              if (groupList[x]['group'] == e.currentTarget.dataset.group) {
+                //更新当前组
+                groupListNew.push(this.getGroupMap(e));
+                flag = true;
+              } else {
+                //保留当前组
+                groupListNew.push(groupList[x]);
+              }
+            }
+          }
+
+          if (!flag) {
+            groupListNew.push(this.getGroupMap(e));
+          }
+
+          //更新数据库
+          this.clockinUpdateDB(clockinList[0]['_id'], groupListNew);
+        }
+        this.setData({
+          clockinList: res.data
+        })
+      }
+    })
+  },
+
+
+  clockinDeleteByDate: function (e) {
+    const db = wx.cloud.database();
+    db.collection('clockin').where({
+      clockin_date: db.command.gte(this.getStartDate()).and(db.command.lte(this.getEndDate()))
+    }).get({
+      success: res => {
+        let clockinList = res.data;
+        if (clockinList.length != 0) {
+          //clockinList 1条记录，更新
+          let groupList = clockinList[0]['groupList'];
+          let groupListNew = [];
+          for (let x in groupList) {
+            if (groupList[x]['small_id'] == e.currentTarget.dataset.small_id) {
+              //在同一个small_id下
+              if (groupList[x]['group'] != e.currentTarget.dataset.group) {
+                //保留当前组
+                groupListNew.push(groupList[x]);
+              }
+            }
+          }
+
+          if (groupListNew.length == 0) {
+            //删除
+            this.clockinDeleteDB(clockinList[0]['_id']);
+          } else {
+            //更新数据库
+            this.clockinUpdateDB(clockinList[0]['_id'], groupListNew);
+          }
+        }
+        this.setData({
+          clockinList: res.data
+        })
+      }
+    })
+  },
+
+  getGroupMap: function (e) {
+    let groupMap = {};
+    groupMap['small_id'] = e.currentTarget.dataset.small_id;
+    groupMap['small_name'] = e.currentTarget.dataset.small_name;
+    groupMap['group'] = e.currentTarget.dataset.group;
+    groupMap['weight'] = e.currentTarget.dataset.weight;
+    groupMap['unit'] = e.currentTarget.dataset.unit;
+    groupMap['number'] = e.currentTarget.dataset.number;
+    return groupMap;
+  },
+
+  clockinAdd: function (e) {
+
+    let groupList = [];
+    groupList.push(this.getGroupMap(e));
+
+    if (e.detail.value) {
+      this.clockinAddDB(groupList)
     }
 
   },
 
 
-  clockinAddDB: function (small_id, small_name, group, weight, unit, number) {
+  clockinDeleteDB: function (id) {
+    const db = wx.cloud.database()
+    db.collection('clockin').doc(id).remove({
+      success: res => {
+        console.warn(res);
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '数据库更新失败'
+        })
+        console.error('数据库更新失败：', err)
+      }
+    })
+  },
+
+
+  clockinUpdateDB: function (id, groupList) {
+    const db = wx.cloud.database()
+    db.collection('clockin').doc(id).update({
+      data: {
+        groupList: groupList
+      },
+      success: res => {
+        console.warn(res);
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '数据库更新失败'
+        })
+        console.error('数据库更新失败：', err)
+      }
+    })
+  },
+
+
+  clockinAddDB: function (groupList) {
     const db = wx.cloud.database()
     db.collection('clockin').add({
       data: {
-        small_id: small_id,
-        small_name: small_name,
-        group: group,
-        weight: weight,
-        unit: unit,
-        number: number,
-        clockin_date: db.serverDate()
+        clockin_date: db.serverDate(),
+        groupList: groupList
       },
       success: res => {
-        console.log(res);
+        console.warn(res);
       },
       fail: err => {
         wx.showToast({
@@ -155,6 +319,7 @@ Page({
       }
     })
   },
+
 
   activityQuery: function () {
     let bigList2 = [];
