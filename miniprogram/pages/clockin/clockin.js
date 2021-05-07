@@ -113,14 +113,85 @@ Page({
   },
 
   batchClockin: function (e) {
-    let groupList = this.data.groupList;
-    for (let x in groupList) {
-      this.clockinAddDB(e.currentTarget.dataset.small_id, e.currentTarget.dataset.small_name, groupList[x]["group"], groupList[x]["weight"], groupList[x]["unit"], groupList[x]["number"])
-    }
+    this.batchClockinQueryByDate(e);
 
     this.setData({
       detailShow: false
     })
+  },
+
+
+  batchClockinAdd: function (e) {
+    let groupList = [];
+    let groupArray = this.data.groupList;
+    for (let x in groupArray) {
+      let groupMap = {};
+      groupMap['group'] = groupArray[x]['group'];
+      groupMap['weight'] = groupArray[x]['weight'];
+      groupMap['unit'] = groupArray[x]['unit'];
+      groupMap['number'] = groupArray[x]['number'];
+      groupList.push(groupMap);
+    }
+    
+    this.clockinAddDB(e.currentTarget.dataset.small_id, e.currentTarget.dataset.small_name, groupList);
+  },
+
+
+  batchClockinQueryByDate: function (e) {
+    const db = wx.cloud.database();
+    db.collection('clockin').where({
+      clockin_date: db.command.gte(this.getStartDate()).and(db.command.lte(this.getEndDate())),
+      small_id: db.command.eq(e.currentTarget.dataset.small_id)
+    }).get({
+      success: res => {
+        let clockinList = res.data;
+        if (clockinList.length == 0) {
+          //clockinList 0条记录，添加
+          this.batchClockinAdd(e);
+        } else {
+          let groupListNew = this.getGroupMapNew(e, clockinList[0]['groupList']);
+          //更新数据库
+          this.clockinUpdateDB(clockinList[0]['_id'], groupListNew);
+        }
+      }
+    })
+  },
+
+
+  getGroupMapNew: function (e, groupList) {
+    let groupListNew = [];
+    let groupArray = this.data.groupList;
+    //group不相同
+    for (let i in groupArray) {
+      let flag = false;
+      for (let x in groupList) {
+        if (groupList[x]['group'] == groupArray[i]['group']) {
+          //更新当前组
+          let groupMap = {};
+          groupMap['group'] = groupArray[i]['group'];
+          groupMap['weight'] = groupArray[i]['weight'];
+          groupMap['unit'] = groupArray[i]['unit'];
+          groupMap['number'] = groupArray[i]['number'];
+
+          groupListNew.push(groupMap);
+          flag = true;
+          break;
+        }
+      }
+
+      ////保留当前组
+      if (!flag) {
+        let groupMap = {};
+        groupMap['group'] = groupArray[i]['group'];
+        groupMap['weight'] = groupArray[i]['weight'];
+        groupMap['unit'] = groupArray[i]['unit'];
+        groupMap['number'] = groupArray[i]['number'];
+
+        groupListNew.push(groupMap);
+      }
+    }
+
+    return groupListNew;
   },
 
   clockin: function (e) {
@@ -130,8 +201,6 @@ Page({
     } else {
       this.clockinDeleteByDate(e);
     }
-
-
   },
 
   dateToString: function () {
@@ -163,7 +232,8 @@ Page({
   clockinQueryByDate: function (e) {
     const db = wx.cloud.database();
     db.collection('clockin').where({
-      clockin_date: db.command.gte(this.getStartDate()).and(db.command.lte(this.getEndDate()))
+      clockin_date: db.command.gte(this.getStartDate()).and(db.command.lte(this.getEndDate())),
+      small_id: db.command.eq(e.currentTarget.dataset.small_id)
     }).get({
       success: res => {
         let clockinList = res.data;
@@ -176,16 +246,13 @@ Page({
           let groupListNew = [];
           let flag = false;
           for (let x in groupList) {
-            if (groupList[x]['small_id'] == e.currentTarget.dataset.small_id) {
-              //在同一个small_id下
-              if (groupList[x]['group'] == e.currentTarget.dataset.group) {
-                //更新当前组
-                groupListNew.push(this.getGroupMap(e));
-                flag = true;
-              } else {
-                //保留当前组
-                groupListNew.push(groupList[x]);
-              }
+            if (groupList[x]['group'] == e.currentTarget.dataset.group) {
+              //更新当前组
+              groupListNew.push(this.getGroupMap(e));
+              flag = true;
+            } else {
+              //保留当前组
+              groupListNew.push(groupList[x]);
             }
           }
 
@@ -196,9 +263,6 @@ Page({
           //更新数据库
           this.clockinUpdateDB(clockinList[0]['_id'], groupListNew);
         }
-        this.setData({
-          clockinList: res.data
-        })
       }
     })
   },
@@ -207,7 +271,8 @@ Page({
   clockinDeleteByDate: function (e) {
     const db = wx.cloud.database();
     db.collection('clockin').where({
-      clockin_date: db.command.gte(this.getStartDate()).and(db.command.lte(this.getEndDate()))
+      clockin_date: db.command.gte(this.getStartDate()).and(db.command.lte(this.getEndDate())),
+      small_id: db.command.eq(e.currentTarget.dataset.small_id)
     }).get({
       success: res => {
         let clockinList = res.data;
@@ -216,12 +281,10 @@ Page({
           let groupList = clockinList[0]['groupList'];
           let groupListNew = [];
           for (let x in groupList) {
-            if (groupList[x]['small_id'] == e.currentTarget.dataset.small_id) {
-              //在同一个small_id下
-              if (groupList[x]['group'] != e.currentTarget.dataset.group) {
-                //保留当前组
-                groupListNew.push(groupList[x]);
-              }
+            //在同一个small_id下
+            if (groupList[x]['group'] != e.currentTarget.dataset.group) {
+              //保留当前组
+              groupListNew.push(groupList[x]);
             }
           }
 
@@ -242,8 +305,6 @@ Page({
 
   getGroupMap: function (e) {
     let groupMap = {};
-    groupMap['small_id'] = e.currentTarget.dataset.small_id;
-    groupMap['small_name'] = e.currentTarget.dataset.small_name;
     groupMap['group'] = e.currentTarget.dataset.group;
     groupMap['weight'] = e.currentTarget.dataset.weight;
     groupMap['unit'] = e.currentTarget.dataset.unit;
@@ -252,14 +313,12 @@ Page({
   },
 
   clockinAdd: function (e) {
-
     let groupList = [];
     groupList.push(this.getGroupMap(e));
 
     if (e.detail.value) {
-      this.clockinAddDB(groupList)
+      this.clockinAddDB(e.currentTarget.dataset.small_id, e.currentTarget.dataset.small_name, groupList);
     }
-
   },
 
 
@@ -300,11 +359,13 @@ Page({
   },
 
 
-  clockinAddDB: function (groupList) {
+  clockinAddDB: function (small_id, small_name, groupList) {
     const db = wx.cloud.database()
     db.collection('clockin').add({
       data: {
         clockin_date: db.serverDate(),
+        small_id: small_id,
+        small_name: small_name,
         groupList: groupList
       },
       success: res => {
