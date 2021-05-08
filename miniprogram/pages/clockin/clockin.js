@@ -63,10 +63,10 @@ Page({
   },
 
 
-  //要查询最近的一条数据，只能一条，不能多
+  //TODO 要查询最近的一条数据，只能一条，不能多
   detailQuery: function (small_id, small_name) {
     const db = wx.cloud.database();
-    db.collection('detail').where({
+    db.collection('detail').limit(1).orderBy('exercise_date','desc').where({
       small_id: small_id
     }).get({
       success: res => {
@@ -397,9 +397,9 @@ Page({
 
             let bigList = [];
             for (let x in bigList2) {
-              let twoMap = {};
-              twoMap["big_id"] = bigList2[x]["_id"];
-              twoMap["name"] = bigList2[x]["name"];
+              let bigMap = {};
+              bigMap["big_id"] = bigList2[x]["_id"];
+              bigMap["name"] = bigList2[x]["name"];
               let smallList = [];
 
               for (let y in smallList2) {
@@ -411,8 +411,8 @@ Page({
                 }
               }
 
-              twoMap["smallList"] = smallList;
-              bigList.push(twoMap);
+              bigMap["smallList"] = smallList;
+              bigList.push(bigMap);
 
             }
             this.setData({

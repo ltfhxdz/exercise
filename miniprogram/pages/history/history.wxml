@@ -20,7 +20,8 @@
   <view class='date-box'>
     <block wx:for='{{dateArr}}' wx:key='key'>
       <view class='{{isToday == item.isToday ? "nowDay" : ""}}'>
-        <view class='date-head' bindtap='selectDay' data-year='{{year}}' data-month='{{month}}' data-datenum='{{item.dateNum}}'>
+        <view class='date-head' bindtap='selectDay' data-year='{{year}}' data-month='{{month}}'
+          data-datenum='{{item.dateNum}}'>
           <view>{{item.dateNum}}</view>
         </view>
       </view>
@@ -29,3 +30,17 @@
 </view>
 
 
+<view class="table" wx:for="{{clockinList}}" wx:key="id">
+  <view class="tr bg-w">
+    <view>{{item.small_name}}</view>
+  </view>
+
+  <block wx:for="{{item.groupList}}" wx:for-item="groupList" wx:key="id">
+    <view class="tr bg-g">
+      <view class="td-1">第{{groupList.group}}组</view>
+      <view class="td-2">{{groupList.weight}}{{groupList.unit}}</view>
+      <view class="td-3">{{groupList.number}}次</view>
+    </view>
+    <view class="line"></view>
+  </block>
+</view>

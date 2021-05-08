@@ -31,7 +31,8 @@ Page({
     })
   },
 
-  detailAddDB: function (smallId, name, group, weight,unit, number) {
+
+  detailAddDB: function (smallId, name, group, weight, unit, number) {
     const db = wx.cloud.database()
     db.collection('detail').add({
       data: {
@@ -47,15 +48,11 @@ Page({
         console.log(res);
       },
       fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '数据库新增失败'
-        })
         console.error('数据库新增失败：', err)
       }
     })
   },
-  
+
 
   groupMethod: function (e) {
     let groupArray = e.detail.value;
@@ -95,30 +92,51 @@ Page({
 
 
   showGroup: function (e) {
-    console.log(e.currentTarget.dataset.id);
-    let action = e.currentTarget.dataset.name;
-    this.setData({
-      smallId: e.currentTarget.dataset.id,
-      detailShow: true,
-      action: action,
-      group: 4,
-      weight: 20,
-      unit: '公斤',
-      number: 20
-    })
-
+    this.detailQuery(e);
   },
 
-  closeGroup: function () {
+
+  detailQuery: function (e) {
+    const db = wx.cloud.database();
+    db.collection('detail').where({
+      small_id: e.currentTarget.dataset.id
+    }).get({
+      success: res => {
+        if (res.data.length == 0) {
+          this.setData({
+            detailShow: true,
+            smallId: e.currentTarget.dataset.id,
+            action: e.currentTarget.dataset.name,
+            group: 4,
+            weight: 20,
+            unit: '公斤',
+            number: 20
+          })
+        } else {
+          this.setData({
+            detailShow: true,
+            smallId: e.currentTarget.dataset.id,
+            action: e.currentTarget.dataset.name,
+            group: res.data[0]['group'],
+            weight: res.data[0]['weight'],
+            unit: res.data[0]['unit'],
+            number: res.data[0]['number'],
+          })
+        }
+      }
+    })
+  },
+
+
+  closeGroup: function (e) {
+    this.smallQuery(this.data.big_id);
     this.setData({
       detailShow: false
     })
   },
 
 
-
   bigActivation: function (e) {
-
     let activationString = wx.getStorageSync('activation');
     let activationList = [];
     if (activationString != '') {
@@ -172,20 +190,22 @@ Page({
   },
 
   smallDelete: function (e) {
+    this.smallDeleteDB(e);
+  },
+
+  
+  smallDeleteDB: function (e) {
     const db = wx.cloud.database();
     db.collection('small').doc(e.currentTarget.dataset.id).remove({
       success: res => {
         this.smallQuery(this.data.big_id);
       },
       fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '数据库删除失败'
-        })
         console.error('数据库删除失败：', err)
       }
     })
   },
+
 
   smallAddDB: function (big_id, name) {
     const db = wx.cloud.database()
@@ -198,10 +218,6 @@ Page({
         this.smallQuery(this.data.big_id);
       },
       fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '数据库新增失败'
-        })
         console.error('数据库新增失败：', err)
       }
     })
@@ -224,6 +240,7 @@ Page({
 
 
   smallAddConfirm: function () {
+    //TODO 如果存在，就更新，不存在，就添加
     this.smallAddDB(this.data.big_id, this.data.smallName);
 
 
@@ -274,10 +291,6 @@ Page({
         this.bigQuery();
       },
       fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '数据库删除失败'
-        })
         console.error('数据库删除失败：', err)
       }
     })
@@ -294,10 +307,6 @@ Page({
         this.bigQuery();
       },
       fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '数据库新增失败'
-        })
         console.error('数据库新增失败：', err)
       }
     })
@@ -321,6 +330,7 @@ Page({
 
 
   bigAddConfirm: function () {
+    //TODO 如果存在就更新，如果不存在，就添加
     this.bigAddDB(this.data.bigName);
 
 
