@@ -1,3 +1,31 @@
+<swiper class="view_swiper" autoplay="true" interval="10000" duration="600" circular="false">
+  <swiper-item>
+    <view class="swiper_image">
+      <image src="../../pages/images/jianshen1.jpg"  mode='aspectFit' />
+    </view>
+  </swiper-item>
+  <swiper-item>
+    <view class="swiper_image">
+      <image src="../../pages/images/jianshen2.jpg"  mode='aspectFit' />
+    </view>
+  </swiper-item>
+  <swiper-item>
+    <view class="swiper_image">
+      <image src="../../pages/images/jianshen3.jpg"  mode='aspectFit' />
+    </view>
+  </swiper-item>
+  <swiper-item>
+    <view class="swiper_image">
+      <image src="../../pages/images/jianshen4.jpg"  mode='aspectFit' />
+    </view>
+  </swiper-item>
+  <swiper-item>
+    <view class="swiper_image">
+      <image src="../../pages/images/jianshen5.jpg"  mode='aspectFit' />
+    </view>
+  </swiper-item>
+</swiper>
+
 <view class="table" wx:if="{{!detailShow}}" wx:for="{{bigList}}" wx:key="id">
   <view class="tr bg-w">
     <view class="td">{{item.name}}</view>

@@ -16,7 +16,7 @@
 .table {
   border: 1px solid darkgray;
   width: 100%;
-  margin-top: 50rpx;
+  margin-top: 20rpx;
 }
 
 .table2 {
@@ -151,4 +151,12 @@
   left: 0;
   top: 0;
   z-index: 2;
+}
+
+.view_swiper {
+  margin-top: 20rpx;
+}
+
+.swiper_image {
+  text-align:center;
 }
