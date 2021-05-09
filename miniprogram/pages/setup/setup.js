@@ -129,7 +129,6 @@ Page({
 
 
   closeGroup: function (e) {
-    this.smallQuery(this.data.big_id);
     this.setData({
       detailShow: false
     })
@@ -137,12 +136,23 @@ Page({
 
 
   bigActivation: function (e) {
+    this.setActivation(e);
+    this.bigQuery();
+  },
+
+  
+  smallActivation: function (e) {
+    this.setActivation(e);
+    this.smallQuery(this.data.big_id);
+  },
+
+
+  setActivation: function (e) {
     let activationString = wx.getStorageSync('activation');
     let activationList = [];
     if (activationString != '') {
       activationList = JSON.parse(activationString);
     }
-
 
     if (e.detail.value) {
       //新增
@@ -162,7 +172,6 @@ Page({
 
       }
       wx.setStorageSync('activation', JSON.stringify(activationList));
-
     } else {
       //删除
       let newActivationList = [];
@@ -174,10 +183,7 @@ Page({
 
       wx.setStorageSync('activation', JSON.stringify(newActivationList));
     }
-
   },
-
-
 
   addActivity: function (e) {
     this.smallQuery(e.currentTarget.dataset.id);
@@ -193,7 +199,7 @@ Page({
     this.smallDeleteDB(e);
   },
 
-  
+
   smallDeleteDB: function (e) {
     const db = wx.cloud.database();
     db.collection('small').doc(e.currentTarget.dataset.id).remove({

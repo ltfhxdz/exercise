@@ -63,7 +63,6 @@ Page({
   },
 
 
-  //TODO 要查询最近的一条数据，只能一条，不能多
   detailQuery: function (small_id, small_name) {
     const db = wx.cloud.database();
     db.collection('detail').limit(1).orderBy('exercise_date','desc').where({
@@ -71,14 +70,10 @@ Page({
     }).get({
       success: res => {
         let detailList = res.data;
-        let small_id = detailList[0]["small_id"];
-        let name = detailList[0]["name"];
         let group = detailList[0]["group"];
         let weight = detailList[0]["weight"];
         let unit = detailList[0]["unit"];
         let number = detailList[0]["number"];
-        let exercise_date = detailList[0]["exercise_date"];
-
 
         let groupList = [];
 
@@ -195,7 +190,6 @@ Page({
   },
 
   clockin: function (e) {
-
     if (e.detail.value) {
       this.clockinQueryByDate(e);
     } else {
@@ -329,10 +323,6 @@ Page({
         console.warn(res);
       },
       fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '数据库更新失败'
-        })
         console.error('数据库更新失败：', err)
       }
     })
@@ -349,10 +339,6 @@ Page({
         console.warn(res);
       },
       fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '数据库更新失败'
-        })
         console.error('数据库更新失败：', err)
       }
     })
@@ -372,10 +358,6 @@ Page({
         console.warn(res);
       },
       fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '数据库新增失败'
-        })
         console.error('数据库新增失败：', err)
       }
     })
@@ -430,7 +412,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.activityQuery();
   },
 
   /**
@@ -444,7 +425,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.activityQuery();
   },
 
   /**

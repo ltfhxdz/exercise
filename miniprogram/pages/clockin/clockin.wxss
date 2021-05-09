@@ -28,7 +28,7 @@
 .tr {
   display: flex;
   justify-content: center;
-  height: 90rpx;
+  height: 70rpx;
   align-items: center;
 }
 
@@ -37,7 +37,7 @@
   width: 20%;
   justify-content: center;
   display: flex;
-  height: 90rpx;
+  height: 70rpx;
   align-items: center;
 }
 
@@ -46,7 +46,7 @@
   width: 80%;
   justify-content: left;
   display: flex;
-  height: 90rpx;
+  height: 70rpx;
   align-items: center;
 }
 
@@ -54,7 +54,7 @@
   width: 50%;
   justify-content: center;
   display: flex;
-  height: 90rpx;
+  height: 70rpx;
   align-items: center;
 }
 
@@ -62,7 +62,7 @@
   width: 25%;
   justify-content: center;
   display: flex;
-  height: 90rpx;
+  height: 70rpx;
   align-items: center;
 }
 
@@ -71,7 +71,7 @@
   width: 25%;
   justify-content: center;
   display: flex;
-  height: 90rpx;
+  height: 70rpx;
   align-items: center;
 }
 
@@ -79,7 +79,7 @@
   width: 25%;
   justify-content: center;
   display: flex;
-  height: 90rpx;
+  height: 70rpx;
   align-items: center;
 }
 
@@ -87,7 +87,7 @@
   width: 25%;
   justify-content: center;
   display: flex;
-  height: 90rpx;
+  height: 70rpx;
   align-items: center;
 }
 

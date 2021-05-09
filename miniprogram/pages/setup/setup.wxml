@@ -58,7 +58,7 @@
         <view class="td-1">{{index+1}}</view>
         <view class="td-2" catchtap='showGroup' data-id="{{item._id}}" data-name="{{item.name}}">{{item.name}}</view>
         <view class="td-3">
-          <switch bindchange="bigActivation" data-id="{{item._id}}" checked="{{item.activation}}"></switch>
+          <switch bindchange="smallActivation" data-id="{{item._id}}" checked="{{item.activation}}"></switch>
         </view>
         <view class="td-4">
           <image src='../images/delete.jpg' class="deleteImage" catchtap='smallDelete' data-id="{{item._id}}"></image>
@@ -68,7 +68,7 @@
         <view class="td-1">{{index+1}}</view>
         <view class="td-2" catchtap='showGroup' data-id="{{item._id}}" data-name="{{item.name}}">{{item.name}}</view>
         <view class="td-3">
-          <switch bindchange="bigActivation" data-id="{{item._id}}" checked="{{item.activation}}"></switch>
+          <switch bindchange="smallActivation" data-id="{{item._id}}" checked="{{item.activation}}"></switch>
         </view>
         <view class="td-4">
           <image src='../images/delete.jpg' class="deleteImage" catchtap='smallDelete' data-id="{{item._id}}"></image>
