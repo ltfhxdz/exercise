@@ -45,7 +45,7 @@ Page({
         exercise_date: db.serverDate()
       },
       success: res => {
-        console.log(res);
+        console.warn(res);
       },
       fail: err => {
         console.error('数据库新增失败：', err)
@@ -136,54 +136,57 @@ Page({
 
 
   bigActivation: function (e) {
-    this.setActivation(e);
-    this.bigQuery();
-  },
-
-  
-  smallActivation: function (e) {
-    this.setActivation(e);
-    this.smallQuery(this.data.big_id);
-  },
-
-
-  setActivation: function (e) {
-    let activationString = wx.getStorageSync('activation');
-    let activationList = [];
-    if (activationString != '') {
-      activationList = JSON.parse(activationString);
-    }
-
     if (e.detail.value) {
-      //新增
-      let flag = false;
-      for (let x in activationList) {
-        if (activationList[x]["id"] == e.currentTarget.dataset.id) {
-          activationList[x]["activation"] = 1;
-          flag = true;
-          break;
-        }
-      }
-      if (!flag) {
-        let activationMap = {};
-        activationMap["id"] = e.currentTarget.dataset.id;
-        activationMap["activation"] = 1;
-        activationList.push(activationMap);
-
-      }
-      wx.setStorageSync('activation', JSON.stringify(activationList));
+      this.bigUpdate(e.currentTarget.dataset.id, true);
     } else {
-      //删除
-      let newActivationList = [];
-      for (let x in activationList) {
-        if (activationList[x]["id"] != e.currentTarget.dataset.id) {
-          newActivationList.push(activationList[x]);
-        }
-      }
-
-      wx.setStorageSync('activation', JSON.stringify(newActivationList));
+      this.bigUpdate(e.currentTarget.dataset.id, false);
     }
+    // this.bigQuery();
   },
+
+  bigUpdate: function (id, activation) {
+    const db = wx.cloud.database()
+    db.collection('big').doc(id).update({
+      data: {
+        activation: activation
+      },
+      success: res => {
+        console.warn(res);
+      },
+      fail: err => {
+        console.error('数据库更新失败：', err)
+      }
+    })
+  },
+
+  smallUpdate: function (id, activation) {
+    const db = wx.cloud.database()
+    db.collection('small').doc(id).update({
+      data: {
+        activation: activation
+      },
+      success: res => {
+        console.warn(res);
+      },
+      fail: err => {
+        console.error('数据库更新失败：', err)
+      }
+    })
+  },
+
+
+
+  smallActivation: function (e) {
+    if (e.detail.value) {
+      this.smallUpdate(e.currentTarget.dataset.id, true);
+    } else {
+      this.smallUpdate(e.currentTarget.dataset.id, false);
+    }
+
+    // this.smallQuery(this.data.big_id);
+  },
+
+
 
   addActivity: function (e) {
     this.smallQuery(e.currentTarget.dataset.id);
@@ -218,7 +221,8 @@ Page({
     db.collection('small').add({
       data: {
         big_id: big_id,
-        name: name
+        name: name,
+        activation: true
       },
       success: res => {
         this.smallQuery(this.data.big_id);
@@ -253,7 +257,6 @@ Page({
     this.setData({
       smallAddHidden: true
     });
-
   },
 
 
@@ -283,7 +286,7 @@ Page({
     }).get({
       success: res => {
         this.setData({
-          smallList: this.getActivationList(res.data)
+          smallList: res.data
         })
       }
     })
@@ -300,14 +303,14 @@ Page({
         console.error('数据库删除失败：', err)
       }
     })
-
   },
 
   bigAddDB: function (name) {
     const db = wx.cloud.database()
     db.collection('big').add({
       data: {
-        name: name
+        name: name,
+        activation: true
       },
       success: res => {
         this.bigQuery();
@@ -316,7 +319,6 @@ Page({
         console.error('数据库新增失败：', err)
       }
     })
-
   },
 
   bigAdd: function () {
@@ -365,40 +367,13 @@ Page({
     })
   },
 
-  getActivationList: function (queryList) {
-    let activationString = wx.getStorageSync('activation');
-    let activationList = [];
-    if (activationString != '') {
-      activationList = JSON.parse(activationString);
-    }
-
-    let activateList = [];
-    for (let x in queryList) {
-      let flag = false;
-      let bigMap = {};
-      bigMap["_id"] = queryList[x]["_id"];
-      bigMap["name"] = queryList[x]["name"];
-      for (let y in activationList) {
-        if (queryList[x]["_id"] == activationList[y]["id"]) {
-          bigMap["activation"] = true;
-          flag = true;
-          break;
-        }
-      }
-      if (!flag) {
-        bigMap["activation"] = false;
-      }
-      activateList.push(bigMap);
-    }
-    return activateList;
-  },
 
   bigQuery: function () {
     const db = wx.cloud.database();
     db.collection('big').get({
       success: res => {
         this.setData({
-          bigList: this.getActivationList(res.data)
+          bigList: res.data
         })
       }
     })
