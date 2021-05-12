@@ -65,7 +65,7 @@ Page({
 
   detailQuery: function (small_id, small_name) {
     const db = wx.cloud.database();
-    db.collection('detail').limit(1).orderBy('exercise_date','desc').where({
+    db.collection('detail').limit(1).orderBy('exercise_date', 'desc').where({
       small_id: small_id
     }).get({
       success: res => {
@@ -127,7 +127,7 @@ Page({
       groupMap['number'] = groupArray[x]['number'];
       groupList.push(groupMap);
     }
-    
+
     this.clockinAddDB(e.currentTarget.dataset.small_id, e.currentTarget.dataset.small_name, groupList);
   },
 
@@ -368,12 +368,16 @@ Page({
     let bigList2 = [];
     let smallList2 = [];
     const db = wx.cloud.database();
-    db.collection('big').get({
+    db.collection('big').where({
+      activation: true
+    }).get({
       success: res => {
         bigList2 = res.data;
 
         const db = wx.cloud.database();
-        db.collection('small').get({
+        db.collection('small').where({
+          activation: true
+        }).get({
           success: res => {
             smallList2 = res.data;
 
@@ -411,8 +415,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-  },
+  onLoad: function (options) {},
 
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -141,7 +141,7 @@ Page({
     } else {
       this.bigUpdate(e.currentTarget.dataset.id, false);
     }
-    // this.bigQuery();
+    
   },
 
   bigUpdate: function (id, activation) {
@@ -151,7 +151,7 @@ Page({
         activation: activation
       },
       success: res => {
-        console.warn(res);
+        this.bigQuery();
       },
       fail: err => {
         console.error('数据库更新失败：', err)
@@ -166,7 +166,7 @@ Page({
         activation: activation
       },
       success: res => {
-        console.warn(res);
+        this.smallQuery(this.data.big_id);
       },
       fail: err => {
         console.error('数据库更新失败：', err)
@@ -182,8 +182,6 @@ Page({
     } else {
       this.smallUpdate(e.currentTarget.dataset.id, false);
     }
-
-    // this.smallQuery(this.data.big_id);
   },
 
 

@@ -134,7 +134,6 @@
     <view class="line"></view>
 
     <view class="tr bg-g">
-      <view class="button1" catchtap='closeGroup'><button>取消</button></view>
       <view class="button1" catchtap='detailAdd'><button>确定</button></view>
     </view>
   </view>
