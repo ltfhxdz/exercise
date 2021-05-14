@@ -63,6 +63,17 @@
   border-right: 2px solid #ddd;
 }
 
+
+
+.td-2-1 {
+  width: 50%;
+  justify-content: space-around;
+  display: flex;
+  height: 70rpx;
+  align-items: center;
+  border-right: 2px solid #ddd;
+}
+
 .bg-w {
   background: cyan;
 }
@@ -73,6 +84,10 @@
 
 .bg-g2 {
   background: #fff;
+}
+
+.bg-g3 {
+  background: rgb(227, 222, 248);
 }
 
 .clean {

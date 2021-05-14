@@ -64,6 +64,7 @@
           <image src='../images/delete.jpg' class="deleteImage" catchtap='smallDelete' data-id="{{item._id}}"></image>
         </view>
       </view>
+
       <view class="tr bg-g2" wx:else>
         <view class="td-1">{{index+1}}</view>
         <view class="td-2" catchtap='showGroup' data-id="{{item._id}}" data-name="{{item.name}}">{{item.name}}</view>
@@ -73,6 +74,14 @@
         <view class="td-4">
           <image src='../images/delete.jpg' class="deleteImage" catchtap='smallDelete' data-id="{{item._id}}"></image>
         </view>
+      </view>
+      <view class="tr bg-g3">
+        <view class="td-1"></view>
+        <view class="td-2-1">
+          <text decode="{{true}}">&nbsp;&nbsp;{{item.group}}组&nbsp;&nbsp;{{item.weight}}{{item.unit}}&nbsp;&nbsp;{{item.number}}个</text>
+        </view>
+        <view class="td-3"></view>
+        <view class="td-4"></view>
       </view>
     </block>
   </view>

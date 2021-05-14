@@ -45,7 +45,7 @@ Page({
         exercise_date: db.serverDate()
       },
       success: res => {
-        console.warn(res);
+        this.smallQuery(this.data.big_id);
       },
       fail: err => {
         console.error('数据库新增失败：', err)
@@ -98,31 +98,19 @@ Page({
 
   detailQuery: function (e) {
     const db = wx.cloud.database();
-    db.collection('detail').where({
+    db.collection('detail').limit(1).orderBy('exercise_date', 'desc').where({
       small_id: e.currentTarget.dataset.id
     }).get({
       success: res => {
-        if (res.data.length == 0) {
-          this.setData({
-            detailShow: true,
-            smallId: e.currentTarget.dataset.id,
-            action: e.currentTarget.dataset.name,
-            group: 4,
-            weight: 20,
-            unit: '公斤',
-            number: 20
-          })
-        } else {
-          this.setData({
-            detailShow: true,
-            smallId: e.currentTarget.dataset.id,
-            action: e.currentTarget.dataset.name,
-            group: res.data[0]['group'],
-            weight: res.data[0]['weight'],
-            unit: res.data[0]['unit'],
-            number: res.data[0]['number'],
-          })
-        }
+        this.setData({
+          detailShow: true,
+          smallId: e.currentTarget.dataset.id,
+          action: e.currentTarget.dataset.name,
+          group: res.data[0]['group'],
+          weight: res.data[0]['weight'],
+          unit: res.data[0]['unit'],
+          number: res.data[0]['number'],
+        })
       }
     })
   },
@@ -141,7 +129,7 @@ Page({
     } else {
       this.bigUpdate(e.currentTarget.dataset.id, false);
     }
-    
+
   },
 
   bigUpdate: function (id, activation) {
@@ -223,7 +211,7 @@ Page({
         activation: true
       },
       success: res => {
-        this.smallQuery(this.data.big_id);
+        this.detailAddDB(res._id, name, 4, 20, '公斤', 20);
       },
       fail: err => {
         console.error('数据库新增失败：', err)
@@ -248,7 +236,6 @@ Page({
 
 
   smallAddConfirm: function () {
-    //TODO 如果存在，就更新，不存在，就添加
     this.smallAddDB(this.data.big_id, this.data.smallName);
 
 
@@ -283,8 +270,61 @@ Page({
       big_id: big_id
     }).get({
       success: res => {
+        let smallList = res.data;
+        //得到所有的small_id，然后查询detail表，查出对应的数据，最后整合到list中
+        let smallIdList = [];
+        for (let x in smallList) {
+          smallIdList.push(smallList[x]['_id']);
+        }
+        this.detailQueryBySmallId(smallIdList, smallList);
+
+      }
+    })
+  },
+
+
+
+  detailQueryBySmallId: function (smallIdList, smallList) {
+    const db = wx.cloud.database();
+    db.collection('detail').where({
+      small_id: db.command.in(smallIdList)
+    }).get({
+      success: res => {
+        let resultList = [];
+        let detailList = res.data;
+        for (let x = 0; x < detailList.length; x++) {
+          let max = detailList[x];
+          let flag = false;
+          for (let y = 1; y < detailList.length; y++) {
+            if (max['name'] == detailList[y]['name']) {
+              flag = true;
+              if (max['exercise_date'] < detailList[y]['exercise_date']) {
+                max = detailList[y];
+              }
+            }
+          }
+          if (flag) {
+            resultList.push(max);
+          } else {
+            resultList.push(detailList[x]);
+          }
+        }
+
+        for (let x in smallList) {
+          for (let y in resultList) {
+            if (smallList[x]['name'] == resultList[y]['name']) {
+              smallList[x]['group'] = resultList[y]['group'];
+              smallList[x]['unit'] = resultList[y]['unit'];
+              smallList[x]['weight'] = resultList[y]['weight'];
+              smallList[x]['number'] = resultList[y]['number'];
+              smallList[x]['exercise_date'] = resultList[y]['exercise_date'];
+              break;
+            }
+          }
+        }
+
         this.setData({
-          smallList: res.data
+          smallList: smallList
         })
       }
     })
