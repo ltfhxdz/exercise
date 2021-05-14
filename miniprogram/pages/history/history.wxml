@@ -1,5 +1,5 @@
 <!-- 日历年月 -->
-<view class='calendar_title flex_nowrap'>
+<view class='calendar_title flex_nowrap bold'>
   <view class='icon' bindtap='lastMonth'>
     <text decode="{{true}}">&nbsp;&nbsp;&lt;&nbsp;&nbsp;</text>
   </view>
@@ -11,7 +11,7 @@
 
 <!-- 日历主体 -->
 <view class='calendar'>
-  <view class='header'>
+  <view class='header bold'>
     <view wx:for='{{date}}' wx:key='key' class='{{(index == todayIndex) && isTodayWeek ? "weekMark" : ""}}'>
       {{item}}
     </view>
@@ -31,7 +31,7 @@
 
 
 <view class="table" wx:for="{{clockinList}}" wx:key="id">
-  <view class="tr bg-w">
+  <view class="tr bg-w bold">
     <view>{{item.small_name}}</view>
   </view>
 

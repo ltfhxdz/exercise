@@ -26,6 +26,12 @@
   align-items: center;
 }
 
+
+.bold{
+  font-weight: bolder;
+}
+
+
 .td-1 {
   width: 15%;
   justify-content: center;

@@ -94,6 +94,10 @@
   margin-top: 50rpx;
 }
 
+.bold{
+  font-weight: bolder;
+}
+
 .tr {
   display: flex;
   justify-content: center;
