@@ -9,26 +9,20 @@
   </view>
 </view>
 
-<!-- 日历主体 -->
-<view class='calendar'>
-  <view class='header bold'>
-    <view wx:for='{{date}}' wx:key='key' class='{{(index == todayIndex) && isTodayWeek ? "weekMark" : ""}}'>
-      {{item}}
-    </view>
+<view class="table">
+  <view class="tr bg-w bold">
+    <view>打卡日期</view>
   </view>
-
-  <view class='date-box'>
-    <block wx:for='{{dateArr}}' wx:key='key'>
-      <view class='{{isToday == item.isToday ? "nowDay" : ""}}'>
-        <view class='date-head' bindtap='selectDay' data-year='{{year}}' data-month='{{month}}'
-          data-datenum='{{item.dateNum}}'>
-          <view>{{item.dateNum}}</view>
-        </view>
+  <block wx:for="{{dayList}}" wx:key="id">
+    <view bindtap='selectDay' data-clockin_date='{{item.clockin_date}}'
+      class='{{isToday == item.clockin_date ? "nowDay" : "nowDay2"}}'>
+      <view class="date-head">
+        <text
+          decode="{{true}}">&nbsp;&nbsp;&nbsp;&nbsp;{{item.clockin_date}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.big_name}}</text>
       </view>
-    </block>
-  </view>
+    </view>
+  </block>
 </view>
-
 
 <view class="table" wx:for="{{clockinList}}" wx:key="id">
   <view class="tr bg-w bold">

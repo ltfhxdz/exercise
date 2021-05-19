@@ -74,19 +74,31 @@
 }
 
 .date-head {
-  height: 60rpx;
+  height: 70rpx;
   line-height: 60rpx;
   font-size: 12pt;
 }
 
+
+
 .nowDay .date-head {
-  width: 60rpx;
-  border-radius: 50%;
-  text-align: center;
-  color: white;
-  background-color: #f93;
+  display: flex;
+  justify-content: left;
+  height: 70rpx;
+  background-color: greenyellow;
   margin: 0 auto;
+  align-items: center;
 }
+
+
+
+.nowDay2{
+  display: flex;
+  justify-content: left;
+  height: 70rpx;
+  align-items: center;
+}
+
 
 .table {
   border: 1px solid darkgray;

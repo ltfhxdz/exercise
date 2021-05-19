@@ -11,23 +11,22 @@ Page({
     todayIndex: 0,
   },
 
+
   selectDay: function (e) {
     console.log("enter selectDay");
-    let year = e.currentTarget.dataset.year;
-    let month = e.currentTarget.dataset.month;
-    let day = e.currentTarget.dataset.datenum;
-    let isToday = '' + year + this.formatDay(month) + this.formatDay(day);
-    let date = year + '-' + this.formatDay(month) + '-' + this.formatDay(day);
+    let clockin_date = e.currentTarget.dataset.clockin_date;
 
-    let startdate = date + " 00:00:00";
-    let enddate = date + " 23:59:59";
+    console.log("clockin_date=" + clockin_date);
+
+    let startdate = clockin_date + " 00:00:00";
+    let enddate = clockin_date + " 23:59:59";
     let sdate = new Date(startdate);
     let edate = new Date(enddate);
 
     this.clockinQuery(sdate, edate);
 
     this.setData({
-      isToday: isToday
+      isToday: clockin_date
     })
 
   },
@@ -39,7 +38,7 @@ Page({
       clockin_date: db.command.gte(sdate).and(db.command.lte(edate))
     }).get({
       success: res => {
-        console.log(res);
+        console.warn(res);
         this.setData({
           clockinList: res.data
         })
@@ -54,7 +53,7 @@ Page({
       clockin_date: db.command.gte(sdate).and(db.command.lte(edate))
     }).count({
       success: res => {
-        console.log(res);
+        console.warn(res);
       }
     })
   },
@@ -66,60 +65,6 @@ Page({
   },
 
 
-
-  dateInit: function (setYear, setMonth) {
-    //全部时间的月份都是按0~11基准，显示月份才+1
-    let dateArr = []; //需要遍历的日历数组数据
-    let arrLen = 0; //dateArr的数组长度
-    let now = setYear ? new Date(setYear, setMonth) : new Date();
-    let year = setYear || now.getFullYear();
-    let nextYear = 0;
-    let month = setMonth || now.getMonth(); //没有+1方便后面计算当月总天数
-    let nextMonth = (month + 1) > 11 ? 1 : (month + 1);
-    let startWeek = new Date(year + '/' + (month + 1) + '/' + 1).getDay(); //目标月1号对应的星期
-
-    let dayNums = new Date(year, nextMonth, 0).getDate(); //获取目标月有多少天
-    let obj = {};
-    let num = 0;
-    if (month + 1 > 11) {
-      nextYear = year + 1;
-      dayNums = new Date(nextYear, nextMonth, 0).getDate();
-    }
-    arrLen = startWeek + dayNums;
-    for (let i = 0; i < arrLen; i++) {
-      if (i >= startWeek) {
-        num = i - startWeek + 1;
-        let isToday = '' + year + this.formatDay(month + 1) + this.formatDay(num);
-        obj = {
-          isToday: isToday,
-          dateNum: num
-        }
-      } else {
-        obj = {};
-      }
-      dateArr[i] = obj;
-    }
-    this.setData({
-      dateArr: dateArr
-    })
-    let nowDate = new Date();
-    let nowYear = nowDate.getFullYear();
-    let nowMonth = nowDate.getMonth() + 1;
-    let nowWeek = nowDate.getDay();
-    let getYear = setYear || nowYear;
-    let getMonth = setMonth >= 0 ? (setMonth + 1) : nowMonth;
-    if (nowYear == getYear && nowMonth == getMonth) {
-      this.setData({
-        isTodayWeek: true,
-        todayIndex: nowWeek
-      })
-    } else {
-      this.setData({
-        isTodayWeek: false,
-        todayIndex: -1
-      })
-    }
-  },
 
   /**
    * 上月切换
@@ -143,7 +88,8 @@ Page({
       month: (month + 1),
       isToday: isToday
     })
-    this.dateInit(year, month);
+
+    this.clockinQueryByMonth(year, this.data.month);
   },
 
   /**
@@ -169,7 +115,7 @@ Page({
       isToday: isToday
     })
 
-    this.dateInit(year, month);
+    this.clockinQueryByMonth(year, this.data.month);
   },
 
 
@@ -181,28 +127,112 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    let date = util.formatTime(new Date());
-    
-    let startdate = date + " 00:00:00";
-    let enddate = date + " 23:59:59";
-    let sdate = new Date(startdate);
-    let edate = new Date(enddate);
-
-    this.clockinQuery(sdate, edate);
-
     let now = new Date();
     let year = now.getFullYear();
     let month = now.getMonth() + 1;
-    let day = now.getDate();
-    this.dateInit();
-    let isToday = '' + year + this.formatDay(month) + this.formatDay(day);
 
     this.setData({
       year: year,
-      month: month,
-      isToday: isToday
+      month: month
+    })
+
+    this.clockinQueryByMonth(year, month);
+  },
+
+
+  clockinQueryByMonth: function (year, month) {
+    console.log(year);
+    console.log(month);
+    let month1 = year + "-" + month + "-1";
+    let month2 = year + "-" + (month + 1) + "-1";
+    let sdate = new Date(month1);
+    let edate = new Date(month2);
+
+    console.log(sdate);
+    console.log(edate);
+
+    const db = wx.cloud.database();
+    db.collection('clockin').where({
+      clockin_date: db.command.gte(sdate).and(db.command.lt(edate))
+    }).get({
+      success: res => {
+        console.warn(res);
+        if (res.data.length == 0) {
+          this.setData({
+            dayList: []
+          })
+          return;
+        }
+
+        let dayList = this.getDayList(res.data);
+        let isToday = dayList[dayList.length - 1]['clockin_date'];
+
+        this.setData({
+          dayList: dayList,
+          isToday: isToday
+        })
+
+        let startdate = isToday + " 00:00:00";
+        let enddate = isToday + " 23:59:59";
+        let sdate = new Date(startdate);
+        let edate = new Date(enddate);
+        this.clockinQuery(sdate, edate);
+      }
     })
   },
+
+
+  getDayList: function (resultList) {
+    console.log('enter getDayList');
+    console.log(resultList);
+
+    let dayList = [];
+    for (let x in resultList) {
+      let flag = false;
+      let clockin_date = resultList[x]['clockin_date'];
+      let year = clockin_date.getFullYear();
+      let month = clockin_date.getMonth();
+      let day = clockin_date.getDate();
+      let clockin_str = year + "-" + (month + 1) + "-" + day;
+
+      for (let y in dayList) {
+        if (dayList[y]['clockin_date'] == clockin_str) {
+          flag = true;
+          break;
+        }
+      }
+
+      if (!flag) {
+        let dayMap = {};
+        dayMap['clockin_date'] = clockin_str;
+        dayList.push(dayMap);
+      }
+    }
+
+    for (let x in dayList) {
+      let big_name = '';
+      for (let y in resultList) {
+        let clockin_date = resultList[y]['clockin_date'];
+        let year = clockin_date.getFullYear();
+        let month = clockin_date.getMonth();
+        let day = clockin_date.getDate();
+        let clockin_str = year + "-" + (month + 1) + "-" + day;
+
+        if (dayList[x]['clockin_date'] == clockin_str) {
+          if (big_name.indexOf(resultList[y]['big_name']) == -1) {
+            big_name = resultList[y]['big_name'] + "，" + big_name;
+          }
+        }
+      }
+      big_name = big_name.substr(0, big_name.lastIndexOf('，'));
+      dayList[x]['big_name'] = big_name
+    }
+
+    console.log(dayList);
+
+    return dayList;
+  },
+
 
   /**
    * 用户点击右上角分享

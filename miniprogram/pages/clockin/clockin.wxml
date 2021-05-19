@@ -34,7 +34,7 @@
   <block wx:for="{{item.smallList}}" wx:for-item="smallList" wx:key="id">
     <view class="tr bg-g">
       <view class="td-1">{{index+1}}</view>
-      <view class="td-2" catchtap='showGroup' data-small_id="{{smallList.small_id}}"
+      <view class="td-2" catchtap='showGroup' data-big_name="{{item.name}}" data-small_id="{{smallList.small_id}}"
         data-small_name="{{smallList.name}}">{{smallList.name}}</view>
     </view>
     <view class="line"></view>

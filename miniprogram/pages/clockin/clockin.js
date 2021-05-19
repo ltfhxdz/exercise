@@ -63,7 +63,7 @@ Page({
   },
 
 
-  detailQuery: function (small_id, small_name) {
+  detailQuery: function (big_name, small_id, small_name) {
     const db = wx.cloud.database();
     db.collection('detail').limit(1).orderBy('exercise_date', 'desc').where({
       small_id: small_id
@@ -88,6 +88,7 @@ Page({
 
         this.setData({
           detailShow: true,
+          big_name: big_name,
           small_id: small_id,
           small_name: small_name,
           groupList: groupList
@@ -98,7 +99,7 @@ Page({
 
 
   showGroup: function (e) {
-    this.detailQuery(e.currentTarget.dataset.small_id, e.currentTarget.dataset.small_name);
+    this.detailQuery(e.currentTarget.dataset.big_name, e.currentTarget.dataset.small_id, e.currentTarget.dataset.small_name);
   },
 
   closeGroup: function () {
@@ -128,7 +129,7 @@ Page({
       groupList.push(groupMap);
     }
 
-    this.clockinAddDB(e.currentTarget.dataset.small_id, e.currentTarget.dataset.small_name, groupList);
+    this.clockinAddDB(this.data.big_name, e.currentTarget.dataset.small_id, e.currentTarget.dataset.small_name, groupList);
   },
 
 
@@ -224,6 +225,7 @@ Page({
 
 
   clockinQueryByDate: function (e) {
+    console.log(this.data.big_name);
     const db = wx.cloud.database();
     db.collection('clockin').where({
       clockin_date: db.command.gte(this.getStartDate()).and(db.command.lte(this.getEndDate())),
@@ -311,7 +313,7 @@ Page({
     groupList.push(this.getGroupMap(e));
 
     if (e.detail.value) {
-      this.clockinAddDB(e.currentTarget.dataset.small_id, e.currentTarget.dataset.small_name, groupList);
+      this.clockinAddDB(this.data.big_name, e.currentTarget.dataset.small_id, e.currentTarget.dataset.small_name, groupList);
     }
   },
 
@@ -345,11 +347,12 @@ Page({
   },
 
 
-  clockinAddDB: function (small_id, small_name, groupList) {
+  clockinAddDB: function (big_name, small_id, small_name, groupList) {
     const db = wx.cloud.database()
     db.collection('clockin').add({
       data: {
         clockin_date: db.serverDate(),
+        big_name: big_name,
         small_id: small_id,
         small_name: small_name,
         groupList: groupList
