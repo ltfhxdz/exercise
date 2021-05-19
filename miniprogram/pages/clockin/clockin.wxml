@@ -75,7 +75,7 @@
           </picker>
         </view>
         <view class="detail-td-4">
-          <switch bindchange="clockin" data-group="{{item.group}}" data-weight="{{item.weight}}"
+          <switch bindchange="clockin"  checked="{{item.activation}}" data-group="{{item.group}}" data-weight="{{item.weight}}"
             data-unit="{{item.unit}}" data-number="{{item.number}}" data-small_name="{{small_name}}"
             data-small_id="{{small_id}}"></switch>
         </view>

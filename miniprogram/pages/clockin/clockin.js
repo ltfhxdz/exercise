@@ -63,7 +63,7 @@ Page({
   },
 
 
-  detailQuery: function (big_name, small_id, small_name) {
+  detailQuery: function (e, big_name, small_id, small_name) {
     const db = wx.cloud.database();
     db.collection('detail').limit(1).orderBy('exercise_date', 'desc').where({
       small_id: small_id
@@ -86,20 +86,16 @@ Page({
           groupList.push(groupMap);
         }
 
-        this.setData({
-          detailShow: true,
-          big_name: big_name,
-          small_id: small_id,
-          small_name: small_name,
-          groupList: groupList
-        })
+
+        this.clockinQueryByToday(e, big_name, small_id, small_name, groupList);
+
       }
     })
   },
 
 
   showGroup: function (e) {
-    this.detailQuery(e.currentTarget.dataset.big_name, e.currentTarget.dataset.small_id, e.currentTarget.dataset.small_name);
+    this.detailQuery(e, e.currentTarget.dataset.big_name, e.currentTarget.dataset.small_id, e.currentTarget.dataset.small_name);
   },
 
   closeGroup: function () {
@@ -149,6 +145,46 @@ Page({
           //更新数据库
           this.clockinUpdateDB(clockinList[0]['_id'], groupListNew);
         }
+      }
+    })
+  },
+
+
+  clockinQueryByToday: function (e, big_name, small_id, small_name, groupList) {
+    const db = wx.cloud.database();
+    db.collection('clockin').where({
+      clockin_date: db.command.gte(this.getStartDate()).and(db.command.lte(this.getEndDate())),
+      small_id: db.command.eq(e.currentTarget.dataset.small_id)
+    }).get({
+      success: res => {
+        let clockinList = res.data;
+        if (clockinList.length == 0) {
+          for (let x in groupList) {
+            groupList[x]['activation'] = false;
+          }
+        } else {
+          let groupListNew = clockinList[0]['groupList'];
+          for (let x in groupList) {
+            for (let y in groupListNew) {
+              if (groupList[x]['group'] == groupListNew[y]['group']) {
+                groupList[x]['activation'] = true;
+                groupList[x]['weight'] = groupListNew[y]['weight'];
+                groupList[x]['unit'] = groupListNew[y]['unit'];
+                groupList[x]['number'] = groupListNew[y]['number'];
+                break;
+              }
+            }
+          }
+        }
+
+        this.setData({
+          detailShow: true,
+          big_name: big_name,
+          small_id: small_id,
+          small_name: small_name,
+          groupList: groupList
+        })
+
       }
     })
   },
@@ -225,7 +261,6 @@ Page({
 
 
   clockinQueryByDate: function (e) {
-    console.log(this.data.big_name);
     const db = wx.cloud.database();
     db.collection('clockin').where({
       clockin_date: db.command.gte(this.getStartDate()).and(db.command.lte(this.getEndDate())),
