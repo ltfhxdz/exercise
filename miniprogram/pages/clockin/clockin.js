@@ -294,6 +294,8 @@ Page({
           //更新数据库
           this.clockinUpdateDB(clockinList[0]['_id'], groupListNew);
         }
+
+        this.showGroup(e);
       }
     })
   },
@@ -330,6 +332,8 @@ Page({
         this.setData({
           clockinList: res.data
         })
+        
+        this.showGroup(e);
       }
     })
   },
