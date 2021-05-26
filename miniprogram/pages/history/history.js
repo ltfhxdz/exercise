@@ -23,7 +23,6 @@ Page({
         month: month
       },
       complete: res => {
-        console.log(res);
       }
     })
   },
@@ -163,7 +162,6 @@ Page({
           })
           return;
         }
-
         let dayList = this.getDayList(res.result.data);
         let isToday = dayList[dayList.length - 1]['clockin_date'];
 

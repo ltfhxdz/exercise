@@ -1,27 +1,27 @@
 <swiper class="view_swiper" autoplay="true" interval="10000" duration="600" circular="false">
   <swiper-item>
     <view class="swiper_image">
-      <image src="../../pages/images/jianshen1.jpg"  mode='aspectFit' />
+      <image src="../../pages/images/jianshen1.jpg" mode='aspectFit' />
     </view>
   </swiper-item>
   <swiper-item>
     <view class="swiper_image">
-      <image src="../../pages/images/jianshen2.jpg"  mode='aspectFit' />
+      <image src="../../pages/images/jianshen2.jpg" mode='aspectFit' />
     </view>
   </swiper-item>
   <swiper-item>
     <view class="swiper_image">
-      <image src="../../pages/images/jianshen3.jpg"  mode='aspectFit' />
+      <image src="../../pages/images/jianshen3.jpg" mode='aspectFit' />
     </view>
   </swiper-item>
   <swiper-item>
     <view class="swiper_image">
-      <image src="../../pages/images/jianshen4.jpg"  mode='aspectFit' />
+      <image src="../../pages/images/jianshen4.jpg" mode='aspectFit' />
     </view>
   </swiper-item>
   <swiper-item>
     <view class="swiper_image">
-      <image src="../../pages/images/jianshen5.jpg"  mode='aspectFit' />
+      <image src="../../pages/images/jianshen5.jpg" mode='aspectFit' />
     </view>
   </swiper-item>
 </swiper>
@@ -75,9 +75,9 @@
           </picker>
         </view>
         <view class="detail-td-4">
-          <switch bindchange="clockin"  checked="{{item.activation}}" data-group="{{item.group}}" data-weight="{{item.weight}}"
-            data-unit="{{item.unit}}" data-number="{{item.number}}" data-small_name="{{small_name}}"
-            data-small_id="{{small_id}}"></switch>
+          <switch bindchange="clockin" checked="{{item.activation}}" data-group="{{item.group}}"
+            data-weight="{{item.weight}}" data-unit="{{item.unit}}" data-number="{{item.number}}"
+            data-small_name="{{small_name}}" data-small_id="{{small_id}}"></switch>
         </view>
       </view>
 
@@ -86,7 +86,8 @@
 
     <view class="tr bg-g">
       <view class="button1" catchtap='batchClockin' data-small_name="{{small_name}}" data-small_id="{{small_id}}">
-        <button>一键打卡</button></view>
+        <button>一键打卡</button>
+      </view>
     </view>
   </view>
 </view>
