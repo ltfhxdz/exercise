@@ -39,3 +39,42 @@
     <view class="line"></view>
   </block>
 </view>
+
+<view class="table">
+  <view class="tr bg-w bold">
+    <view>肌肉群统计</view>
+  </view>
+  <block wx:for="{{aggregate5List}}" wx:key="id">
+    <view class="tr bg-g">
+      <view class="td-s1">{{item._id}}</view>
+      <view class="td-2">共{{item.num}}天次</view>
+    </view>
+    <view class="line"></view>
+  </block>
+</view>
+
+<view class="table">
+  <view class="tr bg-w bold">
+    <view>动作统计</view>
+  </view>
+  <block wx:for="{{aggregate1List}}" wx:key="id">
+    <view class="tr bg-g">
+      <view class="td-s1">{{item._id}}</view>
+      <view class="td-2">共{{item.num}}天次</view>
+    </view>
+    <view class="line"></view>
+  </block>
+</view>
+
+<view class="table">
+  <view class="tr bg-w bold">
+    <view>开始统计</view>
+  </view>
+  <block wx:for="{{aggregate6List}}" wx:key="id">
+    <view class="tr bg-g">
+      <view class="td-x1">{{item._id}}</view>
+      <view class="td-2">{{item.startDate}}开始</view>
+    </view>
+    <view class="line"></view>
+  </block>
+</view>

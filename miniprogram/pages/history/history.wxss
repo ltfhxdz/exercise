@@ -85,14 +85,14 @@
   display: flex;
   justify-content: left;
   height: 70rpx;
-  background-color: greenyellow;
+  background-color: rgb(230, 237, 241);
   margin: 0 auto;
   align-items: center;
 }
 
 
 
-.nowDay2{
+.nowDay2 {
   display: flex;
   justify-content: left;
   height: 70rpx;
@@ -106,7 +106,7 @@
   margin-top: 50rpx;
 }
 
-.bold{
+.bold {
   font-weight: bolder;
 }
 
@@ -123,6 +123,22 @@
 
 .bg-g {
   background: #E6F3F9;
+}
+
+.td-s1 {
+  width: 30%;
+  justify-content: left;
+  display: flex;
+  height: 70rpx;
+  align-items: center;
+}
+
+.td-x1 {
+  width: 50%;
+  justify-content: left;
+  display: flex;
+  height: 70rpx;
+  align-items: center;
 }
 
 .td-1 {

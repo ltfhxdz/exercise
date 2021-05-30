@@ -11,7 +11,7 @@ Page({
     todayIndex: 0,
   },
 
-  test() {
+  test: function () {
     let now = new Date();
     let year = now.getFullYear();
     let month = now.getMonth() + 1;
@@ -22,10 +22,79 @@ Page({
         year: year,
         month: month
       },
+      complete: res => {}
+    })
+  },
+
+
+  aggregate1: function () {
+    wx.cloud.callFunction({
+      name: 'aggregate1',
       complete: res => {
+        this.setData({
+          aggregate1List: res.result.list
+        })
       }
     })
   },
+
+  aggregate2: function () {
+    wx.cloud.callFunction({
+      name: 'aggregate2',
+      complete: res => {
+        let resultList = res.result.data;
+        for (let x in resultList) {
+          let id = resultList[x]['_id'];
+          let small_name = resultList[x]['small_name'];
+          let small_weight = small_name + ' ' + resultList[x]['groupList'][0]['weight'] + resultList[x]['groupList'][0]['unit'];
+          console.log(id);
+          console.log(small_name);
+          console.log(small_weight);
+          this.clockinUpdateSmall_weight(id, small_weight);
+        }
+
+      }
+    })
+  },
+
+
+  aggregate5: function () {
+    wx.cloud.callFunction({
+      name: 'aggregate5',
+      complete: res => {
+        this.setData({
+          aggregate5List: res.result.list
+        })
+      }
+    })
+  },
+
+
+  aggregate6: function () {
+    wx.cloud.callFunction({
+      name: 'aggregate6',
+      complete: res => {
+        let aggregate6List = [];
+        let resultList = res.result.list;
+        for(let x in resultList){
+          let startDate = new Date(resultList[x]['startDate']);
+          let year = startDate.getFullYear();
+          let month = startDate.getMonth();
+          let day = startDate.getDate();
+          let startDate_str = year + "-" + (month + 1) + "-" + day;
+
+          let aggregate6Map = {};
+          aggregate6Map['_id'] = resultList[x]['_id'];
+          aggregate6Map['startDate'] = startDate_str;
+          aggregate6List.push(aggregate6Map);
+        }
+        this.setData({
+          aggregate6List: aggregate6List
+        })
+      }
+    })
+  },
+
 
   selectDay: function (e) {
     let clockin_date = e.currentTarget.dataset.clockin_date;
@@ -127,9 +196,7 @@ Page({
   },
 
 
-  onLoad: function () {
-
-  },
+  onLoad: function () {},
 
   /**
    * 生命周期函数--监听页面显示
@@ -145,8 +212,26 @@ Page({
     })
 
     this.clockinQueryByMonth(year, month);
+
+    this.aggregate1();
+    this.aggregate5();
+    this.aggregate6();
+    
+    // this.aggregate2();
   },
 
+  clockinUpdateSmall_weight: function (id, small_weight) {
+    const db = wx.cloud.database()
+    db.collection('clockin').doc(id).update({
+      data: {
+        small_weight: small_weight
+      },
+      success: res => {},
+      fail: err => {
+        console.error('数据库更新失败：', err)
+      }
+    })
+  },
 
   clockinQueryByMonth: function (year, month) {
     wx.cloud.callFunction({

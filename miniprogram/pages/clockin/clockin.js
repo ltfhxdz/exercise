@@ -158,7 +158,9 @@ Page({
       groupList.push(groupMap);
     }
 
-    this.clockinAddDB(this.data.big_name, e.currentTarget.dataset.small_id, e.currentTarget.dataset.small_name, groupList);
+    let weight = groupArray[0]['weight'];
+    let unit = groupArray[0]['unit'];
+    this.clockinAddDB(this.data.big_name, e.currentTarget.dataset.small_id, e.currentTarget.dataset.small_name, weight, unit, groupList);
   },
 
 
@@ -271,7 +273,7 @@ Page({
   setGroupList: function (e) {
     let memorGroupList = this.data.groupList;
     let groupList = [];
-    
+
     for (let x in memorGroupList) {
       if (memorGroupList[x]['group'] == e.currentTarget.dataset.group) {
         let groupMap = {};
@@ -405,7 +407,9 @@ Page({
     let groupList = [];
     groupList.push(this.getGroupMap(e));
 
-    this.clockinAddDB(this.data.big_name, e.currentTarget.dataset.small_id, e.currentTarget.dataset.small_name, groupList);
+    let weight = groupList[0]['weight'];
+    let unit = groupList[0]['unit'];
+    this.clockinAddDB(this.data.big_name, e.currentTarget.dataset.small_id, e.currentTarget.dataset.small_name, weight, unit, groupList);
   },
 
 
@@ -426,8 +430,7 @@ Page({
       data: {
         groupList: groupList
       },
-      success: res => {
-      },
+      success: res => {},
       fail: err => {
         console.error('数据库更新失败：', err)
       }
@@ -435,7 +438,7 @@ Page({
   },
 
 
-  clockinAddDB: function (big_name, small_id, small_name, groupList) {
+  clockinAddDB: function (big_name, small_id, small_name, weight, unit, groupList) {
 
     db.collection('clockin').add({
       data: {
@@ -443,6 +446,7 @@ Page({
         big_name: big_name,
         small_id: small_id,
         small_name: small_name,
+        small_weight: small_name + ' ' + weight + unit,
         groupList: groupList
       },
       success: res => {},

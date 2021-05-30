@@ -1,0 +1,63 @@
+// {
+//   "list": [{
+//     "_id": "28ee4e3e609b4a0b17f69929557aaca9",
+//     "clockin_date": "2021-05-12T03:22:51.056Z",
+//     "groupList": [{
+//       "group": 1,
+//       "number": 20,
+//       "unit": "公斤",
+//       "weight": 30
+//     }, {
+//       "unit": "公斤",
+//       "weight": 30,
+//       "group": 2,
+//       "number": 20
+//     }, {
+//       "group": 3,
+//       "number": 20,
+//       "unit": "公斤",
+//       "weight": 30
+//     }, {
+//       "group": 4,
+//       "number": 20,
+//       "unit": "公斤",
+//       "weight": 30
+//     }],
+//     "small_id": "79550af2609a969b160c2355689f681c",
+//     "small_name": "平板杠铃卧推",
+//     "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+//     "big_name": "胸肌",
+//     "clockinList": [{
+//       "_id": "28ee4e3e609a997e17dcf429153b842b",
+//       "small_id": "79550af2609a969b160c2355689f681c",
+//       "unit": "公斤",
+//       "weight": 30,
+//       "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+//       "exercise_date": "2021-05-11T14:49:34.639Z",
+//       "group": 4,
+//       "name": "平板杠铃卧推",
+//       "number": 20
+//     }, {
+//       "_id": "17453ede609a99de090ede8969c02f87",
+//       "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+//       "exercise_date": "2021-05-11T14:51:10.262Z",
+//       "group": 4,
+//       "name": "平板杠铃卧推",
+//       "number": 20,
+//       "small_id": "79550af2609a969b160c2355689f681c",
+//       "unit": "公斤",
+//       "weight": 30
+//     }, {
+//       "_id": "b00064a7609a99fe16a1cc4c58c76bba",
+//       "weight": 30,
+//       "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+//       "exercise_date": "2021-05-11T14:51:42.420Z",
+//       "group": 4,
+//       "name": "平板杠铃卧推",
+//       "number": 20,
+//       "small_id": "79550af2609a969b160c2355689f681c",
+//       "unit": "公斤"
+//     }]
+//   }],
+//   "errMsg": "collection.aggregate:ok"
+// }
