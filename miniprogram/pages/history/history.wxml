@@ -78,3 +78,22 @@
     <view class="line"></view>
   </block>
 </view>
+
+<view class="table" wx:for="{{muscleList}}" wx:for-item="muscleList" wx:key="id">
+  <view class='tr bg-1'>
+    <text class="item1 bold">{{muscleList.muscle}}</text>
+    <text class="item2">{{muscleList.days}}</text>
+  </view>
+  <block wx:for="{{muscleList.actionList}}" wx:for-item="actionList" wx:key="id">
+    <view class="tr bg-2 item3">{{actionList.action}}</view>
+    <view class="line"></view>
+    <block wx:for="{{actionList.groupList}}" wx:for-item="groupList" wx:key="id">
+      <view class="tr bg-3">
+        <view class="td1">{{groupList.weight}}</view>
+        <view class="td2">{{groupList.start}}</view>
+        <view class="td3">{{groupList.days}}</view>
+      </view>
+      <view class="line"></view>
+    </block>
+  </block>
+</view>

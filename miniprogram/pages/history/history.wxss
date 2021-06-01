@@ -79,8 +79,6 @@
   font-size: 12pt;
 }
 
-
-
 .nowDay .date-head {
   display: flex;
   justify-content: left;
@@ -90,15 +88,12 @@
   align-items: center;
 }
 
-
-
 .nowDay2 {
   display: flex;
   justify-content: left;
   height: 70rpx;
   align-items: center;
 }
-
 
 .table {
   border: 1px solid darkgray;
@@ -110,9 +105,11 @@
   font-weight: bolder;
 }
 
+
 .tr {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
   height: 70rpx;
   align-items: center;
 }
@@ -157,7 +154,6 @@
   align-items: center;
 }
 
-
 .td-3 {
   width: 30%;
   justify-content: center;
@@ -166,9 +162,56 @@
   align-items: center;
 }
 
-
-
 .line {
   height: 2px;
   background: cyan;
+}
+
+.td1 {
+  width: 30%;
+  justify-content: center;
+  display: flex;
+  height: 70rpx;
+  align-items: center;
+}
+
+.td2 {
+  width: 40%;
+  justify-content: center;
+  display: flex;
+  height: 70rpx;
+  align-items: center;
+}
+
+.td3 {
+  width: 30%;
+  justify-content: center;
+  display: flex;
+  height: 70rpx;
+  align-items: center;
+}
+
+.bg-1 {
+  background: cyan;
+}
+
+.bg-2 {
+  background: #cfdfe6;
+}
+
+.bg-3 {
+  background: #E6F3F9;
+}
+
+.item1 {
+  margin-left: 300rpx;
+  font-size: 36rpx;
+}
+
+.item2 {
+  margin-left: 150rpx;
+}
+
+.item3 {
+  font-size: 30rpx;
 }

@@ -7,13 +7,13 @@ const db = cloud.database();
 const _ = db.command;
 const $ = db.command.aggregate;
 
-//根据small_name，进行分组，得到第一个groupList
+//根据small_name，进行分组，得到第一个big_name
 exports.main = async (event, context) => {
   try {
     return await db.collection('clockin').aggregate()
       .group({
         _id: '$small_name',
-        num: $.first('$groupList')
+        big_name: $.first('$big_name')
       })
       .end();
   } catch (e) {

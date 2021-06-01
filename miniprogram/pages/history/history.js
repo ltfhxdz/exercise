@@ -9,6 +9,76 @@ Page({
     isToday: 0,
     isTodayWeek: false,
     todayIndex: 0,
+    
+    muscleList: [{
+      muscle: '胸肌',
+      days: '20天次',
+      actionList: [{
+        action: '平板杠铃卧推',
+        groupList: [{
+          weight: '20公斤',
+          start: '2020-12-1开始',
+          days: '18天次'
+        }, {
+          weight: '30公斤',
+          start: '2020-11-10开始',
+          days: '18天次'
+        }, {
+          weight: '40公斤',
+          start: '2021-12-21开始',
+          days: '18天次'
+        }]
+      },{
+        action: '史密斯上斜卧推',
+        groupList: [{
+          weight: '20公斤',
+          start: '2020-12-1开始',
+          days: '18天次'
+        }, {
+          weight: '30公斤',
+          start: '2020-11-12开始',
+          days: '18天次'
+        }, {
+          weight: '40公斤',
+          start: '2021-12-17开始',
+          days: '18天次'
+        }]
+      }]
+    },{
+      muscle: '背肌',
+      days: '20天次',
+      actionList: [{
+        action: '高位下拉',
+        groupList: [{
+          weight: '20公斤',
+          start: '2020-12-1开始',
+          days: '18天次'
+        }, {
+          weight: '30公斤',
+          start: '2020-11-10开始',
+          days: '18天次'
+        }, {
+          weight: '40公斤',
+          start: '2021-12-21开始',
+          days: '18天次'
+        }]
+      },{
+        action: '坐姿划船',
+        groupList: [{
+          weight: '20公斤',
+          start: '2020-12-1开始',
+          days: '18天次'
+        }, {
+          weight: '30公斤',
+          start: '2020-11-12开始',
+          days: '18天次'
+        }, {
+          weight: '40公斤',
+          start: '2021-12-17开始',
+          days: '18天次'
+        }]
+      }]
+    }]
   },
 
   test: function () {
@@ -196,7 +266,12 @@ Page({
   },
 
 
-  onLoad: function () {},
+  onLoad: function () {
+    
+    this.setData({
+      muscleList: this.data.muscleList
+    })
+  },
 
   /**
    * 生命周期函数--监听页面显示
