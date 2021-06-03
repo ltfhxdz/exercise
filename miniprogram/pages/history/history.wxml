@@ -10,7 +10,7 @@
 </view>
 
 <view class="table">
-  <view class="tr bg-w bold"  wx:if="{{showClockin}}">
+  <view class="tr bg-w bold" wx:if="{{showClockin}}">
     <view>打卡日期</view>
   </view>
   <block wx:for="{{dayList}}" wx:key="id">
@@ -40,7 +40,21 @@
   </block>
 </view>
 
-<view class="table" wx:for="{{statisticsList}}" wx:for-item="statisticsList" wx:key="id">
+<view class='flex-wrp-row item'>
+  <view class='item-left flex-wrp-row bold'>
+    <text decode="{{true}}">&nbsp;&nbsp;统计</text>
+  </view>
+  <view class='item-right flex-wrp-row'>
+    <view bindtap="open">{{!isExpanding ? "展开" : "收起"}}
+    </view>
+    <image src='../../images/down.jpg' class='icon-right' mode='aspectFit' wx:if="{{!isExpanding}}" bindtap="open">
+    </image>
+    <image src='../../images/up.jpg' class='icon-right' mode='aspectFit' wx:if="{{isExpanding}}" bindtap="open">
+    </image>
+  </view>
+</view>
+
+<view class="table1" wx:for="{{statisticsList}}" wx:for-item="statisticsList" wx:key="id" wx:if="{{isExpanding}}">
   <view class='tr bg-1'>
     <text class="item1 bold">{{statisticsList.muscle}}</text>
     <text class="item2">{{statisticsList.days}}天次</text>

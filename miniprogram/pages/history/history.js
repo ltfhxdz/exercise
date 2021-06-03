@@ -26,6 +26,12 @@ Page({
     })
   },
 
+  open: function () {
+    this.setData({
+      isExpanding: !this.data.isExpanding
+    })
+  },
+
 
   aggregate1: function () {
     wx.cloud.callFunction({

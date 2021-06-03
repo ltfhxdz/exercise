@@ -101,6 +101,11 @@
   margin-top: 50rpx;
 }
 
+.table1 {
+  border: 1px solid darkgray;
+  width: 100%;
+}
+
 .bold {
   font-weight: bolder;
 }
@@ -214,4 +219,31 @@
 
 .item3 {
   font-size: 30rpx;
+}
+
+.item-right {
+  position: relative;
+  align-items: center;
+}
+
+.flex-wrp-row {
+  display: flex;
+  flex-direction: row;
+  color: black;
+}
+
+.item-left {
+  flex: 1;
+  /* 重要 */
+  align-items: center;
+}
+
+.icon-right {
+  width: 20px;
+  height: 20px;
+}
+
+.item {
+  padding: 25rpx;
+  position: relative;
 }
