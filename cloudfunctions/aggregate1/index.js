@@ -12,7 +12,7 @@ exports.main = async (event, context) => {
   try {
     return await db.collection('clockin').aggregate()
       .group({
-        _id: '$small_name',
+        _id: '$small_weight',
         num: $.sum(1)
       })
       .end();

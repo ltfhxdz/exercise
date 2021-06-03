@@ -9,10 +9,110 @@ const $ = db.command.aggregate;
 
 //根据big_name，进行分组，得到所有的日期
 exports.main = async (event, context) => {
+  let muscleList = await getMuscleList();
+  let nameList = await getNameList();
+  let startList = await getStartList();
+  let smallDaysList = await getSmallDaysList();
+  
 
-  return await getMuscleList();
+  let statisticsList = [];
+  for (let x in muscleList) {
+    let actionList = [];
+    for (let y in nameList) {
+      if (muscleList[x]['muscle'] == nameList[y]['big_name']) {
+        let groupList = [];
+        for (let z in startList) {
+          let actionArray = startList[z]['_id'].split(' ');
+          if (nameList[y]['_id'] == actionArray[0]) {
+            let smallDays = '';
+            for(let a in smallDaysList){
+              if(smallDaysList[a]['_id'] == startList[z]['_id']){
+                smallDays = smallDaysList[a]['days'];
+                break;
+              }
+            }
+
+            let startDate = new Date(startList[z]['startDate']);
+            let year = startDate.getFullYear();
+            let month = startDate.getMonth();
+            let day = startDate.getDate();
+            let startDate_str = year + "-" + (month + 1) + "-" + day;
+
+            let groupMap = {};
+            groupMap['weight'] = actionArray[1];
+            groupMap['start'] = startDate_str;
+            groupMap['days'] = smallDays;
+            groupList.push(groupMap);
+          }
+        }
+        let actionMap = {};
+        actionMap['action'] = nameList[y]['_id'];
+        actionMap['groupList'] = groupList;
+        actionList.push(actionMap);
+      }
+    }
+
+    let statisticsMap = {};
+    statisticsMap['muscle'] = muscleList[x]['muscle'];
+    statisticsMap['days'] = muscleList[x]['days'];
+    statisticsMap['actionList'] = actionList;
+    statisticsList.push(statisticsMap);
+  }
+
+  return statisticsList;
 }
 
+
+async function getSmallDaysList() {
+  try {
+    let queryList =  await db.collection('clockin').aggregate()
+      .group({
+        _id: '$small_weight',
+        days: $.sum(1)
+      })
+      .end();
+
+      return queryList['list'];
+
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+async function getStartList() {
+  try {
+    let queryList = await db.collection('clockin').aggregate().sort({
+        big_name: 1,
+        small_name: 1
+      })
+      .group({
+        _id: '$small_weight',
+        startDate: $.min('$clockin_date')
+      })
+      .end();
+
+    return queryList['list'];
+
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+
+async function getNameList() {
+  try {
+    let queryList = await db.collection('clockin').aggregate()
+      .group({
+        _id: '$small_name',
+        big_name: $.first('$big_name')
+      })
+      .end();
+
+    return queryList['list'];
+  } catch (e) {
+    console.error(e);
+  }
+}
 
 async function getMuscleList() {
   try {
@@ -28,11 +128,11 @@ async function getMuscleList() {
       })
       .end();
 
-    let resultList = [];
+    let muscleList = [];
     let list = queryList.list;
     for (let x in list) {
       let resultMap = {};
-      resultMap['big_name'] = list[x]['_id'];
+      resultMap['muscle'] = list[x]['_id'];
 
       let dateList = [];
       let dates = list[x]['dates'];
@@ -55,11 +155,11 @@ async function getMuscleList() {
       }
 
 
-      resultMap['dates'] = dateList.length;
-      resultList.push(resultMap);
+      resultMap['days'] = dateList.length;
+      muscleList.push(resultMap);
     }
 
-    return resultList;
+    return muscleList;
 
   } catch (e) {
     console.error(e);

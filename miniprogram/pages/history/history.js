@@ -9,76 +9,6 @@ Page({
     isToday: 0,
     isTodayWeek: false,
     todayIndex: 0,
-    
-    muscleList: [{
-      muscle: '胸肌',
-      days: '20天次',
-      actionList: [{
-        action: '平板杠铃卧推',
-        groupList: [{
-          weight: '20公斤',
-          start: '2020-12-1开始',
-          days: '18天次'
-        }, {
-          weight: '30公斤',
-          start: '2020-11-10开始',
-          days: '18天次'
-        }, {
-          weight: '40公斤',
-          start: '2021-12-21开始',
-          days: '18天次'
-        }]
-      },{
-        action: '史密斯上斜卧推',
-        groupList: [{
-          weight: '20公斤',
-          start: '2020-12-1开始',
-          days: '18天次'
-        }, {
-          weight: '30公斤',
-          start: '2020-11-12开始',
-          days: '18天次'
-        }, {
-          weight: '40公斤',
-          start: '2021-12-17开始',
-          days: '18天次'
-        }]
-      }]
-    },{
-      muscle: '背肌',
-      days: '20天次',
-      actionList: [{
-        action: '高位下拉',
-        groupList: [{
-          weight: '20公斤',
-          start: '2020-12-1开始',
-          days: '18天次'
-        }, {
-          weight: '30公斤',
-          start: '2020-11-10开始',
-          days: '18天次'
-        }, {
-          weight: '40公斤',
-          start: '2021-12-21开始',
-          days: '18天次'
-        }]
-      },{
-        action: '坐姿划船',
-        groupList: [{
-          weight: '20公斤',
-          start: '2020-12-1开始',
-          days: '18天次'
-        }, {
-          weight: '30公斤',
-          start: '2020-11-12开始',
-          days: '18天次'
-        }, {
-          weight: '40公斤',
-          start: '2021-12-17开始',
-          days: '18天次'
-        }]
-      }]
-    }]
   },
 
   test: function () {
@@ -160,6 +90,18 @@ Page({
         }
         this.setData({
           aggregate6List: aggregate6List
+        })
+      }
+    })
+  },
+
+  
+  aggregate7: function () {
+    wx.cloud.callFunction({
+      name: 'aggregate7',
+      complete: res => {
+        this.setData({
+          statisticsList: res.result
         })
       }
     })
@@ -269,7 +211,7 @@ Page({
   onLoad: function () {
     
     this.setData({
-      muscleList: this.data.muscleList
+      statisticsList: this.data.statisticsList
     })
   },
 
@@ -288,11 +230,7 @@ Page({
 
     this.clockinQueryByMonth(year, month);
 
-    this.aggregate1();
-    this.aggregate5();
-    this.aggregate6();
-    
-    // this.aggregate2();
+    this.aggregate7();
   },
 
   clockinUpdateSmall_weight: function (id, small_weight) {
