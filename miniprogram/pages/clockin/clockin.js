@@ -443,6 +443,7 @@ Page({
     db.collection('clockin').add({
       data: {
         clockin_date: db.serverDate(),
+        client_date: this.getClient_date(),
         big_name: big_name,
         small_id: small_id,
         small_name: small_name,
@@ -522,6 +523,15 @@ Page({
    */
   onShow: function () {
     this.activityQuery();
+  },
+
+  getClient_date: function () {
+    let date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var client_date = year + "-" + month + "-" + day;
+    return client_date;
   },
 
   /**

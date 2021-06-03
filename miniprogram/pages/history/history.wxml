@@ -41,8 +41,9 @@
 </view>
 
 <view class='flex-wrp-row item'>
-  <view class='item-left flex-wrp-row bold'>
-    <text decode="{{true}}">&nbsp;&nbsp;统计</text>
+  <view class='item-left flex-wrp-row'>
+    <text class="bold" decode="{{true}}">&nbsp;&nbsp;统计 &nbsp;&nbsp;</text>
+    <text decode="{{true}}">{{clockinTotal}}天次</text>
   </view>
   <view class='item-right flex-wrp-row'>
     <view bindtap="open">{{!isExpanding ? "展开" : "收起"}}

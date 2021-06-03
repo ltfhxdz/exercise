@@ -1,5 +1,7 @@
 var util = require('../../utils/util.js');
 
+const db = wx.cloud.database();
+
 Page({
   data: {
     year: 0,
@@ -53,15 +55,55 @@ Page({
           let id = resultList[x]['_id'];
           let small_name = resultList[x]['small_name'];
           let small_weight = small_name + ' ' + resultList[x]['groupList'][0]['weight'] + resultList[x]['groupList'][0]['unit'];
-          console.log(id);
-          console.log(small_name);
-          console.log(small_weight);
           this.clockinUpdateSmall_weight(id, small_weight);
         }
 
       }
     })
   },
+
+  updateClient_date: function () {
+    wx.cloud.callFunction({
+      name: 'aggregate2',
+      complete: res => {
+        let resultList = res.result.data;
+        for (let x in resultList) {
+          let id = resultList[x]['_id'];
+          let clockin_date = new Date(resultList[x]['clockin_date']);
+          let year = clockin_date.getFullYear();
+          let month = clockin_date.getMonth();
+          let day = clockin_date.getDate();
+          let client_date = year + "-" + (month + 1) + "-" + day;
+
+          this.clockinUpdateClient_date(id, client_date);
+        }
+
+      }
+    })
+  },
+
+  clockinUpdateClient_date: function (id, client_date) {
+
+    db.collection('clockin').doc(id).update({
+      data: {
+        client_date: client_date
+      },
+      success: res => {},
+      fail: err => {
+        console.error('数据库更新失败：', err)
+      }
+    })
+  },
+
+  getClient_date: function () {
+    let date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var client_date = year + "-" + month + "-" + day;
+    return client_date;
+  },
+
 
 
   aggregate5: function () {
@@ -113,6 +155,19 @@ Page({
     })
   },
 
+  
+  aggregate8: function () {
+    wx.cloud.callFunction({
+      name: 'aggregate8',
+      complete: res => {
+        this.setData({
+          clockinTotal: res.result
+        })
+      }
+    })
+  },
+
+
 
   selectDay: function (e) {
     let clockin_date = e.currentTarget.dataset.clockin_date;
@@ -131,7 +186,7 @@ Page({
 
 
   clockinQuery: function (sdate, edate) {
-    const db = wx.cloud.database();
+
     db.collection('clockin').where({
       clockin_date: db.command.gte(sdate).and(db.command.lte(edate))
     }).get({
@@ -145,7 +200,7 @@ Page({
 
 
   clockinCount: function (sdate, edate) {
-    const db = wx.cloud.database();
+
     db.collection('clockin').where({
       clockin_date: db.command.gte(sdate).and(db.command.lte(edate))
     }).count({
@@ -214,12 +269,7 @@ Page({
   },
 
 
-  onLoad: function () {
-
-    this.setData({
-      statisticsList: this.data.statisticsList
-    })
-  },
+  onLoad: function () {},
 
   /**
    * 生命周期函数--监听页面显示
@@ -237,10 +287,11 @@ Page({
     this.clockinQueryByMonth(year, month);
 
     this.aggregate7();
+    this.aggregate8();
   },
 
   clockinUpdateSmall_weight: function (id, small_weight) {
-    const db = wx.cloud.database()
+
     db.collection('clockin').doc(id).update({
       data: {
         small_weight: small_weight
@@ -292,7 +343,7 @@ Page({
     let sdate = new Date(month1);
     let edate = new Date(month2);
 
-    const db = wx.cloud.database();
+
     db.collection('clockin').where({
       clockin_date: db.command.gte(sdate).and(db.command.lt(edate))
     }).count({
