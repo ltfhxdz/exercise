@@ -76,7 +76,7 @@ Page({
       complete: res => {
         let aggregate6List = [];
         let resultList = res.result.list;
-        for(let x in resultList){
+        for (let x in resultList) {
           let startDate = new Date(resultList[x]['startDate']);
           let year = startDate.getFullYear();
           let month = startDate.getMonth();
@@ -95,7 +95,7 @@ Page({
     })
   },
 
-  
+
   aggregate7: function () {
     wx.cloud.callFunction({
       name: 'aggregate7',
@@ -209,7 +209,7 @@ Page({
 
 
   onLoad: function () {
-    
+
     this.setData({
       statisticsList: this.data.statisticsList
     })
@@ -256,7 +256,8 @@ Page({
       complete: res => {
         if (res.result.data.length == 0) {
           this.setData({
-            dayList: []
+            dayList: [],
+            showClockin: false
           })
           return;
         }
@@ -265,7 +266,8 @@ Page({
 
         this.setData({
           dayList: dayList,
-          isToday: isToday
+          isToday: isToday,
+          showClockin: true
         })
 
         let startdate = isToday + " 00:00:00";

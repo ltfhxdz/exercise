@@ -10,7 +10,7 @@
 </view>
 
 <view class="table">
-  <view class="tr bg-w bold">
+  <view class="tr bg-w bold"  wx:if="{{showClockin}}">
     <view>打卡日期</view>
   </view>
   <block wx:for="{{dayList}}" wx:key="id">
