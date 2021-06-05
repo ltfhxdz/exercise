@@ -24,6 +24,8 @@ Page({
     ],
   },
 
+
+
   detailAdd: function () {
     this.detailAddDB(this.data.smallId, this.data.action, this.data.group, this.data.weight, this.data.unit, this.data.number);
     this.setData({
@@ -184,6 +186,61 @@ Page({
     })
   },
 
+
+  smallQuery: function (big_id) {
+    const db = wx.cloud.database();
+    db.collection('small').where({
+      big_id: big_id
+    }).get({
+      success: res => {
+        let smallList = res.data;
+        this.aggregate9(smallList);
+
+      }
+    })
+  },
+
+
+  aggregate9: function (inList) {
+    //得到所有的small_id，然后查询detail表，查出对应的数据，最后整合到list中
+    let smallIdList = [];
+    for (let x in inList) {
+      smallIdList.push(inList[x]['_id']);
+    }
+
+    wx.cloud.callFunction({
+      name: 'aggregate9',
+      data: {
+        inArray: smallIdList
+      },
+      complete: res => {
+        let resultList = res.result.list;
+        let smallList = [];
+        for (let x in inList) {
+          let smallMap = {};
+          smallMap['_id'] = inList[x]['_id'];
+          smallMap['name'] = inList[x]['name'];
+          smallMap['activation'] = inList[x]['activation'];
+          for (let y in resultList) {
+            if (inList[x]['_id'] == resultList[y]['_id']) {
+              let row = resultList[y]['row'];
+              smallMap['group'] = row['group'];
+              smallMap['weight'] = row['weight'];
+              smallMap['unit'] = row['unit'];
+              smallMap['number'] = row['number'];
+              break;
+            }
+          }
+          smallList.push(smallMap);
+        }
+
+        this.setData({
+          smallList: smallList
+        })
+      }
+    })
+  },
+
   smallDelete: function (e) {
     this.smallDeleteDB(e);
   },
@@ -264,26 +321,6 @@ Page({
   },
 
 
-  smallQuery: function (big_id) {
-    const db = wx.cloud.database();
-    db.collection('small').where({
-      big_id: big_id
-    }).get({
-      success: res => {
-        let smallList = res.data;
-        //得到所有的small_id，然后查询detail表，查出对应的数据，最后整合到list中
-        let smallIdList = [];
-        for (let x in smallList) {
-          smallIdList.push(smallList[x]['_id']);
-        }
-        this.detailQueryBySmallId(smallIdList, smallList);
-
-      }
-    })
-  },
-
-
-
   detailQueryBySmallId: function (smallIdList, smallList) {
     const db = wx.cloud.database();
     db.collection('detail').where({
@@ -322,7 +359,6 @@ Page({
             }
           }
         }
-
         this.setData({
           smallList: smallList
         })
