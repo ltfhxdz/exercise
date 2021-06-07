@@ -21,14 +21,6 @@ async function getIdList(event) {
       .sort({
         exercise_date: -1
       })
-      .project({
-        exercise_date: true,
-        small_id: true,
-        group: true,
-        weight: true,
-        unit: true,
-        number: true
-      })
       .group({
         _id: '$small_id',
         row: $.first('$$ROOT')

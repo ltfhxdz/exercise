@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/history/history",
     "pages/setup/setup",
+    "pages/history/history",
     "pages/clockin/clockin",
     "pages/index/index",
     "pages/userConsole/userConsole",

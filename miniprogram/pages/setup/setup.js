@@ -1,4 +1,5 @@
-// miniprogram/pages/setup/setup.js
+const db = wx.cloud.database();
+
 Page({
 
   /**
@@ -35,7 +36,6 @@ Page({
 
 
   detailAddDB: function (smallId, name, group, weight, unit, number) {
-    const db = wx.cloud.database()
     db.collection('detail').add({
       data: {
         small_id: smallId,
@@ -99,7 +99,7 @@ Page({
 
 
   detailQuery: function (e) {
-    const db = wx.cloud.database();
+
     db.collection('detail').limit(1).orderBy('exercise_date', 'desc').where({
       small_id: e.currentTarget.dataset.id
     }).get({
@@ -135,7 +135,6 @@ Page({
   },
 
   bigUpdate: function (id, activation) {
-    const db = wx.cloud.database()
     db.collection('big').doc(id).update({
       data: {
         activation: activation
@@ -150,7 +149,7 @@ Page({
   },
 
   smallUpdate: function (id, activation) {
-    const db = wx.cloud.database()
+
     db.collection('small').doc(id).update({
       data: {
         activation: activation
@@ -188,7 +187,7 @@ Page({
 
 
   smallQuery: function (big_id) {
-    const db = wx.cloud.database();
+
     db.collection('small').where({
       big_id: big_id
     }).get({
@@ -247,7 +246,7 @@ Page({
 
 
   smallDeleteDB: function (e) {
-    const db = wx.cloud.database();
+
     db.collection('small').doc(e.currentTarget.dataset.id).remove({
       success: res => {
         this.smallQuery(this.data.big_id);
@@ -260,7 +259,7 @@ Page({
 
 
   smallAddDB: function (big_id, name) {
-    const db = wx.cloud.database()
+
     db.collection('small').add({
       data: {
         big_id: big_id,
@@ -322,7 +321,7 @@ Page({
 
 
   detailQueryBySmallId: function (smallIdList, smallList) {
-    const db = wx.cloud.database();
+
     db.collection('detail').where({
       small_id: db.command.in(smallIdList)
     }).get({
@@ -368,19 +367,41 @@ Page({
 
 
   bigDelete: function (e) {
-    const db = wx.cloud.database();
-    db.collection('big').doc(e.currentTarget.dataset.id).remove({
+    this.smallQueryBybig_id(e.currentTarget.dataset.id);
+
+
+  },
+
+  smallQueryBybig_id: function (big_id) {
+
+    db.collection('small').where({
+      big_id: big_id
+    }).get({
       success: res => {
-        this.bigQuery();
-      },
-      fail: err => {
-        console.error('数据库删除失败：', err)
+        if (res.data.length > 0) {
+          wx.showToast({
+            title: '还有动作，不能删除',
+            icon: 'none',
+            duration: 2000,
+            mask: true
+          })
+        } else {
+          db.collection('big').doc(big_id).remove({
+            success: res => {
+              this.bigQuery();
+            },
+            fail: err => {
+              console.error('数据库删除失败：', err)
+            }
+          })
+        }
       }
     })
   },
 
+
   bigAddDB: function (name) {
-    const db = wx.cloud.database()
+
     db.collection('big').add({
       data: {
         name: name,
@@ -443,7 +464,7 @@ Page({
 
 
   bigQuery: function () {
-    const db = wx.cloud.database();
+
     db.collection('big').get({
       success: res => {
         this.setData({
