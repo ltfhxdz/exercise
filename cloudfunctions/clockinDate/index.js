@@ -16,6 +16,7 @@ exports.main = async (event, context) => {
     let edate = new Date(month2);
 
     return await db.collection('clockin').where({
+      _openid: event.openid,
       clockin_date: _.and(_.gte(sdate), _.lt(edate))
     }).get({
       success: function (res) {

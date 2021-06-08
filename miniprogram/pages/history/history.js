@@ -145,24 +145,58 @@ Page({
 
 
   aggregate7: function () {
+
     wx.cloud.callFunction({
-      name: 'aggregate7',
+      name: 'getUserInfo',
       complete: res => {
-        this.setData({
-          statisticsList: res.result
+        let openid = res.result.openid;
+
+        wx.cloud.callFunction({
+          name: 'aggregate7',
+          data: {
+            openid: openid
+          },
+          complete: res => {
+            this.setData({
+              statisticsList: res.result
+            })
+          }
+        })
+      }
+    })
+
+
+  },
+
+
+  aggregate8: function () {
+    wx.cloud.callFunction({
+      name: 'getUserInfo',
+      complete: res => {
+        let openid = res.result.openid;
+
+        wx.cloud.callFunction({
+          name: 'aggregate8',
+          data: {
+            openid: openid
+          },
+          complete: res => {
+            this.setData({
+              clockinTotal: res.result
+            })
+          }
         })
       }
     })
   },
 
-  
-  aggregate8: function () {
+
+  getUserInfo() {
     wx.cloud.callFunction({
-      name: 'aggregate8',
+      name: 'getUserInfo',
       complete: res => {
-        this.setData({
-          clockinTotal: res.result
-        })
+        let openid = res.result.openid;
+
       }
     })
   },
@@ -269,7 +303,9 @@ Page({
   },
 
 
-  onLoad: function () {},
+  onLoad: function () {
+    this.getUserInfo();
+  },
 
   /**
    * 生命周期函数--监听页面显示
@@ -284,9 +320,12 @@ Page({
       month: month
     })
 
+    //打卡日期
     this.clockinQueryByMonth(year, month);
 
+    //打卡统计信息
     this.aggregate7();
+
     this.aggregate8();
   },
 
@@ -304,36 +343,46 @@ Page({
   },
 
   clockinQueryByMonth: function (year, month) {
+
     wx.cloud.callFunction({
-      name: 'clockinDate',
-      data: {
-        year: year,
-        month: month
-      },
+      name: 'getUserInfo',
       complete: res => {
-        if (res.result.data.length == 0) {
-          this.setData({
-            dayList: [],
-            showClockin: false
-          })
-          return;
-        }
-        let dayList = this.getDayList(res.result.data);
-        let isToday = dayList[dayList.length - 1]['clockin_date'];
+        let openid = res.result.openid;
 
-        this.setData({
-          dayList: dayList,
-          isToday: isToday,
-          showClockin: true
+        wx.cloud.callFunction({
+          name: 'clockinDate',
+          data: {
+            year: year,
+            month: month,
+            openid: openid
+          },
+          complete: res => {
+            if (res.result.data.length == 0) {
+              this.setData({
+                dayList: [],
+                showClockin: false
+              })
+              return;
+            }
+            let dayList = this.getDayList(res.result.data);
+            let isToday = dayList[dayList.length - 1]['clockin_date'];
+
+            this.setData({
+              dayList: dayList,
+              isToday: isToday,
+              showClockin: true
+            })
+
+            let startdate = isToday + " 00:00:00";
+            let enddate = isToday + " 23:59:59";
+            let sdate = new Date(startdate);
+            let edate = new Date(enddate);
+            this.clockinQuery(sdate, edate);
+          }
         })
-
-        let startdate = isToday + " 00:00:00";
-        let enddate = isToday + " 23:59:59";
-        let sdate = new Date(startdate);
-        let edate = new Date(enddate);
-        this.clockinQuery(sdate, edate);
       }
     })
+
   },
 
 

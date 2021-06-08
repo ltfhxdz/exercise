@@ -11,6 +11,9 @@ const $ = db.command.aggregate;
 exports.main = async (event, context) => {
   try {
     let queryList = await db.collection('clockin').aggregate()
+      .match({
+        _openid: event.openid
+      })
       .group({
         _id: '$client_date',
         num: $.sum(1)

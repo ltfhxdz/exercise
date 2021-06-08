@@ -9,11 +9,14 @@ const $ = db.command.aggregate;
 
 //根据big_name，进行分组，得到所有的日期
 exports.main = async (event, context) => {
-  let muscleList = await getMuscleList();
-  let nameList = await getNameList();
-  let startList = await getStartList();
-  let smallDaysList = await getSmallDaysList();
-  
+
+  let openid = event.openid;
+
+  let muscleList = await getMuscleList(openid);
+  let nameList = await getNameList(openid);
+  let startList = await getStartList(openid);
+  let smallDaysList = await getSmallDaysList(openid);
+
 
   let statisticsList = [];
   for (let x in muscleList) {
@@ -25,8 +28,8 @@ exports.main = async (event, context) => {
           let actionArray = startList[z]['_id'].split(' ');
           if (nameList[y]['_id'] == actionArray[0]) {
             let smallDays = '';
-            for(let a in smallDaysList){
-              if(smallDaysList[a]['_id'] == startList[z]['_id']){
+            for (let a in smallDaysList) {
+              if (smallDaysList[a]['_id'] == startList[z]['_id']) {
                 smallDays = smallDaysList[a]['days'];
                 break;
               }
@@ -63,25 +66,32 @@ exports.main = async (event, context) => {
 }
 
 
-async function getSmallDaysList() {
+async function getSmallDaysList(openid) {
   try {
-    let queryList =  await db.collection('clockin').aggregate()
+    let queryList = await db.collection('clockin').aggregate()
+      .match({
+        _openid: openid
+      })
       .group({
         _id: '$small_weight',
         days: $.sum(1)
       })
       .end();
 
-      return queryList['list'];
+    return queryList['list'];
 
   } catch (e) {
     console.error(e);
   }
 }
 
-async function getStartList() {
+async function getStartList(openid) {
   try {
-    let queryList = await db.collection('clockin').aggregate().sort({
+    let queryList = await db.collection('clockin').aggregate()
+      .match({
+        _openid: openid
+      })
+      .sort({
         big_name: 1,
         small_name: 1
       })
@@ -99,9 +109,12 @@ async function getStartList() {
 }
 
 
-async function getNameList() {
+async function getNameList(openid) {
   try {
     let queryList = await db.collection('clockin').aggregate()
+      .match({
+        _openid: openid
+      })
       .group({
         _id: '$small_name',
         big_name: $.first('$big_name')
@@ -114,9 +127,13 @@ async function getNameList() {
   }
 }
 
-async function getMuscleList() {
+async function getMuscleList(openid) {
   try {
-    let queryList = await db.collection('clockin').aggregate().sort({
+    let queryList = await db.collection('clockin').aggregate()
+      .match({
+        _openid: openid
+      })
+      .sort({
         big_name: 1,
         clockin_date: 1
       })
