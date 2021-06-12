@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/clockin/clockin",
     "pages/history/history",
     "pages/setup/setup",
-    "pages/clockin/clockin",
     "pages/index/index",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
@@ -38,7 +38,7 @@
         "pagePath": "pages/history/history",
         "iconPath": "pages/images/meihua.jpg",
         "selectedIconPath": "pages/images/meihua.jpg",
-        "text": "历史"
+        "text": "统计"
       },
       {
         "pagePath": "pages/setup/setup",

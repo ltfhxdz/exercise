@@ -474,12 +474,17 @@ Page({
   onShareAppMessage: function () {
 
   },
-
+    /**
+   * 允许用户点击右上角分享给朋友
+   */
+  onShareAppMessage: function () {
+    title: '强身打卡：记录每一次健身，给增肌提供数据。'
+  },
   /**
    * 允许用户右上角分享到朋友圈
    */
   onShareTimeline: function () {
-    title: '瘦身打卡'
+    title: '强身打卡：记录每一次健身，给增肌提供数据。'
   }
 
 
