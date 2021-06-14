@@ -48,9 +48,9 @@
   <view class='item-right flex-wrp-row'>
     <view bindtap="open">{{!isExpanding ? "展开" : "收起"}}
     </view>
-    <image src='../../images/down.jpg' class='icon-right' mode='aspectFit' wx:if="{{!isExpanding}}" bindtap="open">
+    <image src='../images/down.jpg' class='icon-right' mode='aspectFit' wx:if="{{!isExpanding}}" bindtap="open">
     </image>
-    <image src='../../images/up.jpg' class='icon-right' mode='aspectFit' wx:if="{{isExpanding}}" bindtap="open">
+    <image src='../images/up.jpg' class='icon-right' mode='aspectFit' wx:if="{{isExpanding}}" bindtap="open">
     </image>
   </view>
 </view>
