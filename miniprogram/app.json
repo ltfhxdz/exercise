@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/setup2/setup2",
     "pages/setup/setup",
     "pages/clockin/clockin",
     "pages/statistics/statistics"
@@ -14,8 +15,7 @@
     "color": "#FFFFFF",
     "selectedColor": "#FFA500",
     "backgroundColor": "#000000",
-    "list": [
-      {
+    "list": [{
         "pagePath": "pages/clockin/clockin",
         "iconPath": "pages/images/meihua.jpg",
         "selectedIconPath": "pages/images/meihua.jpg",
@@ -32,6 +32,12 @@
         "iconPath": "pages/images/lanhua.jpg",
         "selectedIconPath": "pages/images/lanhua.jpg",
         "text": "设置"
+      },
+      {
+        "pagePath": "pages/setup2/setup2",
+        "iconPath": "pages/images/lanhua.jpg",
+        "selectedIconPath": "pages/images/lanhua.jpg",
+        "text": "设置2"
       }
     ]
   },
