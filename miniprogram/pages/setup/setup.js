@@ -193,6 +193,7 @@ Page({
     }).get({
       success: res => {
         let smallList = res.data;
+        console.log(smallList);
         this.aggregate9(smallList);
 
       }
@@ -232,7 +233,7 @@ Page({
           }
           smallList.push(smallMap);
         }
-
+        console.log(smallList);
         this.setData({
           smallList: smallList
         })

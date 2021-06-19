@@ -182,3 +182,13 @@
   height: 70rpx;
   align-items: center;
 }
+
+.test {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.test-button {
+  background-color: rgb(219, 236, 236);
+}
