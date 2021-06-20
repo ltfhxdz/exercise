@@ -302,11 +302,42 @@ Page({
 
   bigActivation: function (e) {
     if (e.detail.value) {
-      this.bigUpdate(e.currentTarget.dataset.id, true);
+      this.activationAddDB(e.currentTarget.dataset.id, e.currentTarget.dataset.name);
     } else {
-      this.bigUpdate(e.currentTarget.dataset.id, false);
+      this.activationDeleteDB(e.currentTarget.dataset.id);
     }
 
+  },
+
+
+
+
+  activationAddDB: function (business_id, business_name) {
+    db.collection('activation').add({
+      data: {
+        business_id: business_id,
+        business_name: business_name
+      },
+      success: res => {
+        console.warn(res);
+      },
+      fail: err => {
+        console.error('数据库新增失败：', err)
+      }
+    })
+  },
+
+  activationDeleteDB: function (business_id) {
+    db.collection('activation').where({
+      business_id: business_id
+    }).remove({
+      success: res => {
+        console.warn(res);
+      },
+      fail: err => {
+        console.error('数据库删除失败：', err)
+      }
+    })
   },
 
   bigUpdate: function (id, activation) {
@@ -361,6 +392,7 @@ Page({
   },
 
 
+
   actionQuery: function (big_id) {
     db.collection('action').orderBy('sort', 'asc').where({
       big_id: big_id
@@ -390,26 +422,34 @@ Page({
     }
 
     wx.cloud.callFunction({
-      name: 'aggregate9',
-      data: {
-        inArray: smallIdList
-      },
+      name: 'getUserInfo',
       complete: res => {
-        let resultList = res.result.list;
-        for (let x in resultList) {
-          let row = resultList[x]['row'];
-          for (let y in smallList) {
-            if (row['small_id'] == smallList[y]['_id']) {
-              smallList[y]['group'] = row['group'];
-              smallList[y]['unit'] = row['unit'];
-              smallList[y]['weight'] = row['weight'];
-              smallList[y]['number'] = row['number'];
-            }
-          }
-        }
+        let openid = res.result.openid;
 
-        this.setData({
-          smallList: smallList
+        wx.cloud.callFunction({
+          name: 'aggregate9',
+          data: {
+            inArray: smallIdList,
+            openid: openid
+          },
+          complete: res => {
+            let resultList = res.result.list;
+            for (let x in resultList) {
+              let row = resultList[x]['row'];
+              for (let y in smallList) {
+                if (row['small_id'] == smallList[y]['_id']) {
+                  smallList[y]['group'] = row['group'];
+                  smallList[y]['unit'] = row['unit'];
+                  smallList[y]['weight'] = row['weight'];
+                  smallList[y]['number'] = row['number'];
+                }
+              }
+            }
+
+            this.setData({
+              smallList: smallList
+            })
+          }
         })
       }
     })
@@ -461,7 +501,6 @@ Page({
 
 
   smallDeleteDB: function (e) {
-
     db.collection('small').doc(e.currentTarget.dataset.id).remove({
       success: res => {
         this.actionQuery(this.data.big_id);
@@ -474,7 +513,6 @@ Page({
 
 
   smallAddDB: function (big_id, name) {
-
     db.collection('small').add({
       data: {
         big_id: big_id,
@@ -691,14 +729,49 @@ Page({
   muscleQuery: function () {
     db.collection('muscle').orderBy('sort', 'asc').get({
       success: res => {
-        this.setData({
-          bigList: res.data
-        })
+        let bigList = res.data;
+        this.qureyActivationBybid(bigList);
       }
     })
   },
 
+  qureyActivationBybid: function (bigList) {
+    let smallIdList = [];
+    for (let x in bigList) {
+      smallIdList.push(bigList[x]['_id']);
+    }
 
+    wx.cloud.callFunction({
+      name: 'getUserInfo',
+      complete: res => {
+        let openid = res.result.openid;
+
+        wx.cloud.callFunction({
+          name: 'qureyActivationBybid',
+          data: {
+            inArray: smallIdList,
+            openid: openid
+          },
+          complete: res => {
+            let queryList = res.result.data;
+            for (let x in queryList) {
+              for (let y in bigList) {
+                if (queryList[x]['business_id'] == bigList[y]['_id']) {
+                  bigList[y]['activation'] = true;
+                }
+              }
+            }
+
+            this.setData({
+              bigList: bigList
+            })
+          }
+        })
+      }
+    })
+
+
+  },
 
 
   muscleAddDB: function (sort, name) {
@@ -736,7 +809,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // this.muscleQuery();
     this.muscleQuery();
   },
 

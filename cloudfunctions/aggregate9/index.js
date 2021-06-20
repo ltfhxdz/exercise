@@ -16,7 +16,8 @@ async function getIdList(event) {
   try {
     let queryList = await db.collection('detail').aggregate()
       .match({
-        small_id: _.in(event.inArray)
+        small_id: _.in(event.inArray),
+        _openid: event.openid
       })
       .sort({
         exercise_date: -1
