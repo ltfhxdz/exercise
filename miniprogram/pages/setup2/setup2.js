@@ -1,6 +1,6 @@
 var muscleJson = require('/../data/muscle.js');
-
 const db = wx.cloud.database();
+let openid = '';
 
 Page({
 
@@ -310,8 +310,6 @@ Page({
   },
 
 
-
-
   activationAddDB: function (business_id, business_name) {
     db.collection('activation').add({
       data: {
@@ -370,7 +368,6 @@ Page({
   },
 
 
-
   smallActivation: function (e) {
     if (e.detail.value) {
       this.smallUpdate(e.currentTarget.dataset.id, true);
@@ -378,7 +375,6 @@ Page({
       this.smallUpdate(e.currentTarget.dataset.id, false);
     }
   },
-
 
 
   addActivity: function (e) {
@@ -390,7 +386,6 @@ Page({
       activityFlag: true
     })
   },
-
 
 
   actionQuery: function (big_id) {
@@ -408,44 +403,58 @@ Page({
         }
 
         //如果有设置，取出最新的数据，更新默认值
-        this.aggregate9_new(smallList);
+        this.aggregate9(smallList);
       }
     })
   },
 
 
-  aggregate9_new: function (smallList) {
+  aggregate9: function (smallList) {
     //得到所有的small_id，然后查询detail表，查出对应的数据，最后整合到list中
     let smallIdList = [];
     for (let x in smallList) {
       smallIdList.push(smallList[x]['_id']);
     }
 
+    //在smallList中，添加组信息
     wx.cloud.callFunction({
-      name: 'getUserInfo',
+      name: 'aggregate9',
+      data: {
+        inArray: smallIdList,
+        openid: openid
+      },
       complete: res => {
-        let openid = res.result.openid;
+        let resultList = res.result.list;
+        for (let x in resultList) {
+          let row = resultList[x]['row'];
+          for (let y in smallList) {
+            if (row['small_id'] == smallList[y]['_id']) {
+              smallList[y]['group'] = row['group'];
+              smallList[y]['unit'] = row['unit'];
+              smallList[y]['weight'] = row['weight'];
+              smallList[y]['number'] = row['number'];
+            }
+          }
+        }
+
+        //在smallList中，添加激活信息
 
         wx.cloud.callFunction({
-          name: 'aggregate9',
+          name: 'qureyActivationBybid',
           data: {
             inArray: smallIdList,
             openid: openid
           },
           complete: res => {
-            let resultList = res.result.list;
-            for (let x in resultList) {
-              let row = resultList[x]['row'];
+            let queryList = res.result.data;
+            for (let x in queryList) {
               for (let y in smallList) {
-                if (row['small_id'] == smallList[y]['_id']) {
-                  smallList[y]['group'] = row['group'];
-                  smallList[y]['unit'] = row['unit'];
-                  smallList[y]['weight'] = row['weight'];
-                  smallList[y]['number'] = row['number'];
+                if (queryList[x]['business_id'] == smallList[y]['_id']) {
+                  smallList[y]['activation'] = true;
                 }
               }
             }
-
+      
             this.setData({
               smallList: smallList
             })
@@ -455,45 +464,6 @@ Page({
     })
   },
 
-
-  aggregate9: function (inList) {
-    //得到所有的small_id，然后查询detail表，查出对应的数据，最后整合到list中
-    let smallIdList = [];
-    for (let x in inList) {
-      smallIdList.push(inList[x]['_id']);
-    }
-
-    wx.cloud.callFunction({
-      name: 'aggregate9',
-      data: {
-        inArray: smallIdList
-      },
-      complete: res => {
-        let resultList = res.result.list;
-        let smallList = [];
-        for (let x in inList) {
-          let smallMap = {};
-          smallMap['_id'] = inList[x]['_id'];
-          smallMap['name'] = inList[x]['name'];
-          smallMap['activation'] = inList[x]['activation'];
-          for (let y in resultList) {
-            if (inList[x]['_id'] == resultList[y]['_id']) {
-              let row = resultList[y]['row'];
-              smallMap['group'] = row['group'];
-              smallMap['weight'] = row['weight'];
-              smallMap['unit'] = row['unit'];
-              smallMap['number'] = row['number'];
-              break;
-            }
-          }
-          smallList.push(smallMap);
-        }
-        this.setData({
-          smallList: smallList
-        })
-      }
-    })
-  },
 
   smallDelete: function (e) {
     this.smallDeleteDB(e);
@@ -736,15 +706,16 @@ Page({
   },
 
   qureyActivationBybid: function (bigList) {
-    let smallIdList = [];
-    for (let x in bigList) {
-      smallIdList.push(bigList[x]['_id']);
-    }
-
     wx.cloud.callFunction({
       name: 'getUserInfo',
       complete: res => {
-        let openid = res.result.openid;
+        //放到全局变量中
+        openid = res.result.openid;
+
+        let smallIdList = [];
+        for (let x in bigList) {
+          smallIdList.push(bigList[x]['_id']);
+        }
 
         wx.cloud.callFunction({
           name: 'qureyActivationBybid',
@@ -769,8 +740,6 @@ Page({
         })
       }
     })
-
-
   },
 
 
@@ -790,11 +759,21 @@ Page({
   },
 
 
+  setUserInfo() {
+    wx.cloud.callFunction({
+      name: 'getUserInfo',
+      complete: res => {
+        openid = res.result.openid;
+
+      }
+    })
+  },
+
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
 
   },
 

@@ -1,5 +1,3 @@
-var util = require('../../utils/util.js');
-
 const db = wx.cloud.database();
 
 Page({
@@ -304,7 +302,6 @@ Page({
 
 
   onLoad: function () {
-    this.getUserInfo();
   },
 
   /**
@@ -474,7 +471,7 @@ Page({
   onShareAppMessage: function () {
 
   },
-    /**
+  /**
    * 允许用户点击右上角分享给朋友
    */
   onShareAppMessage: function () {
