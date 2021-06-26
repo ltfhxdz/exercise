@@ -30,7 +30,8 @@
           checked="{{item.activation}}"></switch>
       </view>
       <view class="td-4">
-        <image src='../images/delete.jpg' class="deleteImage" catchtap='bigDelete' data-id="{{item._id}}"></image>
+        <image src='../images/delete.jpg' class="deleteImage" catchtap='bigDelete' data-id="{{item._id}}"
+          wx:if="{{item.isDelete}}"></image>
       </view>
     </view>
     <view class="tr bg-g2" wx:else>
@@ -42,7 +43,8 @@
           checked="{{item.activation}}"></switch>
       </view>
       <view class="td-4">
-        <image src='../images/delete.jpg' class="deleteImage" catchtap='bigDelete' data-id="{{item._id}}"></image>
+        <image src='../images/delete.jpg' class="deleteImage" catchtap='bigDelete' data-id="{{item._id}}"
+          wx:if="{{item.isDelete}}"></image>
       </view>
     </view>
   </block>
@@ -79,7 +81,8 @@
             checked="{{item.activation}}"></switch>
         </view>
         <view class="td-4">
-          <image src='../images/delete.jpg' class="deleteImage" catchtap='smallDelete' data-id="{{item._id}}"></image>
+          <image src='../images/delete.jpg' class="deleteImage" catchtap='smallDelete' data-id="{{item._id}}"
+            wx:if="{{item.isDelete}}"></image>
         </view>
       </view>
 
@@ -92,7 +95,8 @@
             checked="{{item.activation}}"></switch>
         </view>
         <view class="td-4">
-          <image src='../images/delete.jpg' class="deleteImage" catchtap='smallDelete' data-id="{{item._id}}"></image>
+          <image src='../images/delete.jpg' class="deleteImage" catchtap='smallDelete' data-id="{{item._id}}"
+            wx:if="{{item.isDelete}}"></image>
         </view>
       </view>
 

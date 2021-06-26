@@ -389,81 +389,20 @@ Page({
 
 
   actionQuery: function (big_id) {
-    db.collection('action').orderBy('sort', 'asc').where({
-      big_id: big_id
-    }).get({
-      success: res => {
-        let smallList = res.data;
-        //增加默认值
-        for (let x in smallList) {
-          smallList[x]['group'] = 4;
-          smallList[x]['unit'] = '公斤';
-          smallList[x]['weight'] = 30;
-          smallList[x]['number'] = 20;
-        }
-
-        //如果有设置，取出最新的数据，更新默认值
-        this.aggregate9(smallList);
-      }
-    })
-  },
-
-
-  aggregate9: function (smallList) {
-    //得到所有的small_id，然后查询detail表，查出对应的数据，最后整合到list中
-    let smallIdList = [];
-    for (let x in smallList) {
-      smallIdList.push(smallList[x]['_id']);
-    }
-
-    //在smallList中，添加组信息
     wx.cloud.callFunction({
-      name: 'aggregate9',
+      name: 'actionQuery',
       data: {
-        inArray: smallIdList,
+        big_id: big_id,
         openid: openid
       },
       complete: res => {
-        let resultList = res.result.list;
-        for (let x in resultList) {
-          let row = resultList[x]['row'];
-          for (let y in smallList) {
-            if (row['small_id'] == smallList[y]['_id']) {
-              smallList[y]['group'] = row['group'];
-              smallList[y]['unit'] = row['unit'];
-              smallList[y]['weight'] = row['weight'];
-              smallList[y]['number'] = row['number'];
-            }
-          }
-        }
-
-        //在smallList中，添加激活信息
-
-        wx.cloud.callFunction({
-          name: 'qureyActivationBybid',
-          data: {
-            inArray: smallIdList,
-            openid: openid
-          },
-          complete: res => {
-            let queryList = res.result.data;
-            for (let x in queryList) {
-              for (let y in smallList) {
-                if (queryList[x]['business_id'] == smallList[y]['_id']) {
-                  smallList[y]['activation'] = true;
-                }
-              }
-            }
-      
-            this.setData({
-              smallList: smallList
-            })
-          }
+        let smallList = res.result;
+        this.setData({
+          smallList: smallList
         })
       }
     })
   },
-
 
   smallDelete: function (e) {
     this.smallDeleteDB(e);
@@ -700,6 +639,10 @@ Page({
     db.collection('muscle').orderBy('sort', 'asc').get({
       success: res => {
         let bigList = res.data;
+        //增加删除标识
+        for (let x in bigList) {
+          bigList[x]['isDelete'] = false;
+        }
         this.qureyActivationBybid(bigList);
       }
     })
@@ -732,9 +675,17 @@ Page({
                 }
               }
             }
+            db.collection('big').get({
+              success: res => {
+                let bigSelfList = res.data;
+                for (let x = bigSelfList.length - 1; x >= 0; x--) {
+                  bigList.unshift(bigSelfList[x]);
+                }
 
-            this.setData({
-              bigList: bigList
+                this.setData({
+                  bigList: bigList
+                })
+              }
             })
           }
         })

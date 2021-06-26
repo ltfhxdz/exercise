@@ -194,14 +194,14 @@ Page({
       success: res => {
         let smallList = res.data;
         console.log(smallList);
-        this.aggregate9(smallList);
+        this.aggregate9BySmall(smallList);
 
       }
     })
   },
 
 
-  aggregate9: function (inList) {
+  aggregate9BySmall: function (inList) {
     //得到所有的small_id，然后查询detail表，查出对应的数据，最后整合到list中
     let smallIdList = [];
     for (let x in inList) {
