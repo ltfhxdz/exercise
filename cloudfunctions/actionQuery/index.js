@@ -55,12 +55,42 @@ exports.main = async (event, context) => {
     }
   }
 
+  //查询small表
+  let smallList = await getSmallList(event);
+
+  //得到动作ID的list
+  smallIdList = [];
+  for (let x in smallList) {
+    smallIdList.push(smallList[x]['_id']);
+  }
+
+  //查询动作的锻炼数据表
+  detailList = await getDetailList(event, smallIdList);
+
+  for (let x in smallList) {
+    for (let y in detailList) {
+      if (smallList[x]['_id'] == detailList[y]['_id']) {
+        let row = detailList[y]['row'];
+        smallList[x]['group'] = row['group'];
+        smallList[x]['weight'] = row['weight'];
+        smallList[x]['unit'] = row['unit'];
+        smallList[x]['number'] = row['number'];
+        break;
+      }
+    }
+  }
+
+  //整合actionList和smallList
+  for (let x = smallList.length - 1; x >= 0; x--) {
+    actionList.unshift(smallList[x]);
+  }
+
   return actionList;
 }
 
 async function getActivationList(event, smallIdList) {
   try {
-    let activationList =  await db.collection('activation').where({
+    let activationList = await db.collection('activation').where({
       business_id: _.in(smallIdList),
       _openid: event.openid
     }).get();
@@ -102,6 +132,18 @@ async function getDetailList(event, smallIdList) {
 
     return detailList.list;
 
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+async function getSmallList(event) {
+  try {
+    let actionList = await db.collection('small').where({
+      big_id: event.big_id
+    }).get();
+
+    return actionList.data;
   } catch (e) {
     console.error(e);
   }

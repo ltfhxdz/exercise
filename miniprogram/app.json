@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/setup2/setup2",
     "pages/setup/setup",
+    "pages/setup2/setup2",
     "pages/clockin/clockin",
     "pages/statistics/statistics"
   ],
