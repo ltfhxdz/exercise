@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/clockin/clockin",
     "pages/setup/setup",
     "pages/init/init",
-    "pages/clockin/clockin",
     "pages/statistics/statistics"
   ],
   "window": {
