@@ -19,6 +19,12 @@
   margin-top: 50rpx;
 }
 
+.table1 {
+  border: 1px solid darkgray;
+  width: 100%;
+}
+
+
 .tr {
   display: flex;
   justify-content: center;

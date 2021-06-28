@@ -4,3 +4,4 @@
 4.打卡页面：可以看到一些动作信息
 
 删除云函数：aggregate9，qureyActivationBybid
+tabbar图标要改成健身器材

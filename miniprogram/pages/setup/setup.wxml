@@ -1,4 +1,5 @@
-<view class="table" wx:if="{{!detailShow}}">
+
+<view class="table1" wx:if="{{!detailShow}}">
   <view class="tr bg-w bold">
     <view class="td-1">序号</view>
     <view class="td-2">肌肉群</view>
@@ -11,22 +12,28 @@
   <block wx:for="{{bigList}}" wx:key="id">
     <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
       <view class="td-1">{{index+1}}</view>
-      <view class="td-2  bold" catchtap="addActivity" data-name="{{item.name}}" data-id="{{item._id}}">{{item.name}}</view>
+      <view class="td-2  bold" catchtap="addActivity" data-name="{{item.name}}" data-id="{{item._id}}">{{item.name}}
+      </view>
       <view class="td-3">
-        <switch bindchange="bigActivation" data-id="{{item._id}}" checked="{{item.activation}}"></switch>
+        <switch bindchange="bigActivation" data-name="{{item.name}}" data-id="{{item._id}}"
+          checked="{{item.activation}}"></switch>
       </view>
       <view class="td-4">
-        <image src='../images/delete.jpg' class="deleteImage" catchtap='bigDelete' data-id="{{item._id}}"></image>
+        <image src='../images/delete.jpg' class="deleteImage" catchtap='bigDelete' data-id="{{item._id}}"
+          wx:if="{{item.isDelete}}"></image>
       </view>
     </view>
     <view class="tr bg-g2" wx:else>
       <view class="td-1">{{index+1}}</view>
-      <view class="td-2  bold" catchtap="addActivity" data-name="{{item.name}}" data-id="{{item._id}}">{{item.name}}</view>
+      <view class="td-2  bold" catchtap="addActivity" data-name="{{item.name}}" data-id="{{item._id}}">{{item.name}}
+      </view>
       <view class="td-3">
-        <switch bindchange="bigActivation" data-id="{{item._id}}" checked="{{item.activation}}"></switch>
+        <switch bindchange="bigActivation" data-name="{{item.name}}" data-id="{{item._id}}"
+          checked="{{item.activation}}"></switch>
       </view>
       <view class="td-4">
-        <image src='../images/delete.jpg' class="deleteImage" catchtap='bigDelete' data-id="{{item._id}}"></image>
+        <image src='../images/delete.jpg' class="deleteImage" catchtap='bigDelete' data-id="{{item._id}}"
+          wx:if="{{item.isDelete}}"></image>
       </view>
     </view>
   </block>
@@ -59,10 +66,12 @@
         <view class="td-2  bold" catchtap='showGroup' data-id="{{item._id}}" data-name="{{item.name}}">{{item.name}}
         </view>
         <view class="td-3">
-          <switch bindchange="smallActivation" data-id="{{item._id}}" checked="{{item.activation}}"></switch>
+          <switch bindchange="bigActivation" data-name="{{item.name}}" data-id="{{item._id}}"
+            checked="{{item.activation}}"></switch>
         </view>
         <view class="td-4">
-          <image src='../images/delete.jpg' class="deleteImage" catchtap='smallDelete' data-id="{{item._id}}"></image>
+          <image src='../images/delete.jpg' class="deleteImage" catchtap='smallDelete' data-id="{{item._id}}"
+            wx:if="{{item.isDelete}}"></image>
         </view>
       </view>
 
@@ -71,10 +80,12 @@
         <view class="td-2  bold" catchtap='showGroup' data-id="{{item._id}}" data-name="{{item.name}}">{{item.name}}
         </view>
         <view class="td-3">
-          <switch bindchange="smallActivation" data-id="{{item._id}}" checked="{{item.activation}}"></switch>
+          <switch bindchange="bigActivation" data-name="{{item.name}}" data-id="{{item._id}}"
+            checked="{{item.activation}}"></switch>
         </view>
         <view class="td-4">
-          <image src='../images/delete.jpg' class="deleteImage" catchtap='smallDelete' data-id="{{item._id}}"></image>
+          <image src='../images/delete.jpg' class="deleteImage" catchtap='smallDelete' data-id="{{item._id}}"
+            wx:if="{{item.isDelete}}"></image>
         </view>
       </view>
 

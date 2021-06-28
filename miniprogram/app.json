@@ -1,8 +1,7 @@
 {
   "pages": [
-    "pages/setup2/setup2",
-    "pages/init/init",
     "pages/setup/setup",
+    "pages/init/init",
     "pages/clockin/clockin",
     "pages/statistics/statistics"
   ],
@@ -34,12 +33,6 @@
         "iconPath": "pages/images/lanhua.jpg",
         "selectedIconPath": "pages/images/lanhua.jpg",
         "text": "设置"
-      },
-      {
-        "pagePath": "pages/setup2/setup2",
-        "iconPath": "pages/images/lanhua.jpg",
-        "selectedIconPath": "pages/images/lanhua.jpg",
-        "text": "设置2"
       }
     ]
   },
