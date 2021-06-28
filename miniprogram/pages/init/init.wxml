@@ -1,0 +1,11 @@
+<view class="test">
+  <button class="test-button" catchtap="clearMuscle">清空肌肉表</button>
+  <button class="test-button" catchtap="initMuscle">初始化肌肉表</button>
+</view>
+<view class="line"></view>
+
+<view class="test">
+  <button class="test-button" catchtap="clearAction">清空动作表</button>
+  <button class="test-button" catchtap="initAction">初始化动作表</button>
+</view>
+<view class="line"></view>

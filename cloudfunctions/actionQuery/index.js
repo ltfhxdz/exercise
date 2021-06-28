@@ -68,6 +68,9 @@ exports.main = async (event, context) => {
   detailList = await getDetailList(event, smallIdList);
 
   for (let x in smallList) {
+    //添加删除标记
+    smallList[x]['isDelete'] = true;
+
     for (let y in detailList) {
       if (smallList[x]['_id'] == detailList[y]['_id']) {
         let row = detailList[y]['row'];

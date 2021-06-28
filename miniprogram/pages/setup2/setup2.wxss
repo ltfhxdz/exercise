@@ -19,6 +19,12 @@
   margin-top: 50rpx;
 }
 
+.table1 {
+  border: 1px solid darkgray;
+  width: 100%;
+}
+
+
 .tr {
   display: flex;
   justify-content: center;
@@ -181,14 +187,4 @@
   display: flex;
   height: 70rpx;
   align-items: center;
-}
-
-.test {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.test-button {
-  background-color: rgb(219, 236, 236);
 }

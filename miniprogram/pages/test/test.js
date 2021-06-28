@@ -1,39 +1,16 @@
 [{
-  "_id": "b00064a760d73c4222ed8fa737e63019",
-  "name": "平板杠铃卧推",
-  "activation": true,
-  "group": 4,
-  "weight": 20,
-  "unit": "公斤",
-  "number": 20
-}, {
-  "_id": "28ee4e3e60d73eae2576fb4153b19300",
-  "name": "史密斯上斜卧推",
-  "activation": true,
-  "group": 4,
-  "weight": 20,
-  "unit": "公斤",
-  "number": 20
-}]
-
-[{
-  "_id": "b00064a760d73c4222ed8fa737e63019",
-  "activation": true,
-  "big_id": "28ee4e3e60cc7fef235655776988b9aa",
-  "name": "平板杠铃卧推",
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "group": 4,
-  "weight": 20,
-  "unit": "公斤",
-  "number": 20
-}, {
-  "_id": "28ee4e3e60d73eae2576fb4153b19300",
+  "_id": "79550af2609a928e160b2faa7360f96d",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
   "activation": true,
-  "big_id": "28ee4e3e60cc7fef235655776988b9aa",
-  "name": "史密斯上斜卧推",
-  "group": 4,
-  "weight": 20,
-  "unit": "公斤",
-  "number": 20
+  "name": "胸肌"
+}, {
+  "_id": "79550af2609a9ac3160d2c412aaa3396",
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true,
+  "name": "背肌"
+}, {
+  "_id": "cbddf0af609a9b3207d74826479b27b1",
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true,
+  "name": "腹肌"
 }]
