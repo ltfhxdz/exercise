@@ -9,19 +9,19 @@ const $ = db.command.aggregate;
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  //查询肌肉表
-  let bigQueryList = await getBigList(event);
+
+  //查询自定义的肌肉表
+  let bigQueryList = await queryBigList(event);
 
   //查询动作表
   let smallQueryList = await getSmallList(event);
 
-
   let bigList = [];
   for (let x in bigQueryList) {
+    let smallList = [];
     let bigMap = {};
     bigMap["big_id"] = bigQueryList[x]["_id"];
     bigMap["name"] = bigQueryList[x]["name"];
-    let smallList = [];
 
     for (let y in smallQueryList) {
       if (bigQueryList[x]["_id"] == smallQueryList[y]["big_id"]) {
@@ -34,11 +34,11 @@ exports.main = async (event, context) => {
 
     bigMap["smallList"] = smallList;
     bigList.push(bigMap);
-
   }
 
   return bigList;
 }
+
 
 async function getSmallList(event) {
   try {
@@ -52,7 +52,7 @@ async function getSmallList(event) {
   }
 }
 
-async function getBigList(event) {
+async function queryBigList(event) {
   try {
     let bigList = await db.collection('big').where({
       _openid: event.openid
