@@ -1,4 +1,4 @@
-<view class="table" wx:if="{{!detailShow}}">
+<view class="table1" wx:if="{{!detailShow}}">
   <view class="tr bg-w bold">
     <view class="td-1">序号</view>
     <view class="td-2">肌肉群</view>
