@@ -1,4 +1,5 @@
 const db = wx.cloud.database();
+let openid = '';
 
 Page({
 
@@ -457,44 +458,31 @@ Page({
     })
   },
 
+  getClient_date: function () {
+    let date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var client_date = year + "-" + month + "-" + day;
+    return client_date;
+  },
+
 
   activityQuery: function () {
-    let bigList2 = [];
-    let smallList2 = [];
+    wx.cloud.callFunction({
+      name: 'getUserInfo',
+      complete: res => {
+        //放到全局变量中
+        openid = res.result.openid;
 
-    db.collection('big').where({
-      activation: true
-    }).get({
-      success: res => {
-        bigList2 = res.data;
+        wx.cloud.callFunction({
+          name: 'activityQuery',
+          data: {
+            openid: openid
+          },
+          complete: res => {
+            let bigList = res.result;
 
-
-        db.collection('small').where({
-          activation: true
-        }).get({
-          success: res => {
-            smallList2 = res.data;
-
-            let bigList = [];
-            for (let x in bigList2) {
-              let bigMap = {};
-              bigMap["big_id"] = bigList2[x]["_id"];
-              bigMap["name"] = bigList2[x]["name"];
-              let smallList = [];
-
-              for (let y in smallList2) {
-                if (bigList2[x]["_id"] == smallList2[y]["big_id"]) {
-                  let smallMap = {};
-                  smallMap["small_id"] = smallList2[y]["_id"];
-                  smallMap["name"] = smallList2[y]["name"];
-                  smallList.push(smallMap);
-                }
-              }
-
-              bigMap["smallList"] = smallList;
-              bigList.push(bigMap);
-
-            }
             this.setData({
               bigList: bigList
             })
@@ -503,7 +491,6 @@ Page({
       }
     })
   },
-
 
 
   /**
@@ -523,15 +510,6 @@ Page({
    */
   onShow: function () {
     this.activityQuery();
-  },
-
-  getClient_date: function () {
-    let date = new Date();
-    var year = date.getFullYear();
-    var month = date.getMonth() + 1;
-    var day = date.getDate();
-    var client_date = year + "-" + month + "-" + day;
-    return client_date;
   },
 
   /**
@@ -561,7 +539,7 @@ Page({
   onReachBottom: function () {
 
   },
-    /**
+  /**
    * 允许用户点击右上角分享给朋友
    */
   onShareAppMessage: function () {

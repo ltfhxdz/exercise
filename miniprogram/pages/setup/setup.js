@@ -1,4 +1,5 @@
 const db = wx.cloud.database();
+let openid = '';
 
 Page({
 
@@ -47,7 +48,7 @@ Page({
         exercise_date: db.serverDate()
       },
       success: res => {
-        this.smallQuery(this.data.big_id);
+        this.actionQuery(this.data.big_id);
       },
       fail: err => {
         console.error('数据库新增失败：', err)
@@ -140,7 +141,7 @@ Page({
         activation: activation
       },
       success: res => {
-        this.bigQuery();
+        this.muscleQuery();
       },
       fail: err => {
         console.error('数据库更新失败：', err)
@@ -155,7 +156,7 @@ Page({
         activation: activation
       },
       success: res => {
-        this.smallQuery(this.data.big_id);
+        this.actionQuery(this.data.big_id);
       },
       fail: err => {
         console.error('数据库更新失败：', err)
@@ -175,8 +176,9 @@ Page({
 
 
 
+
   addActivity: function (e) {
-    this.smallQuery(e.currentTarget.dataset.id);
+    this.actionQuery(e.currentTarget.dataset.id);
 
     this.setData({
       big_id: e.currentTarget.dataset.id,
@@ -186,54 +188,15 @@ Page({
   },
 
 
-  smallQuery: function (big_id) {
-
-    db.collection('small').where({
-      big_id: big_id
-    }).get({
-      success: res => {
-        let smallList = res.data;
-        console.log(smallList);
-        this.aggregate9(smallList);
-
-      }
-    })
-  },
-
-
-  aggregate9: function (inList) {
-    //得到所有的small_id，然后查询detail表，查出对应的数据，最后整合到list中
-    let smallIdList = [];
-    for (let x in inList) {
-      smallIdList.push(inList[x]['_id']);
-    }
-
+  actionQuery: function (big_id) {
     wx.cloud.callFunction({
-      name: 'aggregate9',
+      name: 'actionQuery',
       data: {
-        inArray: smallIdList
+        big_id: big_id,
+        openid: openid
       },
       complete: res => {
-        let resultList = res.result.list;
-        let smallList = [];
-        for (let x in inList) {
-          let smallMap = {};
-          smallMap['_id'] = inList[x]['_id'];
-          smallMap['name'] = inList[x]['name'];
-          smallMap['activation'] = inList[x]['activation'];
-          for (let y in resultList) {
-            if (inList[x]['_id'] == resultList[y]['_id']) {
-              let row = resultList[y]['row'];
-              smallMap['group'] = row['group'];
-              smallMap['weight'] = row['weight'];
-              smallMap['unit'] = row['unit'];
-              smallMap['number'] = row['number'];
-              break;
-            }
-          }
-          smallList.push(smallMap);
-        }
-        console.log(smallList);
+        let smallList = res.result;
         this.setData({
           smallList: smallList
         })
@@ -250,7 +213,7 @@ Page({
 
     db.collection('small').doc(e.currentTarget.dataset.id).remove({
       success: res => {
-        this.smallQuery(this.data.big_id);
+        this.actionQuery(this.data.big_id);
       },
       fail: err => {
         console.error('数据库删除失败：', err)
@@ -368,12 +331,12 @@ Page({
 
 
   bigDelete: function (e) {
-    this.smallQueryBybig_id(e.currentTarget.dataset.id);
+    this.actionQueryBybig_id(e.currentTarget.dataset.id);
 
 
   },
 
-  smallQueryBybig_id: function (big_id) {
+  actionQueryBybig_id: function (big_id) {
 
     db.collection('small').where({
       big_id: big_id
@@ -389,7 +352,7 @@ Page({
         } else {
           db.collection('big').doc(big_id).remove({
             success: res => {
-              this.bigQuery();
+              this.muscleQuery();
             },
             fail: err => {
               console.error('数据库删除失败：', err)
@@ -409,7 +372,7 @@ Page({
         activation: true
       },
       success: res => {
-        this.bigQuery();
+        this.muscleQuery();
       },
       fail: err => {
         console.error('数据库新增失败：', err)
@@ -463,18 +426,30 @@ Page({
     })
   },
 
+  
+  muscleQuery: function () {
+    wx.cloud.callFunction({
+      name: 'getUserInfo',
+      complete: res => {
+        //放到全局变量中
+        openid = res.result.openid;
 
-  bigQuery: function () {
+        wx.cloud.callFunction({
+          name: 'muscleQuery',
+          data: {
+            openid: openid
+          },
+          complete: res => {
+            let bigList = res.result;
 
-    db.collection('big').get({
-      success: res => {
-        this.setData({
-          bigList: res.data
+            this.setData({
+              bigList: bigList
+            })
+          }
         })
       }
     })
   },
-
 
   /**
    * 生命周期函数--监听页面加载
@@ -494,7 +469,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.bigQuery();
+    this.muscleQuery();
   },
 
   /**
