@@ -467,7 +467,6 @@ Page({
     return client_date;
   },
 
-
   activityQuery: function () {
     wx.cloud.callFunction({
       name: 'getUserInfo',
