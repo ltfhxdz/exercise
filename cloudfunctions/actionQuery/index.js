@@ -67,7 +67,8 @@ async function getDetailList(event, smallIdList) {
 async function getSmallList(event) {
   try {
     let actionList = await db.collection('small').where({
-      big_id: event.big_id
+      big_id: event.big_id,
+      _openid: event.openid
     }).get();
 
     return actionList.data;

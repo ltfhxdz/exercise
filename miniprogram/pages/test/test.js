@@ -1,519 +1,498 @@
 [{
-  "small_id": "79550af260cc8177204e66f459814142",
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "79550af260cc7fef204e17435978c884",
-  "big_name": "腿部",
-  "name": "坐姿大腿伸展",
-  "sort": 1
-}, {
-  "_id": "28ee4e3e60cc81772356b34a7a7ac82c",
-  "big_id": "79550af260cc7fef204e17435978c884",
-  "big_name": "腿部",
-  "name": "坐姿后腿屈伸",
-  "sort": 2,
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8"
-}, {
-  "_id": "b00064a760cc81752101dfb4131f5e49",
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "79550af260cc7fef204e17435978c884",
-  "big_name": "腿部",
-  "name": "大腿内侧肌练习",
-  "sort": 4
-}, {
-  "_id": "cbddf0af60cc8177111c421741caf8e9",
-  "sort": 3,
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "79550af260cc7fef204e17435978c884",
-  "big_name": "腿部",
-  "name": "大腿外侧肌练习"
-}, {
-  "_id": "79550af260cc8177204e66fa01d3c3c5",
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "79550af260cc7fef204e17435978c884",
-  "big_name": "腿部",
-  "name": "绳索提踵",
-  "sort": 6
-}, {
-  "_id": "cbddf0af60cc8177111c42185214d1d4",
-  "sort": 5,
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "79550af260cc7fef204e17435978c884",
-  "big_name": "腿部",
-  "name": "勾腿式练习"
-}, {
-  "_id": "79550af260cc8177204e67050bdf080e",
-  "sort": 7,
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "79550af260cc7fef204e17435978c884",
-  "big_name": "腿部",
-  "name": "KEISER腿部推蹬(双腿)"
-}, {
-  "_id": "79550af260cc8177204e670614303cba",
-  "sort": 8,
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "79550af260cc7fef204e17435978c884",
-  "big_name": "腿部",
-  "name": "深蹲"
-}, {
-  "_id": "28ee4e3e60cc81772356b35362168796",
-  "big_id": "79550af260cc7fef204e17435978c884",
-  "big_name": "腿部",
-  "name": "相扑硬拉",
-  "sort": 9,
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8"
-}, {
-  "_id": "79550af260cc8177204e670a1cdc1e74",
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "79550af260cc7fef204e17435978c884",
-  "big_name": "腿部",
-  "name": "负重弓步",
-  "sort": 10
-}, {
-  "_id": "79550af260cc8177204e670c300db8b3",
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "79550af260cc7fef204e17435978c884",
-  "big_name": "腿部",
-  "name": "提踵行走",
-  "sort": 11
-}, {
-  "_id": "28ee4e3e60cc81782356b360221f42c8",
+  "_id": "28ee4e3e60dc87a92692bf3d028549ea",
+  "big_id": "79550af260dc87a9233183784f7b870b",
+  "action_id": "28ee4e3e60cc81782356b360221f42c8",
   "name": "卧推",
-  "sort": 1,
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef235655776988b9aa",
-  "big_name": "胸部"
+  "activation": true
 }, {
-  "_id": "28ee4e3e60cc81782356b36465232706",
-  "big_id": "79550af260cc7fef204e17435978c884",
-  "big_name": "腿部",
-  "name": "双哑铃前蹲",
-  "sort": 12,
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8"
-}, {
-  "_id": "cbddf0af60cc8178111c422941d4541f",
-  "big_id": "28ee4e3e60cc7fef235655776988b9aa",
-  "big_name": "胸部",
+  "_id": "79550af260dc87a9233183827ce21474",
+  "big_id": "79550af260dc87a9233183784f7b870b",
+  "action_id": "cbddf0af60cc8178111c422941d4541f",
   "name": "上斜卧推",
-  "sort": 2,
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8"
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true
 }, {
-  "_id": "28ee4e3e60cc81782356b3670b0722a2",
-  "big_name": "胸部",
+  "_id": "79550af260dc87a923318385171e4358",
+  "big_id": "79550af260dc87a9233183784f7b870b",
+  "action_id": "28ee4e3e60cc81782356b3670b0722a2",
   "name": "坐姿上斜推胸练习(竖把位)",
-  "sort": 3,
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef235655776988b9aa"
+  "activation": true
 }, {
-  "_id": "28ee4e3e60cc81782356b36960b02ada",
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef235655776988b9aa",
-  "big_name": "胸部",
+  "_id": "28ee4e3e60dc87a92692bf494c577ebb",
+  "big_id": "79550af260dc87a9233183784f7b870b",
+  "action_id": "28ee4e3e60cc81782356b36960b02ada",
   "name": "坐姿双向推胸练习(竖把位)",
-  "sort": 4
-}, {
-  "_id": "79550af260cc8178204e671b666424cb",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef235655776988b9aa",
-  "big_name": "胸部",
+  "activation": true
+}, {
+  "_id": "79550af260dc87a9233183900484c8bf",
+  "big_id": "79550af260dc87a9233183784f7b870b",
+  "action_id": "79550af260cc8178204e671b666424cb",
   "name": "下斜卧推",
-  "sort": 5
-}, {
-  "_id": "79550af260cc8178204e6725227125a3",
-  "sort": 6,
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef235655776988b9aa",
-  "big_name": "胸部",
-  "name": "地板仰卧飞鸟"
+  "activation": true
 }, {
-  "_id": "b00064a760cc81752101dfc962e05c4d",
+  "_id": "79550af260dc87a9233183930f2ccd82",
+  "big_id": "79550af260dc87a9233183784f7b870b",
+  "action_id": "79550af260cc8178204e6725227125a3",
+  "name": "地板仰卧飞鸟",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef235655776988b9aa",
-  "big_name": "胸部",
-  "name": "绳索下斜夹胸",
-  "sort": 8
+  "activation": true
 }, {
-  "_id": "cbddf0af60cc8178111c42315030c346",
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef235655776988b9aa",
-  "big_name": "胸部",
-  "name": "屈臂伸",
-  "sort": 9
-}, {
-  "_id": "cbddf0af60cc8178111c42321c3be80b",
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef235655776988b9aa",
-  "big_name": "胸部",
+  "_id": "28ee4e3e60dc87a92692bf5513639c0d",
+  "big_id": "79550af260dc87a9233183784f7b870b",
+  "action_id": "cbddf0af60cc8178111c42321c3be80b",
   "name": "平板仰卧飞鸟",
-  "sort": 7
-}, {
-  "_id": "b00064a760cc81752101dfce0aad25cd",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef235655776988b9aa",
-  "big_name": "胸部",
+  "activation": true
+}, {
+  "_id": "79550af260dc87a92331839d0e3c51e5",
+  "big_id": "79550af260dc87a9233183784f7b870b",
+  "action_id": "b00064a760cc81752101dfc962e05c4d",
+  "name": "绳索下斜夹胸",
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true
+}, {
+  "_id": "cbddf0af60dc87a913ba71a7075cb7a5",
+  "big_id": "79550af260dc87a9233183784f7b870b",
+  "action_id": "cbddf0af60cc8178111c42315030c346",
+  "name": "屈臂伸",
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true
+}, {
+  "_id": "79550af260dc87a9233183a222f86521",
+  "big_id": "79550af260dc87a9233183784f7b870b",
+  "action_id": "b00064a760cc81752101dfce0aad25cd",
   "name": "弯举上拉",
-  "sort": 10
-}, {
-  "_id": "28ee4e3e60cc81782356b37245deac9d",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef2356557826c563dc",
-  "big_name": "背部",
+  "activation": true
+}, {
+  "_id": "cbddf0af60dc87aa13ba71a979ba37d5",
+  "big_id": "28ee4e3e60dc87a92692bf5f3eb0d0a3",
+  "action_id": "28ee4e3e60cc81782356b37245deac9d",
   "name": "辅助引体向上",
-  "sort": 1
-}, {
-  "_id": "79550af260cc8178204e672c55ce800b",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef2356557826c563dc",
-  "big_name": "背部",
+  "activation": true
+}, {
+  "_id": "28ee4e3e60dc87aa2692bf642bb720b8",
+  "big_id": "28ee4e3e60dc87a92692bf5f3eb0d0a3",
+  "action_id": "79550af260cc8178204e672c55ce800b",
   "name": "引体向上",
-  "sort": 2
-}, {
-  "_id": "28ee4e3e60cc81782356b3761ccf36fd",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef2356557826c563dc",
-  "big_name": "背部",
+  "activation": true
+}, {
+  "_id": "28ee4e3e60dc87aa2692bf663d1431f8",
+  "big_id": "28ee4e3e60dc87a92692bf5f3eb0d0a3",
+  "action_id": "28ee4e3e60cc81782356b3761ccf36fd",
   "name": "坐姿高拉力练习",
-  "sort": 3
-}, {
-  "_id": "28ee4e3e60cc81782356b37949e9b3c7",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef2356557826c563dc",
-  "big_name": "背部",
+  "activation": true
+}, {
+  "_id": "28ee4e3e60dc87aa2692bf7141f9477c",
+  "big_id": "28ee4e3e60dc87a92692bf5f3eb0d0a3",
+  "action_id": "28ee4e3e60cc81782356b37949e9b3c7",
   "name": "高拉力背肌练习(宽握)",
-  "sort": 4
-}, {
-  "_id": "28ee4e3e60cc81782356b37a24e12568",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef2356557826c563dc",
-  "big_name": "背部",
+  "activation": true
+}, {
+  "_id": "28ee4e3e60dc87aa2692bf766092fe49",
+  "big_id": "28ee4e3e60dc87a92692bf5f3eb0d0a3",
+  "action_id": "28ee4e3e60cc81782356b37a24e12568",
   "name": "高拉力背肌练习(窄握)",
-  "sort": 5
-}, {
-  "_id": "28ee4e3e60cc81782356b37e414936d6",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef2356557826c563dc",
-  "big_name": "背部",
+  "activation": true
+}, {
+  "_id": "b00064a760dc87a723ee8a3912adca72",
+  "big_id": "28ee4e3e60dc87a92692bf5f3eb0d0a3",
+  "action_id": "28ee4e3e60cc81782356b37e414936d6",
   "name": "悬吊后拉",
-  "sort": 6
-}, {
-  "_id": "79550af260cc8178204e673474138bdf",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef2356557826c563dc",
-  "big_name": "背部",
+  "activation": true
+}, {
+  "_id": "b00064a760dc87a723ee8a3d344b1e2f",
+  "big_id": "28ee4e3e60dc87a92692bf5f3eb0d0a3",
+  "action_id": "79550af260cc8178204e673474138bdf",
   "name": "背阔肌下拉",
-  "sort": 7
-}, {
-  "_id": "79550af260cc8178204e67363125a73a",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef2356557826c563dc",
-  "big_name": "背部",
+  "activation": true
+}, {
+  "_id": "b00064a760dc87a723ee8a3f0ad2e9c8",
+  "big_id": "28ee4e3e60dc87a92692bf5f3eb0d0a3",
+  "action_id": "28ee4e3e60cc81782356b384638548ab",
+  "name": "划船",
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true
+}, {
+  "_id": "28ee4e3e60dc87aa2692bf837dfa7317",
+  "big_id": "28ee4e3e60dc87a92692bf5f3eb0d0a3",
+  "action_id": "79550af260cc8178204e67363125a73a",
   "name": "杠铃划船",
-  "sort": 9
-}, {
-  "_id": "28ee4e3e60cc81782356b384638548ab",
-  "sort": 8,
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef2356557826c563dc",
-  "big_name": "背部",
-  "name": "划船"
+  "activation": true
 }, {
-  "_id": "b00064a760cc81762101dfdc674cf0d3",
+  "_id": "28ee4e3e60dc87aa2692bf87127020ef",
+  "big_id": "28ee4e3e60dc87a92692bf5f3eb0d0a3",
+  "action_id": "b00064a760cc81762101dfdc674cf0d3",
   "name": "单臂附身划举",
-  "sort": 10,
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef2356557826c563dc",
-  "big_name": "背部"
+  "activation": true
 }, {
-  "_id": "cbddf0af60cc8178111c423f3f291fbc",
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef2356557826c563dc",
-  "big_name": "背部",
+  "_id": "79550af260dc87aa233183c5028bf706",
+  "big_id": "28ee4e3e60dc87a92692bf5f3eb0d0a3",
+  "action_id": "cbddf0af60cc8178111c423f3f291fbc",
   "name": "基本双臂附身划举",
-  "sort": 11
-}, {
-  "_id": "b00064a760cc81762101dfe10aefb95e",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef2356557826c563dc",
-  "big_name": "背部",
+  "activation": true
+}, {
+  "_id": "b00064a760dc87a723ee8a4c5958540e",
+  "big_id": "28ee4e3e60dc87a92692bf5f3eb0d0a3",
+  "action_id": "b00064a760cc81762101dfe10aefb95e",
   "name": "上斜附身划举",
-  "sort": 12
-}, {
-  "_id": "28ee4e3e60cc81782356b3970d3413f7",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef2356557826c563dc",
-  "big_name": "背部",
+  "activation": true
+}, {
+  "_id": "cbddf0af60dc87aa13ba71ca5cc2ef2f",
+  "big_id": "28ee4e3e60dc87a92692bf5f3eb0d0a3",
+  "action_id": "28ee4e3e60cc81782356b3970d3413f7",
   "name": "杠铃硬拉",
-  "sort": 13
-}, {
-  "_id": "28ee4e3e60cc81782356b39934ef05b9",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef2356557826c563dc",
-  "big_name": "背部",
+  "activation": true
+}, {
+  "_id": "79550af260dc87aa233183cd7391f3c9",
+  "big_id": "28ee4e3e60dc87a92692bf5f3eb0d0a3",
+  "action_id": "28ee4e3e60cc81782356b39934ef05b9",
   "name": "站立提拉",
-  "sort": 14
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true
 }, {
-  "_id": "79550af260cc8178204e673f5ce7a129",
-  "big_id": "28ee4e3e60cc7fef2356557826c563dc",
-  "big_name": "背部",
+  "_id": "28ee4e3e60dc87aa2692bf9a545eb3ab",
+  "big_id": "28ee4e3e60dc87a92692bf5f3eb0d0a3",
+  "action_id": "79550af260cc8178204e673f5ce7a129",
   "name": "基本站姿耸肩",
-  "sort": 15,
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8"
-}, {
-  "_id": "b00064a760cc81762101dfeb053527be",
-  "sort": 16,
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef2356557826c563dc",
-  "big_name": "背部",
-  "name": "附身平举"
+  "activation": true
 }, {
-  "_id": "79550af260cc8178204e674406f078e1",
+  "_id": "b00064a760dc87a723ee8a57349dd181",
+  "big_id": "28ee4e3e60dc87a92692bf5f3eb0d0a3",
+  "action_id": "b00064a760cc81762101dfeb053527be",
+  "name": "附身平举",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "cbddf0af60cc7fef111bf94f37cbfde2",
-  "big_name": "肩部",
+  "activation": true
+}, {
+  "_id": "cbddf0af60dc87ab13ba71e014642a35",
+  "big_id": "b00064a760dc87a723ee8a5f1de03d3c",
+  "action_id": "79550af260cc8178204e674406f078e1",
   "name": "坐姿正握肩上推举",
-  "sort": 1
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true
 }, {
-  "_id": "b00064a760cc81762101dfef0074c0e1",
+  "_id": "79550af260dc87ab233183dd2c4dde24",
+  "big_id": "b00064a760dc87a723ee8a5f1de03d3c",
+  "action_id": "b00064a760cc81762101dfef0074c0e1",
   "name": "坐姿前平举",
-  "sort": 2,
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "cbddf0af60cc7fef111bf94f37cbfde2",
-  "big_name": "肩部"
+  "activation": true
 }, {
-  "_id": "b00064a760cc81762101dff014ca8e87",
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "cbddf0af60cc7fef111bf94f37cbfde2",
-  "big_name": "肩部",
+  "_id": "cbddf0af60dc87ab13ba71e7598d88db",
+  "big_id": "b00064a760dc87a723ee8a5f1de03d3c",
+  "action_id": "b00064a760cc81762101dff014ca8e87",
   "name": "基本侧平举",
-  "sort": 3
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true
 }, {
-  "_id": "79550af260cc8178204e67496ef53f01",
-  "big_name": "肩部",
+  "_id": "28ee4e3e60dc87ab2692bfb8071f0139",
+  "big_id": "b00064a760dc87a723ee8a5f1de03d3c",
+  "action_id": "79550af260cc8178204e67496ef53f01",
   "name": "站姿附身平举",
-  "sort": 4,
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "cbddf0af60cc7fef111bf94f37cbfde2"
+  "activation": true
 }, {
-  "_id": "b00064a760cc81762101dff32197b016",
-  "sort": 5,
+  "_id": "cbddf0af60dc87ab13ba71ea408bfebf",
+  "big_id": "b00064a760dc87a723ee8a5f1de03d3c",
+  "action_id": "b00064a760cc81762101dff32197b016",
+  "name": "三级侧平举",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "cbddf0af60cc7fef111bf94f37cbfde2",
-  "big_name": "肩部",
-  "name": "三级侧平举"
+  "activation": true
 }, {
-  "_id": "cbddf0af60cc8178111c424e566409b6",
+  "_id": "79550af260dc87ab233183e92b7dfc64",
+  "big_id": "b00064a760dc87a723ee8a5f1de03d3c",
+  "action_id": "cbddf0af60cc8178111c424e566409b6",
   "name": "双臂交替前平举",
-  "sort": 6,
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "cbddf0af60cc7fef111bf94f37cbfde2",
-  "big_name": "肩部"
+  "activation": true
 }, {
-  "_id": "cbddf0af60cc8178111c424f1985fe70",
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "cbddf0af60cc7fef111bf94f37cbfde2",
-  "big_name": "肩部",
+  "_id": "79550af260dc87ab233183ed7b2d8032",
+  "big_id": "b00064a760dc87a723ee8a5f1de03d3c",
+  "action_id": "cbddf0af60cc8178111c424f1985fe70",
   "name": "坐姿推举练习(竖把位)",
-  "sort": 7
-}, {
-  "_id": "28ee4e3e60cc81792356b3a578b56d92",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "cbddf0af60cc7fef111bf94f37cbfde2",
-  "big_name": "肩部",
+  "activation": true
+}, {
+  "_id": "79550af260dc87ab233183f0205a56e3",
+  "big_id": "b00064a760dc87a723ee8a5f1de03d3c",
+  "action_id": "28ee4e3e60cc81792356b3a578b56d92",
   "name": "坐姿绳索肩上推举",
-  "sort": 8
-}, {
-  "_id": "b00064a760cc81762101dff5448b57b6",
-  "sort": 9,
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "cbddf0af60cc7fef111bf94f37cbfde2",
-  "big_name": "肩部",
-  "name": "坐姿下拉练习(竖把位)"
+  "activation": true
 }, {
-  "_id": "79550af260cc8179204e67542b85a810",
+  "_id": "b00064a760dc87a823ee8a87114e2e6f",
+  "big_id": "b00064a760dc87a723ee8a5f1de03d3c",
+  "action_id": "b00064a760cc81762101dff5448b57b6",
+  "name": "坐姿下拉练习(竖把位)",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "b00064a760cc7fed21018e77562c9a80",
-  "big_name": "臀部",
-  "name": "绳索腿外展",
-  "sort": 1
+  "activation": true
 }, {
-  "_id": "b00064a760cc81762101dff65f702959",
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "cbddf0af60cc7fef111bf94f37cbfde2",
-  "big_name": "肩部",
+  "_id": "b00064a760dc87a823ee8a890359cd99",
+  "big_id": "b00064a760dc87a723ee8a5f1de03d3c",
+  "action_id": "b00064a760cc81762101dff65f702959",
   "name": "站姿后拉",
-  "sort": 10
-}, {
-  "_id": "b00064a760cc81762101dff95fd58972",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "b00064a760cc7fed21018e77562c9a80",
-  "big_name": "臀部",
-  "name": "绳索腿后蹬",
-  "sort": 2
+  "activation": true
 }, {
-  "_id": "28ee4e3e60cc81792356b3ad60828802",
-  "big_name": "臀部",
-  "name": "TRX双腿臀桥",
-  "sort": 3,
+  "_id": "b00064a760dc87e423ee92256d3e5eb1",
+  "big_id": "79550af260dc87e823318cc07165630c",
+  "action_id": "28ee4e3e60cc81782356b360221f42c8",
+  "name": "卧推",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "b00064a760cc7fed21018e77562c9a80"
+  "activation": true
 }, {
-  "_id": "79550af260cc8179204e675d32326350",
-  "big_id": "b00064a760cc7fed21018e77562c9a80",
-  "big_name": "臀部",
-  "name": "站姿臀肌练习",
-  "sort": 4,
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8"
-}, {
-  "_id": "79550af260cc8179204e675f1732c6eb",
+  "_id": "79550af260dc87e823318cc97f55485d",
+  "big_id": "79550af260dc87e823318cc07165630c",
+  "action_id": "cbddf0af60cc8178111c422941d4541f",
+  "name": "上斜卧推",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "b00064a760cc7fed21018e77562c9a80",
-  "big_name": "臀部",
-  "name": "悬吊髋关节外展",
-  "sort": 6
+  "activation": true
 }, {
-  "_id": "cbddf0af60cc8179111c42596b806a45",
+  "_id": "28ee4e3e60dc87e82692c8fb125a5a53",
+  "big_id": "79550af260dc87e823318cc07165630c",
+  "action_id": "28ee4e3e60cc81782356b3670b0722a2",
+  "name": "坐姿上斜推胸练习(竖把位)",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "b00064a760cc7fed21018e77562c9a80",
-  "big_name": "臀部",
-  "name": "KEISER臀部复合训练",
-  "sort": 5
+  "activation": true
 }, {
-  "_id": "79550af260cc8179204e676242fb49de",
-  "big_name": "臀部",
-  "name": "哑铃负重动态双腿臀桥",
-  "sort": 7,
+  "_id": "79550af260dc87e823318cce4aa2a9b8",
+  "big_id": "79550af260dc87e823318cc07165630c",
+  "action_id": "28ee4e3e60cc81782356b36960b02ada",
+  "name": "坐姿双向推胸练习(竖把位)",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "b00064a760cc7fed21018e77562c9a80"
+  "activation": true
 }, {
-  "_id": "28ee4e3e60cc81792356b3b1504aefe0",
-  "big_id": "b00064a760cc7fed21018e77562c9a80",
-  "big_name": "臀部",
-  "name": "弓步下蹲",
-  "sort": 8,
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8"
-}, {
-  "_id": "b00064a760cc81762101e0060f348a2f",
+  "_id": "b00064a760dc87e523ee9234662c3a60",
+  "big_id": "79550af260dc87e823318cc07165630c",
+  "action_id": "79550af260cc8178204e671b666424cb",
+  "name": "下斜卧推",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef2356557b2b3de432",
-  "big_name": "手臂",
-  "name": "坐姿手臂弯举练习",
-  "sort": 1
+  "activation": true
 }, {
-  "_id": "cbddf0af60cc8179111c42607607eb05",
-  "big_name": "手臂",
-  "name": "单臂弯举",
-  "sort": 3,
+  "_id": "28ee4e3e60dc87e82692c90003c1c813",
+  "big_id": "79550af260dc87e823318cc07165630c",
+  "action_id": "79550af260cc8178204e6725227125a3",
+  "name": "地板仰卧飞鸟",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef2356557b2b3de432"
+  "activation": true
 }, {
-  "_id": "cbddf0af60cc8179111c42626c782d88",
+  "_id": "28ee4e3e60dc87e82692c9035e6c8698",
+  "big_id": "79550af260dc87e823318cc07165630c",
+  "action_id": "cbddf0af60cc8178111c42321c3be80b",
+  "name": "平板仰卧飞鸟",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef2356557b2b3de432",
-  "big_name": "手臂",
-  "name": "坐姿弯举",
-  "sort": 4
+  "activation": true
 }, {
-  "_id": "79550af260cc8179204e6766068c7205",
+  "_id": "b00064a760dc87e523ee923e1092f923",
+  "big_id": "79550af260dc87e823318cc07165630c",
+  "action_id": "b00064a760cc81752101dfc962e05c4d",
+  "name": "绳索下斜夹胸",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef2356557b2b3de432",
-  "big_name": "手臂",
-  "name": "绳索弘二头肌弯举",
-  "sort": 2
+  "activation": true
 }, {
-  "_id": "79550af260cc8179204e67677c2c3a8e",
+  "_id": "28ee4e3e60dc87e82692c90961663cf8",
+  "big_id": "79550af260dc87e823318cc07165630c",
+  "action_id": "cbddf0af60cc8178111c42315030c346",
+  "name": "屈臂伸",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef2356557b2b3de432",
-  "big_name": "手臂",
-  "name": "双臂屈臂伸",
-  "sort": 5
+  "activation": true
 }, {
-  "_id": "cbddf0af60cc8179111c4263300eaa86",
+  "_id": "b00064a760dc87e523ee924455e7f831",
+  "big_id": "79550af260dc87e823318cc07165630c",
+  "action_id": "b00064a760cc81752101dfce0aad25cd",
+  "name": "弯举上拉",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef2356557b2b3de432",
-  "big_name": "手臂",
-  "name": "肱三头肌双向练习",
-  "sort": 6
+  "activation": true
 }, {
-  "_id": "cbddf0af60cc8179111c4267469eebaf",
+  "_id": "79550af260dc87e923318ce35df01bc8",
+  "big_id": "79550af260dc87e823318cde12a26933",
+  "action_id": "28ee4e3e60cc81782356b37245deac9d",
+  "name": "辅助引体向上",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef2356557b2b3de432",
-  "big_name": "手臂",
-  "name": "绳索肱三头肌下拉",
-  "sort": 7
+  "activation": true
 }, {
-  "_id": "cbddf0af60cc8179111c4269526485e8",
+  "_id": "28ee4e3e60dc87e92692c9131e9580da",
+  "big_id": "79550af260dc87e823318cde12a26933",
+  "action_id": "79550af260cc8178204e672c55ce800b",
+  "name": "引体向上",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "28ee4e3e60cc7fef2356557b2b3de432",
-  "big_name": "手臂",
-  "name": "基本屈臂伸",
-  "sort": 8
+  "activation": true
 }, {
-  "_id": "79550af260cc8179204e676d7e9a4063",
-  "sort": 1,
+  "_id": "28ee4e3e60dc87e92692c916588d9eb3",
+  "big_id": "79550af260dc87e823318cde12a26933",
+  "action_id": "28ee4e3e60cc81782356b3761ccf36fd",
+  "name": "坐姿高拉力练习",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "79550af260cc7ff0204e174840fa0207",
-  "big_name": "腹部",
-  "name": "卷腹"
+  "activation": true
 }, {
-  "_id": "79550af260cc8179204e676f4ab9d906",
+  "_id": "28ee4e3e60dc87e92692c91b6fb04cf5",
+  "big_id": "79550af260dc87e823318cde12a26933",
+  "action_id": "28ee4e3e60cc81782356b37949e9b3c7",
+  "name": "高拉力背肌练习(宽握)",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "79550af260cc7ff0204e174840fa0207",
-  "big_name": "腹部",
-  "name": "坐姿腹肌练习",
-  "sort": 2
+  "activation": true
 }, {
-  "_id": "cbddf0af60cc8179111c426a0cf142d3",
-  "big_id": "79550af260cc7ff0204e174840fa0207",
-  "big_name": "腹部",
-  "name": "跪姿绳索卷腹",
-  "sort": 3,
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8"
-}, {
-  "_id": "79550af260cc8179204e6771273fd688",
-  "big_id": "79550af260cc7ff0204e174840fa0207",
-  "big_name": "腹部",
-  "name": "提腿",
-  "sort": 4,
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8"
-}, {
-  "_id": "79550af260cc8179204e677453879621",
+  "_id": "28ee4e3e60dc87e92692c920368f3bde",
+  "big_id": "79550af260dc87e823318cde12a26933",
+  "action_id": "28ee4e3e60cc81782356b37a24e12568",
+  "name": "高拉力背肌练习(窄握)",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "79550af260cc7ff0204e174840fa0207",
-  "big_name": "腹部",
-  "name": "哑铃俄罗斯转体",
-  "sort": 5
+  "activation": true
 }, {
-  "_id": "cbddf0af60cc8179111c4270156c4f35",
-  "big_id": "79550af260cc7ff0204e174840fa0207",
-  "big_name": "腹部",
-  "name": "负重下砍",
-  "sort": 6,
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8"
-}, {
-  "_id": "28ee4e3e60cc81792356b3c82a20ffea",
-  "big_name": "腹部",
-  "name": "悬吊平板支撑",
-  "sort": 8,
+  "_id": "b00064a760dc87e623ee925957f3eb82",
+  "big_id": "79550af260dc87e823318cde12a26933",
+  "action_id": "28ee4e3e60cc81782356b37e414936d6",
+  "name": "悬吊后拉",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "79550af260cc7ff0204e174840fa0207"
+  "activation": true
 }, {
-  "_id": "cbddf0af60cc8179111c4272086939bf",
-  "sort": 9,
+  "_id": "28ee4e3e60dc87e92692c92447f6666b",
+  "big_id": "79550af260dc87e823318cde12a26933",
+  "action_id": "79550af260cc8178204e673474138bdf",
+  "name": "背阔肌下拉",
   "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
-  "big_id": "79550af260cc7ff0204e174840fa0207",
-  "big_name": "腹部",
-  "name": "悬吊屈体"
+  "activation": true
 }, {
-  "_id": "cbddf0af60cc8179111c4273198ff161",
-  "big_id": "79550af260cc7ff0204e174840fa0207",
-  "big_name": "腹部",
-  "name": "弓步旋转",
-  "sort": 10,
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8"
+  "_id": "28ee4e3e60dc87e92692c9266a1187a6",
+  "big_id": "79550af260dc87e823318cde12a26933",
+  "action_id": "28ee4e3e60cc81782356b384638548ab",
+  "name": "划船",
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true
 }, {
-  "_id": "b00064a760cc81772101e01c4399d112",
-  "big_id": "79550af260cc7ff0204e174840fa0207",
-  "big_name": "腹部",
-  "name": "站立侧屈",
-  "sort": 7,
-  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8"
+  "_id": "b00064a760dc87e623ee92604619c4f6",
+  "big_id": "79550af260dc87e823318cde12a26933",
+  "action_id": "79550af260cc8178204e67363125a73a",
+  "name": "杠铃划船",
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true
+}, {
+  "_id": "79550af260dc87e923318cf35214b36c",
+  "big_id": "79550af260dc87e823318cde12a26933",
+  "action_id": "b00064a760cc81762101dfdc674cf0d3",
+  "name": "单臂附身划举",
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true
+}, {
+  "_id": "28ee4e3e60dc87e92692c92f1726a17f",
+  "big_id": "79550af260dc87e823318cde12a26933",
+  "action_id": "cbddf0af60cc8178111c423f3f291fbc",
+  "name": "基本双臂附身划举",
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true
+}, {
+  "_id": "79550af260dc87e923318cf64c363e71",
+  "big_id": "79550af260dc87e823318cde12a26933",
+  "action_id": "b00064a760cc81762101dfe10aefb95e",
+  "name": "上斜附身划举",
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true
+}, {
+  "_id": "cbddf0af60dc87e913ba78ef195ca947",
+  "big_id": "79550af260dc87e823318cde12a26933",
+  "action_id": "28ee4e3e60cc81782356b3970d3413f7",
+  "name": "杠铃硬拉",
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true
+}, {
+  "_id": "79550af260dc87e923318cfc6b6fd3b8",
+  "big_id": "79550af260dc87e823318cde12a26933",
+  "action_id": "28ee4e3e60cc81782356b39934ef05b9",
+  "name": "站立提拉",
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true
+}, {
+  "_id": "28ee4e3e60dc87ea2692c93631d1f974",
+  "big_id": "79550af260dc87e823318cde12a26933",
+  "action_id": "79550af260cc8178204e673f5ce7a129",
+  "name": "基本站姿耸肩",
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true
+}, {
+  "_id": "cbddf0af60dc87ea13ba78f5570197ae",
+  "big_id": "79550af260dc87e823318cde12a26933",
+  "action_id": "b00064a760cc81762101dfeb053527be",
+  "name": "附身平举",
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true
+}, {
+  "_id": "28ee4e3e60dc87ea2692c9425769e820",
+  "big_id": "28ee4e3e60dc87ea2692c93a749836d3",
+  "action_id": "79550af260cc8178204e674406f078e1",
+  "name": "坐姿正握肩上推举",
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true
+}, {
+  "_id": "b00064a760dc87e723ee9271797164a0",
+  "big_id": "28ee4e3e60dc87ea2692c93a749836d3",
+  "action_id": "b00064a760cc81762101dfef0074c0e1",
+  "name": "坐姿前平举",
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true
+}, {
+  "_id": "79550af260dc87ea23318d0624c52c23",
+  "big_id": "28ee4e3e60dc87ea2692c93a749836d3",
+  "action_id": "b00064a760cc81762101dff014ca8e87",
+  "name": "基本侧平举",
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true
+}, {
+  "_id": "79550af260dc87ea23318d0c55618127",
+  "big_id": "28ee4e3e60dc87ea2692c93a749836d3",
+  "action_id": "79550af260cc8178204e67496ef53f01",
+  "name": "站姿附身平举",
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true
+}, {
+  "_id": "79550af260dc87ea23318d0f006a97fc",
+  "big_id": "28ee4e3e60dc87ea2692c93a749836d3",
+  "action_id": "b00064a760cc81762101dff32197b016",
+  "name": "三级侧平举",
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true
+}, {
+  "_id": "b00064a760dc87e723ee927e22b6fee7",
+  "big_id": "28ee4e3e60dc87ea2692c93a749836d3",
+  "action_id": "cbddf0af60cc8178111c424e566409b6",
+  "name": "双臂交替前平举",
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true
+}, {
+  "_id": "28ee4e3e60dc87ea2692c9584c605b8d",
+  "big_id": "28ee4e3e60dc87ea2692c93a749836d3",
+  "action_id": "cbddf0af60cc8178111c424f1985fe70",
+  "name": "坐姿推举练习(竖把位)",
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true
+}, {
+  "_id": "79550af260dc87ea23318d1862b0f613",
+  "big_id": "28ee4e3e60dc87ea2692c93a749836d3",
+  "action_id": "28ee4e3e60cc81792356b3a578b56d92",
+  "name": "坐姿绳索肩上推举",
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true
+}, {
+  "_id": "28ee4e3e60dc87ea2692c95d339f877d",
+  "big_id": "28ee4e3e60dc87ea2692c93a749836d3",
+  "action_id": "b00064a760cc81762101dff5448b57b6",
+  "name": "坐姿下拉练习(竖把位)",
+  "_openid": "oWx7Z5GUCkg27RjKiC-C7tnE55C8",
+  "activation": true
 }]

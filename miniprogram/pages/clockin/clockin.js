@@ -1,3 +1,4 @@
+var muscleJson = require('/../data/muscle.js');
 const db = wx.cloud.database();
 let openid = '';
 
@@ -16,35 +17,9 @@ Page({
       [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
       [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     ],
+
+    muscleArray: ['胸部', '背部', '肩部', '手臂', '腿部', '臀部', '腹部'],
   },
-
-  detailQuery2: function (e, big_name, small_id, small_name) {
-    db.collection('detail').limit(1).orderBy('exercise_date', 'desc').where({
-      small_id: small_id
-    }).get({
-      success: res => {
-        let detailList = res.data;
-        let group = detailList[0]["group"];
-        let weight = detailList[0]["weight"];
-        let unit = detailList[0]["unit"];
-        let number = detailList[0]["number"];
-
-        let groupList = [];
-
-        for (let x = 1; x <= group; x++) {
-          let groupMap = {};
-          groupMap["group"] = x;
-          groupMap["weight"] = weight;
-          groupMap["unit"] = unit;
-          groupMap["number"] = number;
-          groupList.push(groupMap);
-        }
-
-        this.numberMethod2(e, groupList);
-      }
-    })
-  },
-
 
   numberMethod: function (e) {
     this.numberMethod2(e, this.data.groupList);
@@ -491,11 +466,178 @@ Page({
     })
   },
 
+  initUser: function () {
+    db.collection('user').get({
+      success: res => {
+        //console.warn(res);
+        if (res.data.length > 0) {
+
+        } else {
+          this.userAddDB();
+        }
+      }
+    })
+  },
+
+
+  userAddDB: function () {
+    db.collection('user').add({
+      data: {
+        create_date: db.serverDate()
+      },
+      success: res => {
+        //console.warn(res);
+      },
+      fail: err => {
+        console.error('数据库新增失败：', err)
+      }
+    })
+  },
+
+  init: function () {
+    wx.cloud.callFunction({
+      name: 'getUserInfo',
+      complete: res => {
+        //放到全局变量中
+        openid = res.result.openid;
+
+        wx.cloud.callFunction({
+          name: 'init',
+          data: {
+            openid: openid
+          },
+          complete: res => {
+            //console.warn(res);
+          }
+        })
+      }
+    })
+  },
+
+
+  initAction: function (start) {
+    let userTotal = wx.getStorageSync("userTotal");
+    if (userTotal != 1) {
+      this.userCount();
+    }
+
+  },
+
+  userCount: function (start) {
+    db.collection('user').count({
+      success: res => {
+        if (res.total == 0) {
+          wx.setStorageSync("userTotal", 1);
+          this.userAddDB(start);
+        }else if (res.total == 1){
+          let userTotal = wx.getStorageSync("userTotal");
+          if (userTotal != 1) {
+            wx.setStorageSync("userTotal", 1);
+          }
+        }
+      }
+    })
+  },
+
+
+  userAddDB: function (start) {
+    db.collection('user').add({
+      data: {},
+      success: res => {
+        let muscleArray = muscleJson.muscleJson;
+        for (let x in muscleArray) {
+          let name = muscleArray[x]['muscle'];
+          let actionList = muscleArray[x]['actionList'];
+          this.bigAddDB(name, actionList, start);
+        }
+      },
+      fail: err => {
+        console.error('数据库新增失败：', err)
+      }
+    })
+  },
+
+
+  initMuscle: function () {
+    let muscleArray = this.data.muscleArray;
+    for (let x in muscleArray) {}
+  },
+
+
+  bigAddDB: function (name, actionList, start) {
+    db.collection('big').add({
+      data: {
+        name: name,
+        muscle_id: "init",
+        activation: true
+      },
+      success: res => {
+        let bit_id = res['_id'];
+        for (let x in actionList) {
+          if (x < 3) {
+            this.smallAddDB(bit_id, actionList[x], start, true);
+          } else {
+            this.smallAddDB(bit_id, actionList[x], start, false);
+          }
+        }
+      },
+      fail: err => {
+        console.error('数据库新增失败：', err)
+      }
+    })
+  },
+
+  smallAddDB: function (big_id, name, start, activation) {
+    db.collection('small').add({
+      data: {
+        big_id: big_id,
+        name: name,
+        action_id: "init",
+        activation: activation
+      },
+      success: res => {
+        //console.warn(res);
+        this.detailAddDB(res._id, name, 4, 20, '公斤', 20, start);
+      },
+      fail: err => {
+        console.error('数据库新增失败：', err)
+      }
+    })
+  },
+
+
+
+  detailAddDB: function (smallId, name, group, weight, unit, number, start) {
+    db.collection('detail').add({
+      data: {
+        small_id: smallId,
+        name: name,
+        group: group,
+        weight: weight,
+        unit: unit,
+        number: number,
+        init_id: "init",
+        exercise_date: db.serverDate()
+      },
+      success: res => {
+        //console.warn(res);
+        let end = new Date().getTime();
+        console.warn(end - start);
+      },
+      fail: err => {
+        console.error('数据库新增失败：', err)
+      }
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {},
+  onLoad: function (options) {
+    let start = new Date().getTime();
+    this.initAction(start);
+
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
